@@ -1,0 +1,127 @@
+.section {
+  position: relative;
+  background: #ffffff;
+  padding: 6rem 0;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 220px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.body {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+/* ---------- graphic ---------- */
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graphic {
+  position: relative;
+  width: clamp(280px, 38vw, 440px);
+  height: clamp(280px, 38vw, 440px);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(100, 160, 255, 0.2);
+}
+
+.ringMid {
+  inset: 15%;
+  border-color: rgba(167, 139, 250, 0.2);
+  border-style: dashed;
+}
+
+.core {
+  position: absolute;
+  inset: 35%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 40%,
+    rgba(60, 120, 255, 0.35),
+    rgba(20, 40, 120, 0.5)
+  );
+  border: 1px solid rgba(100, 160, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coreInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coreLabel {
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.orbitDot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(100, 180, 255, 0.85);
+  top: 50%;
+  left: 50%;
+  transform: rotate(var(--deg))
+    translateX(calc(clamp(280px, 38vw, 440px) * 0.46)) translateY(-50%);
+  box-shadow: 0 0 8px rgba(100, 180, 255, 0.6);
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .right {
+    order: -1;
+  }
+}

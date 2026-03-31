@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 220px;
+  padding-right: 220px;
+}
+
+.sm  { max-width: 640px; }
+.md  { max-width: 768px; }
+.lg  { max-width: 1024px; }
+.xl  { max-width: 1280px; }
+
+@media (max-width: 1280px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

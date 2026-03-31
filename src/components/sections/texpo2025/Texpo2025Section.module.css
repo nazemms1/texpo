@@ -1,0 +1,95 @@
+.section {
+  background: #050d22;
+  padding: 6rem 0;
+}
+
+.inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.highlightCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 2rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.highlightCard:hover {
+  border-color: rgba(100, 160, 255, 0.3);
+}
+
+.highlightIcon {
+  color: #60b0ff;
+}
+
+.highlightValue {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.highlightLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.themesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.themeChip {
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(26, 122, 255, 0.08);
+  border: 1px solid rgba(100, 160, 255, 0.2);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.themeChip:hover {
+  background: rgba(26, 122, 255, 0.18);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

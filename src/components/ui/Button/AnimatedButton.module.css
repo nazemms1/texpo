@@ -1,0 +1,83 @@
+.link {
+  display: inline-block;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+}
+
+.label {
+  padding: 0.65rem 1.25rem;
+}
+
+.arrowBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin: 3px 3px 3px 0;
+}
+
+/* --- primary --- */
+.primary {
+  background: #1a3a6e;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.primary .arrowBadge {
+  background: #1a7aff;
+}
+
+.primary:hover {
+  box-shadow: 0 6px 24px rgba(26, 122, 255, 0.35);
+}
+
+/* --- outline (used for "Become A Sponsor") --- */
+.outline {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.outline .arrowBadge {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.outline:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* --- ghost --- */
+.ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.ghost .arrowBadge {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ghost:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

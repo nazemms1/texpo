@@ -1,0 +1,47 @@
+.section {
+  background: #ffffff;
+  padding: 0 8rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.arcWrapper {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+.arc {
+  width: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.value {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: #133854;
+  line-height: 1;
+}
+
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #555960;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .arc {
+    display: none;
+  }
+}

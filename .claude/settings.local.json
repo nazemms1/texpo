@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(cmd.exe /c \"taskkill /PID 26648 /F\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/)",
+      "Bash(cmd.exe /c \"tasklist | findstr node\")",
+      "Bash(sed -i 's/background: #ffffff;/background: #050d22;/g' \"d:/texpo/texpo-land/src/components/sections/about-exhibition/AboutExhibition.module.css\" \"d:/texpo/texpo-land/src/components/sections/vision/VisionSection.module.css\" \"d:/texpo/texpo-land/src/components/sections/sponsors/SponsorsSection.module.css\" \"d:/texpo/texpo-land/src/components/sections/countries/CountriesSection.module.css\" \"d:/texpo/texpo-land/src/components/sections/visitors/VisitorInfoSection.module.css\" \"d:/texpo/texpo-land/src/components/sections/texpo2025/Texpo2025Section.module.css\" \"d:/texpo/texpo-land/src/components/sections/contact/ContactSection.module.css\")",
+      "Bash(__NEW_LINE_963564a4e1e9d862__ sed:*)"
+    ]
+  }
+}

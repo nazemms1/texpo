@@ -1,0 +1,79 @@
+.section {
+  background: #030a1e;
+  padding: 6rem 0;
+}
+
+.inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 220px;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.card {
+  padding: 2.5rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(100, 160, 255, 0.25);
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(26, 80, 200, 0.5), rgba(100, 60, 200, 0.4));
+  border: 1.5px solid rgba(100, 160, 255, 0.3);
+}
+
+.quote {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  font-style: italic;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.role {
+  font-size: 0.75rem;
+  color: #60b0ff;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

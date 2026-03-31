@@ -1,0 +1,53 @@
+.root {
+  margin-bottom: 2.5rem;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #1a2744;
+  margin: 0 0 1rem;
+}
+
+.light .title {
+  color: #fff;
+}
+
+.light .label {
+  color: #60b0ff;
+}
+
+.subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0;
+}
+
+.center .subtitle {
+  margin: 0 auto;
+}
+
+.light .subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}

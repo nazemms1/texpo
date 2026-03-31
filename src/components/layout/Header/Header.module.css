@@ -1,0 +1,161 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: linear-gradient(90deg, rgba(18, 24, 19, 0.3) 0%, rgba(2, 8, 6, 0.3) 100%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #E5E7EB;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  height: 95px;
+}
+
+.scrolled {
+  background: rgba(5, 10, 28, 0.92);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  padding: 0 220px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ---------- logo ---------- */
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoEmblem {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+/* ---------- desktop nav ---------- */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.navLink {
+  position: relative;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: #fff;
+}
+
+.navLink.active {
+  color: #fff;
+}
+
+.underline {
+  position: absolute;
+  bottom: -1px;
+  left: 0.9rem;
+  right: 0.9rem;
+  height: 2px;
+  background: #1a7aff;
+  border-radius: 2px;
+}
+
+/* ---------- language button ---------- */
+.langBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 1rem;
+  margin-left: 1rem;
+  border-radius: 999px;
+  background: #1ab8a0;
+  border: none;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.langBtn:hover {
+  background: #15a08b;
+}
+
+/* ---------- mobile ---------- */
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem 1.5rem;
+  gap: 0.25rem;
+  background: rgba(5, 10, 28, 0.97);
+  backdrop-filter: blur(16px);
+}
+
+.mobileLink {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: color 0.2s ease;
+}
+
+.mobileLink:hover,
+.mobileLink.active {
+  color: #fff;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .menuToggle {
+    display: block;
+  }
+}
