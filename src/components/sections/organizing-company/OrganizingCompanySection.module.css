@@ -1,0 +1,49 @@
+.section {
+  background: transparent;
+  padding: 6rem 0;
+}
+
+.inner {
+   font-family: 'URWGeometricArabic', sans-serif;
+font-weight: 400;
+  margin: 0 auto;
+  padding: 0 220px;
+  display: flex;
+  font-size: 2px;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+.body {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  margin: 0;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.logo {
+  width: clamp(180px, 28vw, 320px);
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .body {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+}

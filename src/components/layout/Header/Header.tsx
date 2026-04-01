@@ -20,7 +20,7 @@ export function Header() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <div className={styles.inner}>
-        {/* Logo */}
+  
         <Link href="/" className={styles.logo}>
           <Image
             src="/images/logo-emblem.svg"
@@ -33,13 +33,13 @@ export function Header() {
           <span className={styles.logoText}>TEXPO</span>
         </Link>
 
-        {/* Desktop nav */}
+     
         <div className={styles.desktopNav}>
           <NavMenu />
           <LanguageSwitcher />
         </div>
 
-        {/* Mobile toggle */}
+      
         <button
           className={styles.menuToggle}
           onClick={() => setMenuOpen((v) => !v)}
@@ -49,7 +49,7 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+   
       <NavMenu mobile open={menuOpen} onClose={() => setMenuOpen(false)} />
     </motion.header>
   );

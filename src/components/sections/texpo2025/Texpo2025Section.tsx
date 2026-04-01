@@ -28,7 +28,7 @@ export function Texpo2025Section() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        {/* Key highlights */}
+   
         <SectionTitle
           label="Edition Highlights"
           title="TEXPO 2025 AT A GLANCE"
@@ -52,7 +52,6 @@ export function Texpo2025Section() {
           ))}
         </motion.div>
 
-        {/* Themes */}
         <div className={styles.themesBlock}>
           <SectionTitle
             label="Focus Areas"

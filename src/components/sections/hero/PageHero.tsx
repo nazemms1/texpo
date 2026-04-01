@@ -6,15 +6,30 @@ import styles from './PageHero.module.css';
 
 interface PageHeroProps {
   title: string;
-  subtitle?: string;
+  titleAccent?: string;
 }
 
-export function PageHero({ title, subtitle }: PageHeroProps) {
+export function PageHero({ title, titleAccent }: PageHeroProps) {
   return (
     <section className={styles.hero}>
-      <div className={styles.bg}>
-        <div className={styles.gradient} />
-      </div>
+      <img
+        src="/images/Hero-section-page.svg"
+        alt=""
+        className={styles.bgImage}
+        aria-hidden="true"
+      />
+      <img
+        src="/images/Overlay.svg"
+        alt=""
+        className={styles.overlay}
+        aria-hidden="true"
+      />
+      <img
+        src="/images/lines.png"
+        alt=""
+        className={styles.linesBg}
+        aria-hidden="true"
+      />
       <motion.div
         className={styles.content}
         variants={staggerContainer}
@@ -22,13 +37,11 @@ export function PageHero({ title, subtitle }: PageHeroProps) {
         animate="visible"
       >
         <motion.h1 className={styles.title} variants={fadeInUp}>
-          {title}
+          <span className={styles.titlePrimary}>{title}</span>
+          {titleAccent && (
+            <span className={styles.titleAccent}> {titleAccent}</span>
+          )}
         </motion.h1>
-        {subtitle && (
-          <motion.p className={styles.subtitle} variants={fadeInUp}>
-            {subtitle}
-          </motion.p>
-        )}
       </motion.div>
     </section>
   );

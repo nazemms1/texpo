@@ -1,12 +1,12 @@
 .section {
   position: relative;
-  background: #ffffff;
+  background: transparent;
   padding: 6rem 0;
   overflow: hidden;
 }
 
 .inner {
-  max-width: 1920px;
+
   margin: 0 auto;
   padding: 0 220px;
   display: grid;
@@ -22,6 +22,7 @@
 }
 
 .body {
+  font-family: 'URWGeometricArabic-Regular', sans-serif;
   font-size: 0.95rem;
   line-height: 1.8;
   color: rgba(0, 0, 0, 0.6);
@@ -35,7 +36,6 @@
   margin-top: 0.5rem;
 }
 
-/* ---------- graphic ---------- */
 .right {
   display: flex;
   justify-content: center;
@@ -65,11 +65,9 @@
   position: absolute;
   inset: 35%;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 40% 40%,
-    rgba(60, 120, 255, 0.35),
-    rgba(20, 40, 120, 0.5)
-  );
+  background: radial-gradient(circle at 40% 40%,
+      rgba(60, 120, 255, 0.35),
+      rgba(20, 40, 120, 0.5));
   border: 1px solid rgba(100, 160, 255, 0.35);
   display: flex;
   align-items: center;
@@ -97,8 +95,7 @@
   background: rgba(100, 180, 255, 0.85);
   top: 50%;
   left: 50%;
-  transform: rotate(var(--deg))
-    translateX(calc(clamp(280px, 38vw, 440px) * 0.46)) translateY(-50%);
+  transform: rotate(var(--deg)) translateX(calc(clamp(280px, 38vw, 440px) * 0.46)) translateY(-50%);
   box-shadow: 0 0 8px rgba(100, 180, 255, 0.6);
 }
 

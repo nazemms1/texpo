@@ -1,5 +1,5 @@
 .section {
-  background: #ffffff;
+  background: transparent;
   padding: 0 8rem 4rem;
   position: relative;
   overflow: hidden;
@@ -32,8 +32,7 @@
 }
 
 .label {
-  font-size: 0.7rem;
-  font-weight: 500;
+  
   color: #555960;
   letter-spacing: 0.04em;
   text-transform: uppercase;

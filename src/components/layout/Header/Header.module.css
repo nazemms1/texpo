@@ -11,10 +11,6 @@
   height: 95px;
 }
 
-.scrolled {
-  background: rgba(5, 10, 28, 0.92);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
-}
 
 .inner {
   width: 100%;
@@ -25,7 +21,6 @@
   justify-content: space-between;
 }
 
-/* ---------- logo ---------- */
 .logo {
   text-decoration: none;
   display: flex;
@@ -46,7 +41,6 @@
   color: #fff;
 }
 
-/* ---------- desktop nav ---------- */
 .desktopNav {
   display: flex;
   align-items: center;
@@ -88,7 +82,6 @@
   border-radius: 2px;
 }
 
-/* ---------- language button ---------- */
 .langBtn {
   display: inline-flex;
   align-items: center;
@@ -110,7 +103,6 @@
   background: #15a08b;
 }
 
-/* ---------- mobile ---------- */
 .menuToggle {
   display: none;
   background: none;

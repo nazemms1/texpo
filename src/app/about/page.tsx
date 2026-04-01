@@ -4,6 +4,8 @@ import { VisionSection } from '@/src/components/sections/vision/VisionSection';
 import { StatisticsSection } from '@/src/components/sections/statistics/StatisticsSection';
 import { MessageSection } from '@/src/components/sections/message/MessageSection';
 import { PageHero } from '@/src/components/sections/hero/PageHero';
+import { WhyTexpoSection } from '@/src/components/sections/why-texpo/WhyTexpoSection';
+import { WhySyriaSection } from '@/src/components/sections/why-syria/WhySyriaSection';
 
 export const metadata: Metadata = {
   title: 'About — TEXPO',
@@ -14,13 +16,16 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        title="ABOUT TEXPO"
-        subtitle="Discover the story, mission, and people behind the world's most forward-thinking technology exhibition."
+        title="About"
+        titleAccent="TEXPO LAND"
       />
-      <StatisticsSection />
-      <AboutExhibition />
-      <VisionSection />
-      <MessageSection />
+      {/* <StatisticsSection /> */}
+      <div className="withLinesBg">
+        <AboutExhibition variant="about" />
+      </div>
+      <WhyTexpoSection />
+      <WhySyriaSection />
+      
     </>
   );
 }

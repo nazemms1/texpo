@@ -3,10 +3,9 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-}
+ }
 
-/* ---------- background ---------- */
-
+ 
 .bg {
   position: absolute;
   inset: 0;
@@ -34,26 +33,17 @@
   object-position: center 20%;
 }
 
-/* ---------- particles ---------- */
 .particleGrid {
   position: absolute;
   inset: 0;
 }
 
-.particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(100, 180, 255, 0.7);
-}
-
-/* ---------- content ---------- */
-.content {
+ 
+ .content {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1920px;
+ 
   margin: 0 auto;
   padding: 0 220px;
   min-height: 100vh;
@@ -62,7 +52,7 @@
 }
 
 .textBlock {
-  max-width: 580px;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -76,21 +66,22 @@
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #60b0ff;
+  color:#FFFFFF;
 }
 
 .heading {
-  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-  font-weight: 900;
-  line-height: 1.08;
+  font-family: 'Nulshock', sans-serif;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 96px;
+  letter-spacing: 0;
   color: #fff;
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
 }
 
 .accent {
-  background: linear-gradient(135deg, #60b0ff, #a78bfa);
+  background: #FFFFFF;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -110,7 +101,6 @@
   flex-wrap: wrap;
 }
 
-/* ---------- social bar — center-right of viewport ---------- */
 .socialBar {
   position: fixed;
   top: 30%;
@@ -119,7 +109,6 @@
   z-index: 50;
 }
 
-/* ---------- scroll indicator ---------- */
 .scrollIndicator {
   display: none;
 }

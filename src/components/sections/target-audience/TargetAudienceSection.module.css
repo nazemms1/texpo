@@ -1,0 +1,121 @@
+.section {
+  background: transparent;
+  padding: 6rem 0;
+}
+
+.inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(1.6rem, 3vw, 2.75rem);
+  font-weight: 700;
+  color: #133854;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+}
+
+.subtitle {
+  font-family: 'URWGeometricArabic', sans-serif;
+
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: rgba(0, 0, 0, 0.55);
+  max-width: 900px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 14px;
+  /* aspect-ratio: 4 / 3; */
+  width: 359;
+  height: 267;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(96, 176, 255, 0.2);
+}
+
+.cardDots {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+.cardLabel {
+  font-family: 'URWGeometricArabic-Bold', sans-serif;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+  width: 80%;
+
+  padding: 1rem 0.75rem 0.875rem;
+  font-size: 18px;
+
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 22.5px;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

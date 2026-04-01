@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
@@ -21,11 +22,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="en" className={geist.variable} data-mantine-color-scheme="dark" suppressHydrationWarning>
       <head>
-        <ColorSchemeScript defaultColorScheme="dark" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <MantineProvider theme={theme} defaultColorScheme="dark">
           <Header />
           <main>{children}</main>

@@ -111,7 +111,6 @@ export function ExhibitorsSectorsSection() {
           ))}
         </div>
 
-        {/* Dot navigation */}
         <div className={styles.dots}>
           {SECTORS.map((_, i) => (
             <button

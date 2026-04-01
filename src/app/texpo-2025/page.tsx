@@ -13,9 +13,10 @@ export default function Texpo2025Page() {
     <>
       <PageHero
         title="TEXPO 2025"
-        subtitle="The most anticipated edition yet — bigger, bolder, and more global than ever before."
       />
-      <Texpo2025Section />
+      <div className="withLinesBg">
+        <Texpo2025Section />
+      </div>
       <SponsorsSection />
     </>
   );

@@ -42,16 +42,14 @@ export function StatisticsSection() {
             fill="none"
           />
 
-          {/* Stats placed on the first (top) curve */}
-          {STATS.map((stat, i) => {
+           {STATS.map((stat, i) => {
             const { x, y } = bezier(T_VALUES[i]);
             return (
               <g
                 key={stat.value + stat.label}
                 transform={`translate(${x}, ${y})`}
               >
-                {/* Dot on the curve */}
-                <circle cx="0" cy="0" r="4" fill="#133854" />
+                 <circle cx="0" cy="0" r="4" fill="#42BEB3" />
                 <foreignObject x="-50" y="-80" width="120" height="80">
                   <motion.div
                     // @ts-ignore

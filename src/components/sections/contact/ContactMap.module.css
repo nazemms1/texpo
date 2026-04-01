@@ -1,0 +1,33 @@
+.section {
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.mapWrap {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); 
+}
+
+.mapImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 1440px) {
+  .mapWrap {
+    margin: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mapWrap {
+    margin: 0 1rem;
+    border-radius: 12px;
+  }
+}

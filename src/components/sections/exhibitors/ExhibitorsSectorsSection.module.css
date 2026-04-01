@@ -1,5 +1,5 @@
 .section {
-  background: #ffffff;
+  background: transparent;
   padding: 5rem 0 0;
   overflow: hidden;
 }
@@ -41,7 +41,6 @@
   }
 }
 
-/* ---- arc stage ---- */
 .stage {
   position: relative;
   width: 100%;
@@ -50,7 +49,6 @@
   overflow: visible;
 }
 
-/* ---- individual card ---- */
 .card {
   position: absolute;
   width: 180px;
@@ -110,7 +108,6 @@
   margin: 0;
 }
 
-/* ---- dots ---- */
 .dots {
   display: flex;
   gap: 8px;
@@ -135,7 +132,6 @@
   transform: scale(1.25);
 }
 
-/* ---- responsive ---- */
 @media (max-width: 1280px) {
   .inner {
     padding: 0 2rem;

@@ -8,11 +8,15 @@ import {
   fadeInUp,
 } from "@/src/lib/animations";
 import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
-import { AnimatedButton } from "@/src/components/ui/Button/AnimatedButton";
+import { PillButton, ArrowCircle } from "@/src/components/ui/Button/AnimatedButton";
 import { IconMapPin, IconPlayerPlay } from "@tabler/icons-react";
 import styles from "./AboutExhibition.module.css";
 
-export function AboutExhibition() {
+interface AboutExhibitionProps {
+  variant?: "home" | "about";
+}
+
+export function AboutExhibition({ variant = "home" }: AboutExhibitionProps) {
   return (
     <section className={styles.section}>
       <div className={styles.waveTop} />
@@ -27,7 +31,7 @@ export function AboutExhibition() {
           viewport={{ once: true, amount: 0.25 }}
         >
           <motion.div variants={fadeInLeft}>
-            <SectionTitle label="Who We Are" title="ABOUT THE EXHIBITION" />
+            <SectionTitle   title="ABOUT THE EXHIBITION" />
           </motion.div>
 
           <motion.p className={styles.body} variants={fadeInUp}>
@@ -65,14 +69,21 @@ export function AboutExhibition() {
           </motion.p>
 
           <motion.div className={styles.actions} variants={fadeInUp}>
-            <AnimatedButton href="#" variant="primary">
+            {variant === "about" && <ArrowCircle href="#" variant="dashed" />}
+            <PillButton href="#" variant="primary">
               <IconMapPin size={16} />
               View in Map
-            </AnimatedButton>
-            <AnimatedButton href="#" variant="outline">
-              <IconPlayerPlay size={16} />
-              Watch
-            </AnimatedButton>
+            </PillButton>
+            <ArrowCircle href="#" variant="primary" />
+            {variant === "home" && (
+              <>
+                <PillButton href="#" variant="outline">
+                  <IconPlayerPlay size={16} />
+                  Watch
+                </PillButton>
+                <ArrowCircle href="#" variant="outline" />
+              </>
+            )}
           </motion.div>
         </motion.div>
 

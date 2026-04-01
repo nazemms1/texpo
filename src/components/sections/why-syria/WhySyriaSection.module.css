@@ -1,0 +1,113 @@
+.section {
+  background: transparent;
+  padding: 6rem 0;
+}
+
+.inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 220px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+ .mapCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mapImage {
+  width: 100%;
+ 
+  height: auto;
+}
+
+ .contentCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 900;
+  color: #133854;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.intro {
+  font-family: 'URWGeometricArabic-SemiBold', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color:#555960;
+  margin: 0;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.point {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 180, 200, 0.1);
+  border: 1px solid rgba(0, 180, 200, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00b4c8;
+  margin-top: 2px;
+}
+
+.pointTitle {
+  font-family: 'Nulshock', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: #133854;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.3rem;
+}
+
+.pointBody {
+  font-family: 'URWGeometricArabic-SemiBold', sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: #555960;
+  margin: 0;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .mapCol {
+    order: -1;
+  }
+
+  .mapImage {
+    max-width: 320px;
+  }
+}
