@@ -1,23 +1,23 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  IconBrandLinkedin,
-  IconBrandFacebook,
-  IconBrandInstagram,
-} from '@tabler/icons-react';
+import Image from 'next/image';
 import styles from './SocialIcons.module.css';
+import facebookIcon from '../../../assets/Icons/facebook.svg';
+import instagramIcon from '../../../assets/Icons/instagram.svg';
+import linkedinIcon from '../../../assets/Icons/linkedin.svg';
 
 const icons = [
-  { Icon: IconBrandLinkedin, label: 'LinkedIn', href: '#' },
-  { Icon: IconBrandFacebook, label: 'Facebook', href: '#' },
-  { Icon: IconBrandInstagram, label: 'Instagram', href: '#' },
+    { icon: linkedinIcon, label: 'Instagram', href: '#' },
+
+  { icon: facebookIcon, label: 'LinkedIn', href: '#' },
+  { icon: instagramIcon, label: 'Facebook', href: '#' },
 ];
 
 export function SocialIcons({ horizontal = false }: { horizontal?: boolean }) {
   return (
     <div className={`${styles.bar} ${horizontal ? styles.horizontal : ''}`}>
-      {icons.map(({ Icon, label, href }) => (
+      {icons.map(({ icon, label, href }) => (
         <motion.a
           key={label}
           href={href}
@@ -27,7 +27,13 @@ export function SocialIcons({ horizontal = false }: { horizontal?: boolean }) {
           whileTap={{ scale: 0.9 }}
           transition={{ type: 'spring', stiffness: 300, damping: 18 }}
         >
-          <Icon size={20} />
+          <Image 
+            src={icon} 
+            alt={label} 
+            width={24} 
+            height={24}
+            className={styles.icon}
+          />
         </motion.a>
       ))}
     </div>

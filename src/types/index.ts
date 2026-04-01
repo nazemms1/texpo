@@ -1,6 +1,6 @@
 export interface NavItem {
-  label: string;
-  href: string;
+  key: string;
+  path: string;
 }
 
 export interface StatItem {

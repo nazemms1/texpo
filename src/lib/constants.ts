@@ -1,11 +1,11 @@
 import type { NavItem, StatItem } from "@/src/types";
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Our Visitors", href: "/visitors" },
-  { label: "Texpo 2025", href: "/texpo-2025" },
+  { key: "home", path: "" },
+  { key: "about", path: "/about" },
+  { key: "contact", path: "/contact" },
+  { key: "visitors", path: "/visitors" },
+  { key: "texpo2025", path: "/texpo-2025" },
 ];
 
 export const STATS: StatItem[] = [
