@@ -13,7 +13,8 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        title="CONTACT US"
+        title="CONTACT"
+        titleAccent='US'
       />
       <div className="withLinesBg" style={{ display: 'flex', flexDirection: 'column', paddingBottom: '4rem' }}>
         <ContactHeroCard />
