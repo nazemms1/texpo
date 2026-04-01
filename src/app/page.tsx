@@ -7,6 +7,7 @@ import { VisionSection } from "@/src/components/sections/vision/VisionSection";
 import { SponsorsSection } from "@/src/components/sections/sponsors/SponsorsSection";
 import { CountriesSection } from "@/src/components/sections/countries/CountriesSection";
 import { ExhibitorsSectorsSection } from "../components/sections/exhibitors/ExhibitorsSectorsSection";
+import { InfoCardSection } from "@/src/components/sections/info-card/InfoCardSection";
 
 export default function HomePage() {
   return (
@@ -14,9 +15,9 @@ export default function HomePage() {
       <HeroSection />
       <AboutExhibition />
       <StatisticsSection />
+      <InfoCardSection />
       <OrganizingCompanySection />
       <ExhibitorsSectorsSection />
-      
-     </>
+    </>
   );
 }
