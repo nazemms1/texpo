@@ -35,6 +35,7 @@
 }
 
 .logoText {
+  
   font-size: 1.3rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -54,10 +55,13 @@
 }
 
 .navLink {
+  
   position: relative;
   padding: 0.45rem 0.9rem;
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 1.125rem;
+ 
+    font-family: 'URWGeometricArabic-SemiBold', sans-serif;
+
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   transition: color 0.2s ease;
