@@ -4,6 +4,8 @@ import { StatisticsSection } from "@/src/components/sections/statistics/Statisti
 import { OrganizingCompanySection } from "@/src/components/sections/organizing-company/OrganizingCompanySection";
 import { ExhibitorsSectorsSection } from "@/src/components/sections/exhibitors/ExhibitorsSectorsSection";
 import { SponsorsMotionSection } from "@/src/components/sections/sponsers-section/SponsorsMotionSection";
+import { InfoCardSection } from "@/src/components/sections/info-card/InfoCardSection";
+import { MapSection } from "@/src/components/sections/map/MapSection";
 
 export default function HomePage() {
   return (
