@@ -1,127 +1,143 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Carousel } from "@mantine/carousel";
+import type { EmblaCarouselType } from "embla-carousel";
+import "@mantine/core/styles.css";
+import "@mantine/carousel/styles.css";
+import { Container } from "@/src/components/layout/Container";
 import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
+import { SectorCard } from "./SectorCard";
 import styles from "./ExhibitorsSectorsSection.module.css";
 
 const SECTORS = [
   {
     title: "Artificial Intelligence\n& Machine Learning",
-    image: "/images/sectors/ai.jpg",
+    image: "/images/sectors/sector-ai-ml.png",
   },
   {
     title: "Cybersecurity",
-    image: "/images/sectors/cybersecurity.jpg",
+    image: "/images/sectors/sector-right-near.png",
   },
   {
     title: "Semiconductors\n& Hardware",
-    image: "/images/sectors/semiconductors.jpg",
+    image: "/images/sectors/sector-left-near.png",
   },
   {
     title: "Cloud Computing\n& Infrastructure",
-    image: "/images/sectors/cloud.jpg",
+    image: "/images/sectors/sector-right-far.png",
   },
   {
     title: "Smart Cities\n& IoT",
-    image: "/images/sectors/smartcities.jpg",
-  },
-  {
-    title: "Telecom\n& Connectivity",
-    image: "/images/sectors/telecom.jpg",
+    image: "/images/sectors/sector-left-far.png",
   },
 ];
 
-const RADIUS = 900;
-const CARD_W = 180;
-const CARD_H = 220;
-const SPREAD = 40;
-
-function getArcStyle(i: number, total: number) {
-  const half = (total - 1) / 2;
-  const deg = 90 + SPREAD * ((i - half) / half);
-  const rad = (deg * Math.PI) / 180;
-
-  const x = RADIUS * Math.cos(rad);
-  const y = -(RADIUS * Math.sin(rad));
-  const rotateDeg = -(deg - 90);
-
-  return {
-    left: `calc(50% + ${x}px - ${CARD_W / 2}px)`,
-    top: `calc(100% + ${y}px - ${CARD_H / 2}px)`,
-    transform: `rotate(${rotateDeg}deg)`,
-  };
+function getLoopDistance(index: number, current: number, total: number) {
+  const raw = index - current;
+  return ((((raw + total / 2) % total) + total) % total) - total / 2;
 }
 
 export function ExhibitorsSectorsSection() {
   const total = SECTORS.length;
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [embla, setEmbla] = useState<EmblaCarouselType | null>(null);
+  const [offsets, setOffsets] = useState<number[]>(
+    SECTORS.map((_, i) => (i === 0 ? 0 : i)),
+  );
+  const visualActiveIndex = offsets.reduce((bestIdx, value, idx, arr) => {
+    return Math.abs(value) < Math.abs(arr[bestIdx] ?? Infinity) ? idx : bestIdx;
+  }, 0);
 
-  const active = SECTORS[activeIndex];
+  useEffect(() => {
+    if (!embla) return;
+
+    const updateArc = () => {
+      const current = embla.scrollProgress() * total;
+      const normalizedCurrent = ((current % total) + total) % total;
+
+      setOffsets(
+        SECTORS.map((_, i) => getLoopDistance(i, normalizedCurrent, total)),
+      );
+      setActiveIndex(embla.selectedScrollSnap());
+    };
+
+    updateArc();
+    embla.on("scroll", updateArc);
+    embla.on("select", updateArc);
+    embla.on("reInit", updateArc);
+
+    return () => {
+      embla.off("scroll", updateArc);
+      embla.off("select", updateArc);
+      embla.off("reInit", updateArc);
+    };
+  }, [embla, total]);
 
   return (
     <section className={styles.section}>
-      <div className={styles.inner}>
-        <SectionTitle
-          title="EXHIBITORS AND SECTORS PARTICIPATING IN TEXPO LAND | 2ND EDITION"
-          subtitle="The TEXPO Land exhibition features a wide range of companies and institutions from various technological and digital transformation sectors, showcasing advanced solutions, products, and services across a variety of fields, including:"
-          align="center"
-        />
-
-        <div className={styles.featured}>
-          <img
-            key={activeIndex}
-            src={active.image}
-            alt={active.title.replace("\n", " ")}
-            className={styles.featuredImg}
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).style.display = "none";
-            }}
-          />
-        </div>
-
-        <div className={styles.stage}>
-          {SECTORS.map((sector, i) => (
-            <div
-              key={i}
-              className={`${styles.card} ${i === activeIndex ? styles.cardActive : ""}`}
-              style={getArcStyle(i, total)}
-              onClick={() => setActiveIndex(i)}
-            >
-              <div className={styles.cardInner}>
-                <img
-                  src={sector.image}
-                  alt={sector.title.replace("\n", " ")}
-                  className={styles.cardImg}
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display =
-                      "none";
-                  }}
-                />
-                <div className={styles.cardOverlay} />
-                <p className={styles.cardLabel}>
-                  {sector.title.split("\n").map((line, j) => (
-                    <span key={j}>
-                      {line}
-                      {j < sector.title.split("\n").length - 1 && <br />}
-                    </span>
-                  ))}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className={styles.dots}>
-          {SECTORS.map((_, i) => (
-            <button
-              key={i}
-              className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ""}`}
-              onClick={() => setActiveIndex(i)}
-              aria-label={`Go to sector ${i + 1}`}
+      <Container size="full">
+        <div className={styles.inner}>
+          <header className={styles.header}>
+            <SectionTitle
+              title="EXHIBITORS AND SECTORS PARTICIPATING IN TEXPO LAND | 2ND EDITION"
+              align="center"
             />
-          ))}
+            <p className={styles.subtitle}>
+              The TEXPO Land exhibition features a wide range of companies and
+              institutions from various technological and digital transformation
+              sectors, showcasing advanced solutions, products, and services
+              across a variety of fields, including:
+            </p>
+          </header>
+
+          <div className={styles.carouselClip}>
+            <Carousel
+              className={styles.carousel}
+              slideSize={{ base: "100%", md: "30%" }}
+              slideGap={{ base: 10, md: 14 }}
+              withControls={false}
+              withIndicators={false}
+              emblaOptions={{
+                align: "center",
+                loop: true,
+                containScroll: "trimSnaps",
+              }}
+              getEmblaApi={setEmbla}
+              onSlideChange={setActiveIndex}
+            >
+              {SECTORS.map((sector, index) => (
+                <Carousel.Slide key={sector.title}>
+                  <button
+                    type="button"
+                    className={styles.slideButton}
+                    onClick={() => embla?.scrollTo(index)}
+                    aria-label={`Select ${sector.title.replace("\n", " ")}`}
+                  >
+                    <SectorCard
+                      title={sector.title}
+                      image={sector.image}
+                      offset={offsets[index] ?? 0}
+                      isActive={index === visualActiveIndex}
+                    />
+                  </button>
+                </Carousel.Slide>
+              ))}
+            </Carousel>
+          </div>
+
+          <div className={styles.dots}>
+            {SECTORS.map((_, i) => (
+              <button
+                key={i}
+                className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ""}`}
+                onClick={() => embla?.scrollTo(i)}
+                aria-label={`Go to sector ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

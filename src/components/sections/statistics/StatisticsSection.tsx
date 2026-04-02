@@ -46,13 +46,13 @@ export function StatisticsSection() {
             const { x, y } = bezier(T_VALUES[i]);
             return (
               <g
-                key={stat.value + stat.label}
+                key={`${stat.value}-${stat.label}-${i}`}
                 transform={`translate(${x}, ${y})`}
               >
                  <circle cx="0" cy="0" r="4" fill="#42BEB3" />
                 <foreignObject x="-50" y="-80" width="120" height="80">
                   <motion.div
-                    // @ts-ignore
+                    // @ts-expect-error foreignObject requires XHTML namespace on this node
                     xmlns="http://www.w3.org/1999/xhtml"
                     className={styles.item}
                     variants={fadeInUp}
