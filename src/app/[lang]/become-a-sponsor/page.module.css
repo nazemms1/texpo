@@ -1,0 +1,37 @@
+.heroWrap {
+  position: relative;
+}
+
+.scrollDown {
+  position: absolute;
+  left: 50%;
+  bottom: 44px;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(7, 54, 95, 0.12);
+  color: #42beb3;
+
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.scrollDown:hover {
+  transform: translateX(-50%) scale(1.04);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.scrollDown svg {
+  display: block;
+}
+

@@ -1,0 +1,69 @@
+.section {
+  position: relative;
+  background: #ffffff;
+  padding: 6rem 0 4.5rem;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.title {
+  font-family: 'Nulshock', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #07365f;
+  font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.subtitle {
+  margin: 0 auto;
+  max-width: 760px;
+  color: rgba(7, 54, 95, 0.62);
+  font-family: 'URWGeometricArabic', sans-serif;
+  font-size: clamp(0.9rem, 1.25vw, 1.05rem);
+  line-height: 1.7;
+}
+
+.pattern {
+  position: absolute;
+  right: -160px;
+  top: 50%;
+  width: 520px;
+  height: 520px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.35;
+
+  background-image: repeating-radial-gradient(
+    circle at 40% 40%,
+    rgba(7, 54, 95, 0.12) 0px,
+    rgba(7, 54, 95, 0.12) 1px,
+    transparent 1px,
+    transparent 22px
+  );
+
+  /* Keep it looking like a right-side semi circle */
+  clip-path: inset(0 0 0 45%);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4.5rem 0 3.5rem;
+  }
+
+  .pattern {
+    right: -260px;
+    width: 520px;
+    height: 520px;
+  }
+}
+

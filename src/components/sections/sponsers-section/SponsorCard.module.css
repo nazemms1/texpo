@@ -1,0 +1,87 @@
+.card {
+  --card-w: clamp(180px, 20vw, 250px);
+  /* Figma tile is 250x250 (1:1). Keep it square for exact match. */
+  --card-h: var(--card-w);
+
+  /* badge: ~38px on 250px tile */
+  --badge-h: calc(var(--card-h) * 38 / 250);
+  --badge-radius: calc(var(--card-w) * 0.128); /* 32px on 250px tile */
+  --logo-top: calc(var(--card-w) * 0.076); /* logo offset: 19px on 250px tile */
+
+  /*
+    Space between card border and logo.
+    Based on Figma inset ~26px on a 250px tile (~10.4%).
+  */
+  --logo-inset: calc(var(--card-w) * 0.104);
+
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 32px;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.02);
+  /* Allow badge to render above the card border (Figma style). */
+  overflow: visible;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  flex: 0 0 auto;
+}
+
+/* Match the same hover feel used in the other card sections. */
+/* keep card::after removed to match the Figma container border exactly */
+
+.card:hover {
+  border-color: var(--sponsor-accent-rgba);
+  box-shadow: 0 8px 32px var(--sponsor-accent-shadow-rgba);
+}
+
+.badge {
+  position: absolute;
+  /* Lift badge slightly so it visually centers on the card's top border (Figma match). */
+  top: calc(var(--badge-h) * -0.35);
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: var(--badge-h);
+  padding: 0 clamp(18px, 1.6vw, 30px);
+  border-radius: var(--badge-radius);
+  background: var(--sponsor-accent);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.06);
+  z-index: 3;
+}
+
+.badgeText {
+  font-family: "URWGeometricArabic-Bold", "URW Geometric", sans-serif;
+  font-weight: 700;
+  font-size: calc(var(--card-w) * 0.064); /* 16px on 250px tile */
+  line-height: 1;
+  color: var(--badge-text);
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.logoWrap {
+  position: absolute;
+  top: var(--logo-inset);
+  left: var(--logo-inset);
+  right: var(--logo-inset);
+  bottom: var(--logo-inset);
+  z-index: 1;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
