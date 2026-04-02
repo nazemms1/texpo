@@ -3,6 +3,7 @@ import { AboutExhibition } from "@/src/components/sections/about-exhibition/Abou
 import { StatisticsSection } from "@/src/components/sections/statistics/StatisticsSection";
 import { OrganizingCompanySection } from "@/src/components/sections/organizing-company/OrganizingCompanySection";
 import { ExhibitorsSectorsSection } from "@/src/components/sections/exhibitors/ExhibitorsSectorsSection";
+import { SponsorsMotionSection } from "@/src/components/sections/sponsers-section/SponsorsMotionSection";
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
       <AboutExhibition />
       <StatisticsSection />
       <OrganizingCompanySection />
+      <SponsorsMotionSection />
       <ExhibitorsSectorsSection />
     </>
   );

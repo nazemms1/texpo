@@ -1,0 +1,63 @@
+.section {
+  background: transparent;
+  padding: 6rem 0;
+}
+
+.inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.subtitle {
+  margin: -0.25rem 0 0;
+  color: #33546e;
+  font-family: "URWGeometricArabic", "URW Geometric", sans-serif;
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  line-height: 1.7;
+  max-width: 980px;
+}
+
+.scrollWrapper {
+  position: relative;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.25rem 0 1.75rem;
+}
+
+.scrollWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.grid {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  flex-wrap: nowrap;
+}
+
+.card {
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  min-width: clamp(180px, 20vw, 250px);
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+}
