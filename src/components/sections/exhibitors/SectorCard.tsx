@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import styles from "./SectorCard.module.css";
 
 interface SectorCardProps {
@@ -8,30 +9,60 @@ interface SectorCardProps {
   image: string;
   offset: number;
   isActive: boolean;
+  total: number;
 }
 
-export function SectorCard({ title, image, offset, isActive }: SectorCardProps) {
+export function SectorCard({ title, image, offset, isActive, total }: SectorCardProps) {
   const lines = title.split("\n");
   const abs = Math.abs(offset);
-  const near = Math.min(abs, 1);
-  const far = Math.min(Math.max(abs - 1, 0), 1);
-
-  // Matched from Figma positions: center y=0, near y~68, far y~251
-  const translateY = 68 * near + 183 * far;
-  const translateX = -Math.sign(offset) * 18 * far;
-  const rotateZ = offset === 0 ? 0 : Math.sign(offset) * (13 + 2 * far);
-  const scale = 1 - 0.1 * near - 0.016 * far;
-  const opacity = isActive ? 1 : abs < 1.5 ? 0.6 : 0.4;
-  const transform = isActive
-    ? "perspective(1300px) translateY(0px) rotateZ(0deg) scale(1)"
-    : `perspective(1300px) translateX(${translateX}px) translateY(${translateY}px) rotateZ(${rotateZ}deg) scale(${scale})`;
+  
+  // Convert offset to an orbital angle (radians)
+  // Adjusted factor to keep 5 cards within "viewable" front half
+  const angle = (offset / total) * Math.PI; // Halved the rotation range to show 5 cards
+  
+  const translateX = Math.sin(angle) * 520; 
+  const translateZ = (Math.cos(angle) - 1) * 350;
+  const archFactor = Math.abs(offset / (total/2));
+  const translateY = Math.pow(archFactor, 1.3) * 180;
+  
+  const rotateY = -Math.sin(angle) * 35;
+  const rotateZ = (offset / total) * 35;
+  const scale = 1 - abs * 0.12;
+  
+  // Opacity: Show all 5 front cards clearly
+  const opacity = isActive ? 1 : Math.max(0.4, 1 - abs * 0.25);
+  
+  // Blur effect for far-most cards only
+  const blur = abs > 1.2 ? `blur(${Math.min(5, (abs - 1.2) * 6)}px)` : "blur(0px)";
 
   return (
-    <article
+    <motion.article
       className={`${styles.card} ${isActive ? styles.active : styles.inactive}`}
-      style={{
-        transform,
+      initial={false}
+      animate={{
+        x: translateX,
+        y: translateY,
+        z: translateZ,
+        rotateY: rotateY,
+        rotateZ: rotateZ,
+        scale,
         opacity,
+        filter: blur,
+        zIndex: Math.round((5 - abs) * 10),
+      }}
+      transition={{
+        duration: 0.6,
+        ease: [0.22, 0.61, 0.36, 1],
+        zIndex: { duration: 0 }
+      }}
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "40%",
+        marginLeft: "-150px", 
+        marginTop: "-150px",
+        width: "300px",
+        perspective: "1200px"
       }}
     >
       <div className={styles.cardMedia}>
@@ -39,7 +70,7 @@ export function SectorCard({ title, image, offset, isActive }: SectorCardProps) 
           src={image}
           alt={title.replace("\n", " ")}
           fill
-          sizes="(max-width: 768px) 82vw, 450px"
+          sizes="(max-width: 768px) 82vw, 400px"
           className={styles.cardImage}
           priority={isActive}
         />
@@ -55,6 +86,6 @@ export function SectorCard({ title, image, offset, isActive }: SectorCardProps) 
           </span>
         ))}
       </p>
-    </article>
+    </motion.article>
   );
 }
