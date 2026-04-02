@@ -11,6 +11,9 @@ import { SectorCard } from "./SectorCard";
 import styles from "./ExhibitorsSectorsSection.module.css";
 
 const SECTORS = [
+
+
+
   {
     title: "Artificial Intelligence\n& Machine Learning",
     image: "/images/sectors/sector-ai-ml.png",
@@ -35,6 +38,7 @@ const SECTORS = [
 
 function getLoopDistance(index: number, current: number, total: number) {
   const raw = index - current;
+  // This calculates the shortest distance in a loop (e.g. from -2.5 to 2.5)
   return ((((raw + total / 2) % total) + total) % total) - total / 2;
 }
 
@@ -45,6 +49,7 @@ export function ExhibitorsSectorsSection() {
   const [offsets, setOffsets] = useState<number[]>(
     SECTORS.map((_, i) => (i === 0 ? 0 : i)),
   );
+
   const visualActiveIndex = offsets.reduce((bestIdx, value, idx, arr) => {
     return Math.abs(value) < Math.abs(arr[bestIdx] ?? Infinity) ? idx : bestIdx;
   }, 0);
@@ -53,11 +58,13 @@ export function ExhibitorsSectorsSection() {
     if (!embla) return;
 
     const updateArc = () => {
-      const current = embla.scrollProgress() * total;
-      const normalizedCurrent = ((current % total) + total) % total;
+      const scrollProgress = embla.scrollProgress();
+      // Embla progress can be > 1 or < 0 if not looped, but here we assume loop:true
+      // normalizedCurrent is the "center index" based on scroll progress
+      const current = ((scrollProgress * total) % total + total) % total;
 
       setOffsets(
-        SECTORS.map((_, i) => getLoopDistance(i, normalizedCurrent, total)),
+        SECTORS.map((_, i) => getLoopDistance(i, current, total)),
       );
       setActiveIndex(embla.selectedScrollSnap());
     };
@@ -91,39 +98,43 @@ export function ExhibitorsSectorsSection() {
             </p>
           </header>
 
-          <div className={styles.carouselClip}>
-            <Carousel
-              className={styles.carousel}
-              slideSize={{ base: "100%", md: "30%" }}
-              slideGap={{ base: 10, md: 14 }}
-              withControls={false}
-              withIndicators={false}
-              emblaOptions={{
-                align: "center",
-                loop: true,
-                containScroll: "trimSnaps",
-              }}
-              getEmblaApi={setEmbla}
-              onSlideChange={setActiveIndex}
-            >
+          <div className={styles.carouselContainer}>
+            {/* The 3D Stage where cards are rendered centrally */}
+            <div className={styles.stage3D}>
               {SECTORS.map((sector, index) => (
-                <Carousel.Slide key={sector.title}>
-                  <button
-                    type="button"
-                    className={styles.slideButton}
-                    onClick={() => embla?.scrollTo(index)}
-                    aria-label={`Select ${sector.title.replace("\n", " ")}`}
-                  >
-                    <SectorCard
-                      title={sector.title}
-                      image={sector.image}
-                      offset={offsets[index] ?? 0}
-                      isActive={index === visualActiveIndex}
-                    />
-                  </button>
-                </Carousel.Slide>
+                <SectorCard
+                  key={sector.title}
+                  title={sector.title}
+                  image={sector.image}
+                  offset={offsets[index] ?? 0}
+                  isActive={index === visualActiveIndex}
+                  total={total}
+                />
               ))}
-            </Carousel>
+            </div>
+
+            {/* Invisible Carousel for interaction and state management */}
+            <div className={styles.interactionLayer}>
+              <Carousel
+                className={styles.carousel}
+                slideSize="100%"
+                withControls={false}
+                withIndicators={false}
+                emblaOptions={{
+                  align: "center",
+                  loop: true,
+                  skipSnaps: false,
+                }}
+                getEmblaApi={setEmbla}
+                onSlideChange={setActiveIndex}
+              >
+                {SECTORS.map((sector) => (
+                  <Carousel.Slide key={sector.title}>
+                    <div className={styles.invisibleSlide} />
+                  </Carousel.Slide>
+                ))}
+              </Carousel>
+            </div>
           </div>
 
           <div className={styles.dots}>
