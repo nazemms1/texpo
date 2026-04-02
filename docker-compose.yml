@@ -1,0 +1,20 @@
+
+services:
+  front:
+    container_name: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "8105:80"
+    env_file:
+      - $envfile
+    restart: unless-stopped
+    networks:
+      texpo-net:
+        aliases:
+          - texpo-front
+networks:
+  texpo-net:
+    external: true
+
