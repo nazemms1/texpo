@@ -22,3 +22,4 @@ export const SOCIAL_LINKS = [
   { label: "Facebook", href: "#", icon: "facebook" },
   { label: "Instagram", href: "#", icon: "instagram" },
 ];
+ 
