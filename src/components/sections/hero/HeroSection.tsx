@@ -42,8 +42,8 @@ export function HeroSection() {
           <motion.div className={styles.actions} variants={fadeInUp}>
             <PillButton href="/about" variant="primary">Discover More</PillButton>
             <ArrowCircle href="/about" variant="primary" />
-            <PillButton href="/contact" variant="outline">Become A Sponsor</PillButton>
-            <ArrowCircle href="/contact" variant="outline" />
+            <PillButton href="/become-a-sponsor" variant="outline">Become A Sponsor</PillButton>
+            <ArrowCircle href="/become-a-sponsor" variant="outline" />
           </motion.div>
         </motion.div>
       </div>

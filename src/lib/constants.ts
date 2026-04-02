@@ -4,6 +4,7 @@ export const NAV_ITEMS: NavItem[] = [
   { key: "home", path: "" },
   { key: "about", path: "/about" },
   { key: "contact", path: "/contact" },
+  { key: "sponsor", path: "/become-a-sponsor" },
   { key: "visitors", path: "/visitors" },
   { key: "texpo2025", path: "/texpo-2025" },
 ];
