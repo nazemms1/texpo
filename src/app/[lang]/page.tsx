@@ -11,9 +11,11 @@ export default function HomePage() {
       <HeroSection />
       <AboutExhibition />
       <StatisticsSection />
+      <InfoCardSection />
       <OrganizingCompanySection />
       <SponsorsMotionSection />
       <ExhibitorsSectorsSection />
-    </>
+      <MapSection />
+     </>
   );
 }

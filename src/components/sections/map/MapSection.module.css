@@ -1,0 +1,54 @@
+.section {
+  background: #ffffff;
+ }
+
+.inner {
+   margin: 0 auto;
+  padding: 0 220px;
+}
+
+.mapWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.title {
+    font-family: 'Nulshock', sans-serif;
+top: 200;
+  position: absolute;
+ 
+  font-size: 3rem;
+  
+  color: #0a1a3e;
+  text-align: center;
+  text-transform: uppercase;
+ 
+  
+  pointer-events: none;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 0.65rem;
+    white-space: normal;
+    width: 80%;
+  }
+}
