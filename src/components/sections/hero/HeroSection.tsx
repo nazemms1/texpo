@@ -40,7 +40,7 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div className={styles.actions} variants={fadeInUp}>
-            <PillButton href="/book-a-stand" variant="primary">Discover More</PillButton>
+            <PillButton href="/about" variant="primary">Discover More</PillButton>
             <ArrowCircle href="/about" variant="primary" />
             <PillButton href="/become-a-sponsor" variant="outline">Become A Sponsor</PillButton>
             <ArrowCircle href="/become-a-sponsor" variant="outline" />
