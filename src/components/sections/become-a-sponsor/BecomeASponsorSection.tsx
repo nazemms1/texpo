@@ -31,8 +31,9 @@ export function BecomeASponsorSection() {
       subtitle="Submit your interest and our partnership team will contact you with a tailored sponsorship proposal within 24 hours."
       contactItems={sponsorContactInfo}
       terms={[
-        "By submitting this form, you consent to the collection and processing of your personal data for the purpose of handling your sponsorship enquiry and follow-up communication.",
-        "Your information may be shared with contracted service providers and official partners only when needed to deliver event services and coordinate sponsorship packages.",
+        "By registering for TEXPO Land, you consent to the collection and processing of your personal data for the purpose of facilitating your participation in the event. Your information may also be used to send event-related updates and notifications, as well as to share relevant news, offers, and marketing communications from the exhibition and its official partners, in accordance with your selected preferences.",
+        "I confirm that I am 21 years of age or older, and that I have read and agreed to the Terms and Conditions and the Privacy Policy. I understand that my personal data will be processed in accordance with the Privacy Policy and, where necessary, shared with contracted service providers, exhibitors, sponsors, and partners for the purpose of delivering event services, facilitating my participation, and managing follow-ups or communications related to this event",
+        "Your information may be shared with contracted service providers and official partners only when needed to deliver event services and coordinate sponsorship packages"
       ]}
       renderFormFields={(styles) => (
         <>

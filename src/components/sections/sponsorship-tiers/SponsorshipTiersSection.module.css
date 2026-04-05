@@ -4,26 +4,30 @@
 }
 
 .inner {
-  max-width: 1180px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 220px;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    padding: 0 2rem;
+  }
 }
 
 .title {
   font-family: 'Nulshock', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #07365f;
-  font-size: clamp(1.35rem, 2.6vw, 2.15rem);
-  line-height: 1.2;
+  /* font-weight: 700; */
+  /* text-transform: uppercase; */
+   color: #133854;
+  font-size: 48;
+ 
   margin: 0 0 1rem;
   text-align: center;
 }
 
 .subtitle {
   margin: 0 auto 2.75rem;
-  max-width: 720px;
+ 
   text-align: center;
   color: rgba(7, 54, 95, 0.62);
   font-family: 'URWGeometricArabic', sans-serif;
