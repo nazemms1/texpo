@@ -47,7 +47,8 @@ const standContactInfo = [
     Icon: IconMail,
     label: 'Email Us',
     value: 'info@texpo-exhibition.com',
-  },
+  }, 
+  
   {
     Icon: IconPhone,
     label: 'Call Us',
