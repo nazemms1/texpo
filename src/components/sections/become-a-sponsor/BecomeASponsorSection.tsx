@@ -26,6 +26,7 @@ const sponsorContactInfo = [
 export function BecomeASponsorSection() {
   return (
     <TwoPanelFormSection
+      id="sponsor-enquiry"
       title="BECOME A SPONSOR"
       subtitle="Submit your interest and our partnership team will contact you with a tailored sponsorship proposal within 24 hours."
       contactItems={sponsorContactInfo}

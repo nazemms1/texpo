@@ -1,0 +1,606 @@
+/**
+ * درج الارتفاع: الشبكة align-items:start (محاذاة من الأعلى).
+ * --stair-extra يُطبَّق كـ margin-top على الزر حتى ينزل الزر مع كل مستوى
+ * دون ترك فراغ أبيض تحت الزر داخل البطاقة.
+ */
+.card {
+  --stair-extra: 0rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 17.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  padding: 1.75rem 1.5rem calc(1.5rem + var(--stair-extra));
+  border-radius: 18px;
+  box-shadow:
+    0 8px 32px rgba(7, 54, 95, 0.08),
+    0 2px 8px rgba(7, 54, 95, 0.04);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 14px 40px rgba(7, 54, 95, 0.12),
+    0 4px 12px rgba(7, 54, 95, 0.06);
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  font-family: "Nulshock", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #fff;
+  background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+}
+
+.iconWrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+}
+
+.tierIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.title {
+  font-family: "Nulshock", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  color: #07365f;
+  margin: 0 0 0.4rem;
+}
+
+.subtitle {
+  margin: 0 0 1.25rem;
+  font-family: "URWGeometricArabic", sans-serif;
+  font-size: 0.88rem;
+  color: rgba(7, 54, 95, 0.55);
+  line-height: 1.45;
+}
+
+.features {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  text-align: left;
+  flex: 1;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-bottom: 0.65rem;
+  font-family: "URWGeometricArabic", sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: rgba(7, 54, 95, 0.78);
+}
+
+.feature:last-child {
+  margin-bottom: 0;
+}
+
+.check {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ختم + صح لقائمة Diamond (Tabler rosette) */
+.checkSeal {
+  margin-top: 1px;
+}
+
+.cta {
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-family: "URWGeometricArabic", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.cta:hover {
+  transform: scale(1.02);
+}
+
+.cta:focus-visible {
+  outline: 2px solid #07365f;
+  outline-offset: 3px;
+}
+
+.silver .cta,
+.gold .cta,
+.platinum .cta,
+.diamond .cta {
+  margin-top: var(--stair-extra);
+}
+
+/* —— Silver — نفس فكرة Gold: توكنات مركزية + زجاج Figma —— */
+.silver {
+  /* ارتفاع الدرج */
+  --stair-extra: 0rem;
+
+  /* تمييز واحد: أيقونة المستوى + صح الميزات (#0058BD) */
+  --tier-accent: #0058bd;
+
+  /* بطاقة */
+  --tier-card-bg: rgba(255, 255, 255, 0.6);
+  /* أوضح من #fff على خلفية بيضاء مع بقاء خفيف (زجاج) */
+  --tier-border: rgba(0, 88, 189, 0.18);
+  --tier-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --tier-shadow-hover-extra: rgba(7, 54, 95, 0.07);
+
+  /* أيقونة المستوى (64×64) */
+  --tier-icon-surface: #f1f5f9;
+  --tier-icon-fg: var(--tier-accent);
+
+  /* نصوص (نفس تسلسل Gold / Figma) */
+  --tier-title: #133854;
+  --tier-subtitle: #414754;
+  --tier-feature: #555960;
+
+  --tier-check: var(--tier-accent);
+
+  /* زر: أبيض + حدود خفيفة + نص بلون التمييز */
+  --tier-cta-bg: #ffffff;
+  --tier-cta-fg: var(--tier-title);
+  --tier-cta-border: rgba(19, 56, 84, 0.12);
+  --tier-cta-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --tier-cta-hover-bg: rgba(255, 255, 255, 0.98);
+  --tier-cta-hover-border: rgba(19, 56, 84, 0.18);
+
+  padding: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-radius: 24px;
+  background: var(--tier-card-bg);
+  border: 1px solid var(--tier-border);
+  box-shadow: var(--tier-shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  align-items: flex-start;
+  text-align: left;
+}
+
+.silver:hover {
+  box-shadow:
+    0 4px 16px var(--tier-shadow-hover-extra),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.silver .iconWrap {
+  margin-left: 0;
+  margin-right: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--tier-icon-surface);
+  color: var(--tier-icon-fg);
+}
+
+.silver .title,
+.silver .subtitle {
+  width: 100%;
+  text-align: left;
+}
+
+.silver .title {
+  color: var(--tier-title);
+}
+
+.silver .features {
+  width: 100%;
+}
+
+.silver .check {
+  color: var(--tier-check);
+}
+
+.silver .subtitle {
+  color: var(--tier-subtitle);
+}
+
+.silver .feature {
+  color: var(--tier-feature);
+}
+
+.silver .cta {
+  background: var(--tier-cta-bg);
+  color: var(--tier-cta-fg);
+  border: 1px solid var(--tier-cta-border);
+  box-shadow: var(--tier-cta-shadow);
+}
+
+.silver .cta:hover {
+  background: var(--tier-cta-hover-bg);
+  border-color: var(--tier-cta-hover-border);
+}
+
+/* —— Gold — توكنات: غيّر القيم هنا فقط —— */
+.gold {
+  /* ارتفاع الدرج */
+  --stair-extra: 1.25rem;
+
+  /* بطاقة */
+  --tier-border: #fef3c7;
+  --tier-gradient-start: #fffbeb;
+  --tier-gradient-end: #ffffff;
+  --tier-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --tier-shadow-hover-extra: rgba(245, 158, 11, 0.1);
+
+  /* أيقونة المستوى */
+  --tier-icon-surface: rgba(245, 158, 11, 0.1);
+  --tier-icon-fg: #d97706;
+
+  /* نصوص (مستويات Figma: عنوان / وصف / سطر ميزة) */
+  --tier-title: #133854;
+  --tier-subtitle: #414754;
+  --tier-feature: #555960;
+
+  /* أيقونة القائمة (منفصلة عن لون النص) */
+  --tier-check: #f59e0b;
+
+  /* زر */
+  --tier-cta-bg: #f59e0b;
+  --tier-cta-fg: #ffffff;
+  --tier-cta-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --tier-cta-hover-bg: #d97706;
+  --tier-cta-hover-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+
+  padding: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--tier-border);
+  background: linear-gradient(
+    180deg,
+    var(--tier-gradient-start) 0%,
+    var(--tier-gradient-end) 100%
+  );
+  box-shadow: var(--tier-shadow);
+  align-items: flex-start;
+  text-align: left;
+}
+
+.gold:hover {
+  box-shadow:
+    0 4px 16px var(--tier-shadow-hover-extra),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.gold .iconWrap {
+  margin-left: 0;
+  margin-right: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--tier-icon-surface);
+  color: var(--tier-icon-fg);
+}
+
+.gold .title,
+.gold .subtitle {
+  width: 100%;
+  text-align: left;
+}
+
+.gold .title {
+  color: var(--tier-title);
+}
+
+.gold .features {
+  width: 100%;
+}
+
+.gold .check {
+  color: var(--tier-check);
+}
+
+.gold .subtitle {
+  color: var(--tier-subtitle);
+}
+
+.gold .feature {
+  color: var(--tier-feature);
+}
+
+.gold .cta {
+  background: var(--tier-cta-bg);
+  color: var(--tier-cta-fg);
+  border: none;
+  box-shadow: var(--tier-cta-shadow);
+}
+
+.gold .cta:hover {
+  background: var(--tier-cta-hover-bg);
+  box-shadow: var(--tier-cta-hover-shadow);
+}
+
+/* —— Platinum — نفس نموذج Gold/Silver + Figma —— */
+.platinum {
+  --stair-extra: 2.5rem;
+
+  --tier-accent: #0058bd;
+
+  /* بطاقة: تدرج Figma (0% #F1F5F9 → 100% #FFF، عمودي مثل Gold) */
+  --tier-border: #e2e8f0;
+  --tier-gradient-start: #f1f5f9;
+  --tier-gradient-end: #ffffff;
+  --tier-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --tier-shadow-hover-extra: rgba(0, 88, 189, 0.14);
+
+  --tier-icon-surface: rgba(0, 88, 189, 0.1);
+  --tier-icon-fg: var(--tier-accent);
+
+  --tier-title: #133854;
+  --tier-subtitle: #414754;
+  --tier-feature: #555960;
+
+  --tier-check: var(--tier-accent);
+
+  --tier-cta-bg: var(--tier-accent);
+  --tier-cta-fg: #ffffff;
+  --tier-cta-shadow: 0 4px 14px rgba(0, 88, 189, 0.28);
+  --tier-cta-hover-bg: #004a9e;
+  --tier-cta-hover-shadow: 0 6px 20px rgba(0, 88, 189, 0.38);
+
+  padding: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--tier-border);
+  background: linear-gradient(
+    180deg,
+    var(--tier-gradient-start) 0%,
+    var(--tier-gradient-end) 100%
+  );
+  box-shadow: var(--tier-shadow);
+  align-items: flex-start;
+  text-align: left;
+}
+
+.platinum:hover {
+  box-shadow:
+    0 4px 24px var(--tier-shadow-hover-extra),
+    0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.platinum .iconWrap {
+  margin-left: 0;
+  margin-right: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--tier-icon-surface);
+  color: var(--tier-icon-fg);
+}
+
+.platinum .title,
+.platinum .subtitle {
+  width: 100%;
+  text-align: left;
+}
+
+.platinum .title {
+  color: var(--tier-title);
+}
+
+.platinum .features {
+  width: 100%;
+}
+
+.platinum .check {
+  color: var(--tier-check);
+}
+
+.platinum .subtitle {
+  color: var(--tier-subtitle);
+}
+
+.platinum .feature {
+  color: var(--tier-feature);
+}
+
+.platinum .cta {
+  background: var(--tier-cta-bg);
+  color: var(--tier-cta-fg);
+  border: none;
+  box-shadow: var(--tier-cta-shadow);
+}
+
+.platinum .cta:hover {
+  background: var(--tier-cta-hover-bg);
+  box-shadow: var(--tier-cta-hover-shadow);
+}
+
+/* —— Diamond — Figma: تدرج #2E5B88 → #42BEB3؛ شارة/وصف/صح بلون #42BEB3 —— */
+.diamond {
+  --stair-extra: 3.75rem;
+
+  --tier-blue: #0058bd;
+  --tier-gradient-from: #2e5b88;
+  --tier-gradient-to: #42beb3;
+  --tier-accent: #42beb3;
+
+  --tier-border: rgba(0, 88, 189, 0.2);
+  --tier-bg: #ffffff;
+  --tier-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --tier-shadow-hover-extra: rgba(0, 88, 189, 0.12);
+
+  --tier-icon-gradient: linear-gradient(
+    135deg,
+    var(--tier-gradient-from) 0%,
+    var(--tier-gradient-to) 100%
+  );
+  --tier-icon-fg: #ffffff;
+  --tier-icon-shadow:
+    0 10px 15px -3px rgba(46, 91, 136, 0.3),
+    0 4px 6px -4px rgba(46, 91, 136, 0.3);
+
+  --tier-title: #133854;
+  --tier-subtitle: var(--tier-accent);
+  --tier-feature: #555960;
+  --tier-check: var(--tier-accent);
+
+  --tier-cta-gradient: linear-gradient(
+    90deg,
+    var(--tier-gradient-from) 0%,
+    var(--tier-gradient-to) 100%
+  );
+  --tier-cta-gradient-hover: linear-gradient(
+    90deg,
+    #264a6f 0%,
+    #38a89f 100%
+  );
+  --tier-cta-fg: #ffffff;
+  --tier-cta-shadow: 0 6px 20px rgba(46, 91, 136, 0.28);
+  --tier-cta-hover-shadow: 0 8px 26px rgba(46, 91, 136, 0.36);
+
+  padding: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-radius: 24px;
+  /* 1px مثل باقي الطبقات حتى يتساوى عرض المحتوى؛ حلقة إضافية خفيفة بدل 2px */
+  border: 1px solid var(--tier-border);
+  background: var(--tier-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow:
+    var(--tier-shadow),
+    0 0 0 1px rgba(0, 88, 189, 0.12);
+  align-items: flex-start;
+  text-align: left;
+}
+
+.diamond:hover {
+  box-shadow:
+    0 4px 24px var(--tier-shadow-hover-extra),
+    0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 88, 189, 0.12);
+}
+
+.diamond .badge {
+  top: 18px;
+  right: 34.25px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: var(--tier-accent);
+  color: #ffffff;
+}
+
+.diamond .iconWrap {
+  margin-left: 0;
+  margin-right: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--tier-icon-gradient);
+  color: var(--tier-icon-fg);
+  box-shadow: var(--tier-icon-shadow);
+}
+
+.diamond .title,
+.diamond .subtitle {
+  width: 100%;
+  text-align: left;
+}
+
+.diamond .title {
+  color: var(--tier-title);
+}
+
+.diamond .features {
+  width: 100%;
+}
+
+.diamond .check {
+  color: var(--tier-check);
+}
+
+.diamond .subtitle {
+  color: var(--tier-subtitle);
+  font-weight: 600;
+}
+
+.diamond .feature {
+  color: var(--tier-feature);
+}
+
+.diamond .cta {
+  background: var(--tier-cta-gradient);
+  color: var(--tier-cta-fg);
+  border: none;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+  box-shadow: var(--tier-cta-shadow);
+}
+
+.diamond .cta:hover {
+  background: var(--tier-cta-gradient-hover);
+  box-shadow: var(--tier-cta-hover-shadow);
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem 1.25rem 1.35rem;
+  }
+
+  .silver {
+    padding: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .gold {
+    padding: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .platinum {
+    padding: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .diamond {
+    padding: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-radius: 20px;
+  }
+}

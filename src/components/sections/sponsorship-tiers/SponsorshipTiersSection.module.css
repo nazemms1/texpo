@@ -1,0 +1,73 @@
+.section {
+  background: #ffffff;
+  padding: 5.5rem 0 3rem;
+}
+
+.inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.title {
+  font-family: 'Nulshock', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #07365f;
+  font-size: clamp(1.35rem, 2.6vw, 2.15rem);
+  line-height: 1.2;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0 auto 2.75rem;
+  max-width: 720px;
+  text-align: center;
+  color: rgba(7, 54, 95, 0.62);
+  font-family: 'URWGeometricArabic', sans-serif;
+  font-size: clamp(0.9rem, 1.25vw, 1.05rem);
+  line-height: 1.7;
+}
+
+.gridWrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  /* محاذاة من الأعلى: كل بطاقة تحتفظ بارتفاعها دون تمدد لأطول صف */
+  align-items: start;
+}
+
+.cardSlot {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardSlot > * {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.spanAll {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1024px) {
+  .gridWrap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .section {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .gridWrap {
+    grid-template-columns: 1fr;
+  }
+}
