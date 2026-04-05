@@ -10,7 +10,6 @@ import { useApi } from '@/src/hooks/useApi';
 import { socialService } from '@/src/lib/api';
 import type { SocialLinkApiItem } from '@/src/types/api';
 
-// Map platform name → local icon asset (fallback)
 const LOCAL_ICONS: Record<string, string> = {
   facebook:  facebookIcon as unknown as string,
   instagram: instagramIcon as unknown as string,

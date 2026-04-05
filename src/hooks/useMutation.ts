@@ -13,12 +13,6 @@ interface UseMutationReturn<TPayload> extends MutationState {
   reset: () => void;
 }
 
-/**
- * Hook for form submissions / mutations.
- *
- * @example
- * const { submit, loading, error, success } = useMutation(contactService.submit);
- */
 export function useMutation<TData, TPayload>(
   mutationFn: (payload: TPayload) => Promise<{ data: TData; message?: string }>,
 ): UseMutationReturn<TPayload> {

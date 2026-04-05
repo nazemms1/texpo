@@ -1,5 +1,3 @@
-// ─── Generic wrappers ────────────────────────────────────────────────────────
-
 export interface ApiResponse<T> {
   data: T;
   message: string;
@@ -11,8 +9,6 @@ export interface ApiError {
   status: number;
   fieldErrors?: Record<string, string>;
 }
-
-// ─── Home page ───────────────────────────────────────────────────────────────
 
 export interface StatApiItem {
   value: string;
@@ -29,8 +25,6 @@ export interface HeroApiData {
   ctaSecondaryHref: string;
 }
 
-// ─── Sponsors ────────────────────────────────────────────────────────────────
-
 export interface SponsorApiItem {
   id: string;
   type: {
@@ -41,15 +35,11 @@ export interface SponsorApiItem {
   name?: string;
 }
 
-// ─── Social media ────────────────────────────────────────────────────────────
-
 export interface SocialLinkApiItem {
-  platform: string; // "facebook" | "instagram" | "linkedin" | "twitter" | ...
+  platform: string;
   href: string;
-  icon?: string;    // optional override icon URL
+  icon?: string;
 }
-
-// ─── Contact form ────────────────────────────────────────────────────────────
 
 export interface ContactFormPayload {
   fullName: string;
@@ -61,8 +51,6 @@ export interface ContactFormPayload {
   email: string;
   message: string;
 }
-
-// ─── Book a Stand form ───────────────────────────────────────────────────────
 
 export interface BookStandPayload {
   firstName: string;
@@ -76,8 +64,6 @@ export interface BookStandPayload {
   sector: string;
 }
 
-// ─── Become a Sponsor form ───────────────────────────────────────────────────
-
 export interface BecomeSponsorPayload {
   fullName: string;
   companyName: string;
@@ -89,16 +75,12 @@ export interface BecomeSponsorPayload {
   message: string;
 }
 
-// ─── Visitors page ───────────────────────────────────────────────────────────
-
 export interface VisitorInfoApiItem {
   id: string;
   icon?: string;
   title: string;
   description: string;
 }
-
-// ─── About page ──────────────────────────────────────────────────────────────
 
 export interface AboutApiData {
   title: string;

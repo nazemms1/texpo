@@ -9,7 +9,6 @@ const client = axios.create({
   },
 });
 
-// ─── Response interceptor ─────────────────────────────────────────────────────
 
 client.interceptors.response.use(
   (response: AxiosResponse) => response.data,
