@@ -1,10 +1,10 @@
 .section {
-  padding: 4rem 0 6rem;
+  padding: 4rem 220px 6rem;
   width: 100%;
 }
 
 .inner {
-  max-width: 1400px;
+ 
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
@@ -138,6 +138,13 @@
   color: #2b3a4a;
 }
 
+.field:has(input[required]) .fieldLabel::after,
+.field:has(textarea[required]) .fieldLabel::after,
+.field:has(select[required]) .fieldLabel::after {
+  content: ' *';
+  color: #e53e3e;
+}
+
 .input {
   width: 100%;
   padding: 1rem 1.4rem;
@@ -221,9 +228,9 @@
   transform: translateY(0);
 }
 
-@media (max-width: 1440px) {
-  .inner {
-    margin: 0 2rem;
+@media (max-width: 1280px) {
+  .section {
+    padding: 4rem 2rem 6rem;
   }
 }
 
@@ -245,10 +252,6 @@
   .row {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-
-  .inner {
-    margin: 0 1rem;
   }
 }
 

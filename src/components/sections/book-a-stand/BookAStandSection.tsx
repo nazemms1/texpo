@@ -47,7 +47,8 @@ const standContactInfo = [
     Icon: IconMail,
     label: 'Email Us',
     value: 'info@texpo-exhibition.com',
-  },
+  }, 
+  
   {
     Icon: IconPhone,
     label: 'Call Us',
@@ -75,7 +76,7 @@ export function BookAStandSection() {
         <>
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>First Name *</span>
+              <span className={styles.fieldLabel}>First Name</span>
               <input
                 className={styles.input}
                 type="text"
@@ -84,7 +85,7 @@ export function BookAStandSection() {
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Last Name *</span>
+              <span className={styles.fieldLabel}>Last Name</span>
               <input
                 className={styles.input}
                 type="text"
@@ -96,7 +97,7 @@ export function BookAStandSection() {
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Job Title *</span>
+              <span className={styles.fieldLabel}>Job Title</span>
               <input
                 className={styles.input}
                 type="text"
@@ -105,7 +106,7 @@ export function BookAStandSection() {
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Company Name *</span>
+              <span className={styles.fieldLabel}>Company Name</span>
               <input
                 className={styles.input}
                 type="text"
@@ -117,7 +118,7 @@ export function BookAStandSection() {
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Company Website *</span>
+              <span className={styles.fieldLabel}>Company Website</span>
               <input
                 className={styles.input}
                 type="url"
@@ -126,7 +127,7 @@ export function BookAStandSection() {
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Work Email Address *</span>
+              <span className={styles.fieldLabel}>Work Email Address</span>
               <input
                 className={styles.input}
                 type="email"
@@ -138,7 +139,7 @@ export function BookAStandSection() {
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Mobile Phone *</span>
+              <span className={styles.fieldLabel}>Mobile Phone</span>
               <input
                 className={styles.input}
                 type="tel"
@@ -147,7 +148,7 @@ export function BookAStandSection() {
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Country of Residence *</span>
+              <span className={styles.fieldLabel}>Country of Residence</span>
               <span className={styles.selectWrap}>
                 <select
                   className={`${styles.input} ${styles.selectField}`}
@@ -169,7 +170,7 @@ export function BookAStandSection() {
               variants={fadeInUp}
               style={{ gridColumn: '1 / -1' }}
             >
-              <span className={styles.fieldLabel}>What sector are you in? *</span>
+              <span className={styles.fieldLabel}>What sector are you in?</span>
               <span className={styles.selectWrap}>
                 <select
                   className={`${styles.input} ${styles.selectField}`}

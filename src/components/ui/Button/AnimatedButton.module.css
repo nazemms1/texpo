@@ -112,3 +112,13 @@
   height: 100%;
   pointer-events: none;
 }
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .iconWrapper {
+  transform: scaleX(-1);
+}
