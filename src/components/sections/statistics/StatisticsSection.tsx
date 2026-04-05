@@ -16,7 +16,7 @@ function CountUpValue({ value }: { value: string }) {
   const { num, suffix } = parseValue(value);
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
+  const inView = useInView(ref, { once: false });
 
   useEffect(() => {
     if (!inView || num === 0) return;
@@ -58,7 +58,7 @@ export function StatisticsSection() {
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: i * 0.1 }}
           >
             <CountUpValue value={stat.value} />
@@ -114,7 +114,7 @@ export function StatisticsSection() {
                   }}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
                 />
                 <foreignObject x="-50" y="-80" width="120" height="80">
@@ -125,7 +125,7 @@ export function StatisticsSection() {
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                   >
                     <CountUpValue value={stat.value} />
                     <span className={styles.label}>{stat.label}</span>

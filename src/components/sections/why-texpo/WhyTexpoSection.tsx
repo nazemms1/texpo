@@ -41,7 +41,7 @@ export function WhyTexpoSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
         >
           WHY YOU SHOULD BE PART OF TEXPO LAND | 2ND EDITION?
         </motion.h2>
@@ -52,7 +52,7 @@ export function WhyTexpoSection() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: false, amount: 0.15 }}
           >
             {cards.map(({ Icon, title, body }) => (
               <motion.div

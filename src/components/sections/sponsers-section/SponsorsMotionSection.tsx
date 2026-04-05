@@ -79,7 +79,7 @@ export function SponsorsMotionSection() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
+              viewport={{ once: false, amount: 0.15 }}
             >
               {DEFAULT_SPONSORS.map((s, index) => (
                 <motion.div

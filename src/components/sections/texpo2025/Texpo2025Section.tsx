@@ -41,7 +41,7 @@ export function Texpo2025Section() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
         >
           {highlights.map(({ Icon, label, value }) => (
             <motion.div key={label} className={styles.highlightCard} variants={scaleIn}>
@@ -66,7 +66,7 @@ export function Texpo2025Section() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
           >
             {themes.map((theme) => (
               <motion.div key={theme} className={styles.themeChip} variants={fadeInUp}>

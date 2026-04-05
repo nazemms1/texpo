@@ -13,7 +13,7 @@ export function OrganizingCompanySection() {
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
+        viewport={{ once: false, amount: 0.15 }}
       >
         <motion.div variants={fadeInUp}>
           <SectionTitle
