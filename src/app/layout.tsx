@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description:
     'TEXPO is the world\'s premier international technology exhibition, connecting innovators, industries, and ideas on a global stage.',
   keywords: ['technology', 'exhibition', 'innovation', 'TEXPO', 'tech expo'],
+  icons: {
+    icon: '/logos/texpo.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
