@@ -1,33 +1,44 @@
-# Use Node.js LTS version
-FROM node:22.17-alpine AS builder
+# Stage 1: Build
+FROM node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files first for better layer caching
-COPY package*.json ./
-COPY package-lock.json ./
+# Install pnpm globally
+RUN npm install -g pnpm
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies
-RUN npm ci
+RUN pnpm install --frozen-lockfile
 
-# Copy all source files
+# Copy the rest of the project
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build the Next.js app
+RUN pnpm build
 
-# Production stage
-FROM nginx:alpine AS production
+# Stage 2: Production image
+FROM node:20-alpine AS runner
 
-# Copy built files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Set working directory
+WORKDIR /app
 
-# Copy custom nginx config if needed (optional)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Install only production dependencies
+RUN npm install -g pnpm
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
 
-# Expose port 80
-EXPOSE 80
+# Copy built files and public assets from builder
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Only copy next.config.js if it exists
+# COPY --from=builder /app/next.config.js ./
+
+# Expose port
+EXPOSE 3000
+
+# Start the Next.js server
+CMD ["pnpm", "start"]
