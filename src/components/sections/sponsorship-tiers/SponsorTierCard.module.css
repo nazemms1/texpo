@@ -1,0 +1,341 @@
+.card {
+  --stair-extra: 0rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 17.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  padding: 1.75rem 1.5rem calc(1.5rem + var(--stair-extra));
+  border-radius: 18px;
+  box-shadow:
+    0 8px 32px rgba(7, 54, 95, 0.08),
+    0 2px 8px rgba(7, 54, 95, 0.04);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card[data-variant]:hover {
+  box-shadow: var(--tier-card-hover-shadow);
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  font-family: "Nulshock", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #fff;
+  background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+}
+
+.iconWrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+}
+
+.tierIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.title {
+  font-family: "Nulshock", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  color: #07365f;
+  margin: 0 0 0.4rem;
+}
+
+.subtitle {
+  margin: 0 0 1.25rem;
+  font-family: "URWGeometricArabic", sans-serif;
+  font-size: 0.88rem;
+  color: rgba(7, 54, 95, 0.55);
+  line-height: 1.45;
+}
+
+.features {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  text-align: left;
+  flex: 1;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-bottom: 0.65rem;
+  font-family: "URWGeometricArabic", sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: rgba(7, 54, 95, 0.78);
+}
+
+.feature:last-child {
+  margin-bottom: 0;
+}
+
+.check {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkSeal {
+  margin-top: 1px;
+}
+
+.cta {
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-family: "URWGeometricArabic", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.cta:hover {
+  transform: scale(1.02);
+}
+
+.cta:focus-visible {
+  outline: 2px solid #07365f;
+  outline-offset: 3px;
+}
+
+.card[data-variant] {
+  padding: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--tier-border);
+  background: var(--tier-card-background);
+  box-shadow: var(--tier-card-shadow);
+  align-items: flex-start;
+  text-align: left;
+}
+
+.card[data-variant="silver"],
+.card[data-variant="diamond"] {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.card[data-variant] .iconWrap {
+  margin-left: 0;
+  margin-right: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--tier-icon-bg);
+  color: var(--tier-icon-fg);
+  box-shadow: var(--tier-icon-shadow, none);
+}
+
+.card[data-variant] .title,
+.card[data-variant] .subtitle {
+  width: 100%;
+  text-align: left;
+}
+
+.card[data-variant] .title {
+  color: var(--tier-title);
+}
+
+.card[data-variant] .features {
+  width: 100%;
+}
+
+.card[data-variant] .check {
+  color: var(--tier-check);
+}
+
+.card[data-variant] .subtitle {
+  color: var(--tier-subtitle);
+  font-weight: var(--tier-subtitle-weight, inherit);
+}
+
+.card[data-variant] .feature {
+  color: var(--tier-feature);
+}
+
+.card[data-variant] .cta {
+  margin-top: var(--stair-extra);
+  background: var(--tier-cta-bg);
+  color: var(--tier-cta-fg);
+  border: var(--tier-cta-border);
+  box-shadow: var(--tier-cta-shadow);
+  padding: var(--tier-cta-padding, 0.75rem 1rem);
+  font-weight: var(--tier-cta-font-weight, 600);
+}
+
+.card[data-variant] .cta:hover {
+  background: var(--tier-cta-hover-bg);
+  border-color: var(--tier-cta-hover-border-color, transparent);
+  box-shadow: var(--tier-cta-hover-shadow, var(--tier-cta-shadow));
+}
+
+.card[data-variant="silver"] {
+  --stair-extra: 0rem;
+  --tier-accent: #0058bd;
+  --tier-card-background: rgba(255, 255, 255, 0.6);
+  --tier-border: rgba(0, 88, 189, 0.18);
+  --tier-card-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --tier-card-hover-shadow:
+    0 4px 16px rgba(7, 54, 95, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --tier-icon-bg: #f1f5f9;
+  --tier-icon-fg: var(--tier-accent);
+  --tier-title: #133854;
+  --tier-subtitle: #414754;
+  --tier-feature: #555960;
+  --tier-check: var(--tier-accent);
+  --tier-cta-bg: #ffffff;
+  --tier-cta-fg: var(--tier-title);
+  --tier-cta-border: 1px solid rgba(19, 56, 84, 0.12);
+  --tier-cta-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --tier-cta-hover-bg: rgba(255, 255, 255, 0.98);
+  --tier-cta-hover-border-color: rgba(19, 56, 84, 0.18);
+  --tier-cta-hover-shadow: var(--tier-cta-shadow);
+}
+
+/* —— Gold —— */
+.card[data-variant="gold"] {
+  --stair-extra: 1.25rem;
+  --tier-border: #fef3c7;
+  --tier-card-background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+  --tier-card-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --tier-card-hover-shadow:
+    0 4px 16px rgba(245, 158, 11, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --tier-icon-bg: rgba(245, 158, 11, 0.1);
+  --tier-icon-fg: #d97706;
+  --tier-title: #133854;
+  --tier-subtitle: #414754;
+  --tier-feature: #555960;
+  --tier-check: #f59e0b;
+  --tier-cta-bg: #f59e0b;
+  --tier-cta-fg: #ffffff;
+  --tier-cta-border: none;
+  --tier-cta-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --tier-cta-hover-bg: #d97706;
+  --tier-cta-hover-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+}
+
+/* —— Platinum —— */
+.card[data-variant="platinum"] {
+  --stair-extra: 2.5rem;
+  --tier-accent: #0058bd;
+  --tier-border: #e2e8f0;
+  --tier-card-background: linear-gradient(180deg, #f1f5f9 0%, #ffffff 100%);
+  --tier-card-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --tier-card-hover-shadow:
+    0 4px 24px rgba(0, 88, 189, 0.14), 0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --tier-icon-bg: rgba(0, 88, 189, 0.1);
+  --tier-icon-fg: var(--tier-accent);
+  --tier-title: #133854;
+  --tier-subtitle: #414754;
+  --tier-feature: #555960;
+  --tier-check: var(--tier-accent);
+  --tier-cta-bg: var(--tier-accent);
+  --tier-cta-fg: #ffffff;
+  --tier-cta-border: none;
+  --tier-cta-shadow: 0 4px 14px rgba(0, 88, 189, 0.28);
+  --tier-cta-hover-bg: #004a9e;
+  --tier-cta-hover-shadow: 0 6px 20px rgba(0, 88, 189, 0.38);
+}
+
+/* —— Diamond — — */
+.card[data-variant="diamond"] {
+  --stair-extra: 3.75rem;
+  --tier-gradient-from: #2e5b88;
+  --tier-gradient-to: #42beb3;
+  --tier-accent: #42beb3;
+  --tier-border: rgba(0, 88, 189, 0.2);
+  --tier-card-background: #ffffff;
+  --tier-card-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 88, 189, 0.12);
+  --tier-card-hover-shadow:
+    0 4px 24px rgba(0, 88, 189, 0.12), 0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 88, 189, 0.12);
+  --tier-icon-bg: linear-gradient(
+    135deg,
+    var(--tier-gradient-from) 0%,
+    var(--tier-gradient-to) 100%
+  );
+  --tier-icon-fg: #ffffff;
+  --tier-icon-shadow:
+    0 10px 15px -3px rgba(46, 91, 136, 0.3),
+    0 4px 6px -4px rgba(46, 91, 136, 0.3);
+  --tier-title: #133854;
+  --tier-subtitle: var(--tier-accent);
+  --tier-subtitle-weight: 600;
+  --tier-feature: #555960;
+  --tier-check: var(--tier-accent);
+  --tier-cta-bg: linear-gradient(
+    90deg,
+    var(--tier-gradient-from) 0%,
+    var(--tier-gradient-to) 100%
+  );
+  --tier-cta-fg: #ffffff;
+  --tier-cta-border: none;
+  --tier-cta-shadow: 0 6px 20px rgba(46, 91, 136, 0.28);
+  --tier-cta-padding: 0.85rem 1rem;
+  --tier-cta-font-weight: 700;
+  --tier-cta-hover-bg: linear-gradient(90deg, #264a6f 0%, #38a89f 100%);
+  --tier-cta-hover-shadow: 0 8px 26px rgba(46, 91, 136, 0.36);
+}
+
+.card[data-variant="diamond"] .badge {
+  top: 18px;
+  right: 34.25px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: var(--tier-accent);
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem 1.25rem 1.35rem;
+  }
+
+  .card[data-variant] {
+    padding: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-radius: 20px;
+  }
+}

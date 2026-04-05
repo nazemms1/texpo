@@ -13,6 +13,7 @@ type ContactItem = {
 type TwoPanelFormSectionClassNames = typeof styles;
 
 interface TwoPanelFormSectionProps {
+  id?: string;
   title: string;
   subtitle: string;
   contactItems: ContactItem[];
@@ -29,6 +30,7 @@ interface TwoPanelFormSectionProps {
 }
 
 export function TwoPanelFormSection({
+  id,
   title,
   subtitle,
   contactItems,
@@ -44,7 +46,7 @@ export function TwoPanelFormSection({
   successMessage = 'Your request has been submitted successfully!',
 }: TwoPanelFormSectionProps) {
   return (
-    <section className={styles.section}>
+    <section id={id} className={styles.section}>
       <div className={styles.inner}>
         <motion.div
           className={styles.infoPanel}
