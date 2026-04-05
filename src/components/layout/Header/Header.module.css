@@ -28,18 +28,10 @@
   gap: 0.5rem;
 }
 
-.logoEmblem {
-  width: 36px;
-  height: 36px;
+.logoImage {
+  width: 120px;
+  height: 40px;
   object-fit: contain;
-}
-
-.logoText {
-  
-  font-size: 1.3rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  color: #fff;
 }
 
 .desktopNav {
