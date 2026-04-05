@@ -4,7 +4,7 @@
 }
 
 .inner {
-  max-width: 1920px;
+ 
   margin: 0 auto;
   padding: 0 220px;
   display: flex;
@@ -34,7 +34,7 @@
   font-size: 0.9rem;
   line-height: 1.75;
   color: rgba(0, 0, 0, 0.55);
-  max-width: 900px;
+  max-width: 90%;
 }
 
 .grid {
@@ -46,9 +46,7 @@
 .card {
   position: relative;
   border-radius: 14px;
-  /* aspect-ratio: 4 / 3; */
-  width: 359;
-  height: 267;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -86,14 +84,12 @@
   position: relative;
   z-index: 1;
   width: 80%;
-
   padding: 1rem 0.75rem 0.875rem;
-  font-size: 18px;
-
+  font-size: clamp(0.75rem, 1.2vw, 1.125rem);
   color: #ffffff;
   text-align: center;
   letter-spacing: 0.02em;
-  line-height: 22.5px;
+  line-height: 1.4;
 }
 
 @media (max-width: 1280px) {
@@ -109,13 +105,33 @@
 }
 
 @media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cardLabel {
+    font-size: clamp(0.7rem, 3vw, 0.95rem);
   }
 }
 
 @media (max-width: 480px) {
+  .section {
+    padding: 3rem 0;
+  }
+
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .card {
+    aspect-ratio: 16 / 7;
+  }
+
+  .cardLabel {
+    font-size: clamp(0.8rem, 4vw, 1rem);
   }
 }

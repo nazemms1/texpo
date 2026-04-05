@@ -6,20 +6,20 @@ import { IconMail, IconPhone, IconMapPin } from '@tabler/icons-react';
 import { TwoPanelFormSection } from '@/src/components/sections/shared/TwoPanelFormSection';
 
 const contactInfo = [
-  { 
-    Icon: IconMail, 
-    label: 'Email Us', 
-    value: 'info@texpo-exhibition.com' 
+  {
+    Icon: IconMail,
+    label: 'Email Us',
+    value: 'info@texpo-exhibition.com'
   },
-  { 
-    Icon: IconPhone, 
-    label: 'Call Us', 
-    value: '0949333200' 
+  {
+    Icon: IconPhone,
+    label: 'Call Us',
+    value: '0949333200'
   },
-  { 
-    Icon: IconMapPin, 
-    label: 'Office', 
-    value: 'Damascus, Syria - Exhibition City' 
+  {
+    Icon: IconMapPin,
+    label: 'Office',
+    value: 'Damascus, Syria - Exhibition City'
   },
 ];
 
@@ -42,14 +42,14 @@ export function ContactSection() {
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Company Name</span>
-              <input className={styles.input} type="text" placeholder="Tech Global Inc." />
+              <input className={styles.input} type="text" placeholder="Tech Global Inc." required />
             </motion.label>
           </div>
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Business Sector</span>
-              <input className={styles.input} type="text" placeholder="AI &amp; Robotics" />
+              <input className={styles.input} type="text" placeholder="AI & Robotics" required />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Country / City</span>
@@ -57,25 +57,19 @@ export function ContactSection() {
             </motion.label>
           </div>
 
-          <div className={styles.row}>
-            <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Booth Area</span>
-              <input className={styles.input} type="text" placeholder="Booth Area" />
-            </motion.label>
-            <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Address</span>
-              <input className={styles.input} type="text" placeholder="Address" />
-            </motion.label>
-          </div>
+          <motion.label className={styles.field} variants={fadeInUp}>
+            <span className={styles.fieldLabel}>Address</span>
+            <input className={styles.input} type="text" placeholder="Address" />
+          </motion.label>
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Phone Number</span>
-              <input className={styles.input} type="tel" placeholder="+1 234 567 890" />
+              <input className={styles.input} type="tel" placeholder="+1 234 567 890" required />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Email Address</span>
-              <input className={styles.input} type="email" placeholder="john@company.com" />
+              <input className={styles.input} type="email" placeholder="john@company.com" required />
             </motion.label>
           </div>
 

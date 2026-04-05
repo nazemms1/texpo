@@ -1,12 +1,11 @@
 .section {
-  padding: 4rem 0 2rem;
+  padding: 0 220px 5rem;
   width: 100%;
 }
 
 .card {
   position: relative;
-  max-width: 1400px;
-  margin: 0 auto;
+   margin: 0 auto;
   min-height: 480px;
   background: #06111f;
   border-radius: 20px;
@@ -83,6 +82,12 @@
   font-weight: 600;
 }
 
+@media (max-width: 1280px) {
+  .section {
+    padding: 0 2rem 5rem;
+  }
+}
+
 @media (max-width: 900px) {
   .card {
     flex-direction: column;
@@ -90,11 +95,11 @@
     padding: 3rem 2rem;
     min-height: 650px;
   }
-  
+
   .bgImage {
     object-position: top center;
   }
-  
+
   .content {
     width: 100%;
     margin-top: 15rem;
