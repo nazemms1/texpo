@@ -1,9 +1,42 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import { fadeInUp } from "@/src/lib/animations";
 import { STATS } from "@/src/lib/constants";
 import styles from "./StatisticsSection.module.css";
+
+function parseValue(value: string): { num: number; suffix: string } {
+  const match = value.match(/^(\d+)(.*)$/);
+  if (match) return { num: parseInt(match[1], 10), suffix: match[2] };
+  return { num: 0, suffix: value };
+}
+
+function CountUpValue({ value }: { value: string }) {
+  const { num, suffix } = parseValue(value);
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView || num === 0) return;
+    let frame = 0;
+    const totalFrames = 60;
+    const timer = setInterval(() => {
+      frame++;
+      const progress = 1 - Math.pow(1 - frame / totalFrames, 3);
+      setCount(Math.round(progress * num));
+      if (frame >= totalFrames) clearInterval(timer);
+    }, 1500 / totalFrames);
+    return () => clearInterval(timer);
+  }, [inView, num]);
+
+  return (
+    <span ref={ref} className={styles.value}>
+      {count}{suffix}
+    </span>
+  );
+}
 
 function bezier(t: number) {
   const x = (1 - t) * (1 - t) * 0 + 2 * t * (1 - t) * 550 + t * t * 1100;
@@ -42,14 +75,14 @@ export function StatisticsSection() {
             fill="none"
           />
 
-           {STATS.map((stat, i) => {
+          {STATS.map((stat, i) => {
             const { x, y } = bezier(T_VALUES[i]);
             return (
               <g
                 key={`${stat.value}-${stat.label}-${i}`}
                 transform={`translate(${x}, ${y})`}
               >
-                 <circle cx="0" cy="0" r="4" fill="#42BEB3" />
+                <circle cx="0" cy="0" r="4" fill="#42BEB3" />
                 <foreignObject x="-50" y="-80" width="120" height="80">
                   <motion.div
                     // @ts-expect-error foreignObject requires XHTML namespace on this node
@@ -60,7 +93,7 @@ export function StatisticsSection() {
                     whileInView="visible"
                     viewport={{ once: true }}
                   >
-                    <span className={styles.value}>{stat.value}</span>
+                    <CountUpValue value={stat.value} />
                     <span className={styles.label}>{stat.label}</span>
                   </motion.div>
                 </foreignObject>

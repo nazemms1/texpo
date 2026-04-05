@@ -18,13 +18,7 @@ export default function BecomeSponsorPage() {
     <>
       <div className={styles.heroWrap}>
         <PageHero title="BECOME" titleAccent="A SPONSER" />
-        <a
-          className={styles.scrollDown}
-          href="#become-sponsor-intro"
-          aria-label="Scroll to sponsor information"
-        >
-          <IconChevronDown size={22} stroke={2} />
-        </a>
+      
       </div>
 
       <BecomeSponsorIntroSection id="become-sponsor-intro" />
