@@ -57,7 +57,7 @@ export function CompareBenefitsSection({
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: false, amount: 0.25 }}
         >
           <motion.h2 className={styles.title} variants={fadeInUp}>
             Compare benefits

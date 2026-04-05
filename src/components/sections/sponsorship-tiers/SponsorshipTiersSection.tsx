@@ -24,7 +24,7 @@ export function SponsorshipTiersSection({
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           <motion.h2
             className={`${styles.title} ${styles.spanAll}`}

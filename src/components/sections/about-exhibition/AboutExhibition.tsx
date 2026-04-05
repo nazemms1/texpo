@@ -28,7 +28,7 @@ export function AboutExhibition({ variant = "home", hideButtons = false }: About
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: false, amount: 0.25 }}
         >
           <motion.div variants={fadeInLeft}>
             <SectionTitle title="ABOUT THE EXHIBITION" />
@@ -90,7 +90,7 @@ export function AboutExhibition({ variant = "home", hideButtons = false }: About
           variants={fadeInRight}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
         >
           <img
             src="/logos/texpo.svg"

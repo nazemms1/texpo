@@ -58,7 +58,7 @@ export function SponsorsMotionSection() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.15 }}
+                viewport={{ once: false, amount: 0.15 }}
               >
                 {sponsors.map((s, index) => (
                   <motion.div key={s.id} className={styles.card} variants={fadeInUp}>

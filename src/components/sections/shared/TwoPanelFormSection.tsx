@@ -53,7 +53,7 @@ export function TwoPanelFormSection({
           variants={fadeInLeft}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
         >
           <img
             src={logoSrc}
@@ -95,7 +95,7 @@ export function TwoPanelFormSection({
           variants={fadeInRight}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
         >
           <form
             className={styles.form}
@@ -109,7 +109,7 @@ export function TwoPanelFormSection({
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               {renderFormFields(styles)}
 

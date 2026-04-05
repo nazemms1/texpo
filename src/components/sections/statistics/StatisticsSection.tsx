@@ -20,7 +20,7 @@ function CountUpValue({ value }: { value: string }) {
   const { num, suffix } = parseValue(value);
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
+  const inView = useInView(ref, { once: false });
 
   useEffect(() => {
     if (!inView || num === 0) return;
@@ -50,16 +50,13 @@ function bezier(t: number) {
 
 const T_VALUES = [0.05, 0.25, 0.5, 0.75, 0.95];
 
-// Mobile: portrait viewBox 0 0 360 480
-// Arc group baseY values: 160, 300, 440 (each dips 80px at center)
-function mobileBezier(t: number, baseY: number) {
+ function mobileBezier(t: number, baseY: number) {
   const x = 360 * t;
   const y = baseY - 160 * t + 160 * t * t;
   return { x, y };
 }
 
-// Distribute 5 stats across 3 arcs: 2 on arc1, 1 on arc2, 2 on arc3
-const MOBILE_DISTRIBUTION = [
+ const MOBILE_DISTRIBUTION = [
   { baseY: 160, t: 0.25 },
   { baseY: 160, t: 0.75 },
   { baseY: 300, t: 0.5  },
@@ -95,7 +92,7 @@ export function StatisticsSection() {
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: i * 0.1 }}
           >
             <CountUpValue value={stat.value} />
@@ -129,7 +126,7 @@ export function StatisticsSection() {
                   style={{ filter: 'drop-shadow(0px 0px 6px #42BEB3)', transformBox: 'fill-box', transformOrigin: 'center' }}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
                 />
                 <foreignObject x="-55" y="-75" width="110" height="75">
@@ -140,7 +137,7 @@ export function StatisticsSection() {
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                   >
                     <CountUpValue value={stat.value} />
                     <span className={styles.label}>{stat.label}</span>
@@ -198,7 +195,7 @@ export function StatisticsSection() {
                   }}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false }}
                   transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
                 />
                 <foreignObject x="-50" y="-80" width="120" height="80">
@@ -209,7 +206,7 @@ export function StatisticsSection() {
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                   >
                     <CountUpValue value={stat.value} />
                     <span className={styles.label}>{stat.label}</span>

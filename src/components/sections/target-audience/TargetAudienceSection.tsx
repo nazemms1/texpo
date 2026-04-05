@@ -33,7 +33,7 @@ export function TargetAudienceSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
         >
           <h2 className={styles.title}>
             TARGET AUDIENCE FOR VISITING TEXPO LAND | 2ND EDITION
@@ -48,7 +48,7 @@ export function TargetAudienceSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: false, amount: 0.1 }}
         >
           {audiences.map(({ label }, index) => (
             <motion.div

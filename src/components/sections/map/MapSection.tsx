@@ -14,7 +14,7 @@ export function MapSection() {
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
         >
           <Image
             src="/images/Map.svg"
@@ -29,7 +29,7 @@ export function MapSection() {
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
           >
             PARTICIPATING COUNTRIES AT TEXPO LAND | 2ND EDITION
           </motion.h2>
