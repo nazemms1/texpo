@@ -8,21 +8,21 @@ import {
   fadeInUp,
 } from "@/src/lib/animations";
 import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
-import { PillButton, ArrowCircle } from "@/src/components/ui/Button/AnimatedButton";
+import { ArrowCircle, ButtonPair } from "@/src/components/ui/Button/AnimatedButton";
 import { IconMapPin, IconPlayerPlay } from "@tabler/icons-react";
 import styles from "./AboutExhibition.module.css";
 
 interface AboutExhibitionProps {
   variant?: "home" | "about";
+  hideButtons?: boolean;
 }
 
-export function AboutExhibition({ variant = "home" }: AboutExhibitionProps) {
+export function AboutExhibition({ variant = "home", hideButtons = false }: AboutExhibitionProps) {
   return (
     <section className={styles.section}>
       <div className={styles.waveTop} />
 
       <div className={styles.inner}>
-        {/* Left column */}
         <motion.div
           className={styles.left}
           variants={staggerContainer}
@@ -31,7 +31,7 @@ export function AboutExhibition({ variant = "home" }: AboutExhibitionProps) {
           viewport={{ once: true, amount: 0.25 }}
         >
           <motion.div variants={fadeInLeft}>
-            <SectionTitle   title="ABOUT THE EXHIBITION" />
+            <SectionTitle title="ABOUT THE EXHIBITION" />
           </motion.div>
 
           <motion.p className={styles.body} variants={fadeInUp}>
@@ -68,26 +68,24 @@ export function AboutExhibition({ variant = "home" }: AboutExhibitionProps) {
             to shaping a smarter, more innovative future.
           </motion.p>
 
-          <motion.div className={styles.actions} variants={fadeInUp}>
-            {variant === "about" && <ArrowCircle href="#" variant="dashed" />}
-            <PillButton href="#" variant="primary">
-              <IconMapPin size={16} />
-              View in Map
-            </PillButton>
-            <ArrowCircle href="#" variant="primary" />
-            {variant === "home" && (
-              <>
-                <PillButton href="#" variant="outline">
+          {!hideButtons && (
+            <motion.div className={styles.actions} variants={fadeInUp}>
+              {variant === "about" && <ArrowCircle href="#" variant="dashed" />}
+              <ButtonPair pillHref="#" arrowHref="#" variant="primary">
+                <IconMapPin size={16} />
+                View in Map
+              </ButtonPair>
+              {variant === "home" && (
+                <ButtonPair pillHref="#" arrowHref="#" variant="outline">
                   <IconPlayerPlay size={16} />
                   Watch
-                </PillButton>
-                <ArrowCircle href="#" variant="outline" />
-              </>
-            )}
-          </motion.div>
+                </ButtonPair>
+              )}
+            </motion.div>
+          )}
         </motion.div>
 
-         <motion.div
+        <motion.div
           className={styles.right}
           variants={fadeInRight}
           initial="hidden"

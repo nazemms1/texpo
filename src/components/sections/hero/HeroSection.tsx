@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeInLeft, fadeInUp, staggerContainer } from "@/src/lib/animations";
-import { PillButton, ArrowCircle } from "@/src/components/ui/Button/AnimatedButton";
+import { ButtonPair } from "@/src/components/ui/Button/AnimatedButton";
 import { SocialIcons } from "@/src/components/ui/SocialIcons/SocialIcons";
 import styles from "./HeroSection.module.css";
 
@@ -40,10 +40,8 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div className={styles.actions} variants={fadeInUp}>
-            <PillButton href="/about" variant="primary">Discover More</PillButton>
-            <ArrowCircle href="/about" variant="primary" />
-            <PillButton href="/become-a-sponsor" variant="outline">Become A Sponsor</PillButton>
-            <ArrowCircle href="/become-a-sponsor" variant="outline" />
+            <ButtonPair pillHref="/book-a-stand" arrowHref="/about" variant="primary" >Discover More</ButtonPair>
+            <ButtonPair pillHref="/become-a-sponsor" arrowHref="/become-a-sponsor" variant="outline">Become A Sponsor</ButtonPair>
           </motion.div>
         </motion.div>
       </div>

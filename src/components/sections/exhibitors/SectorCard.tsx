@@ -16,9 +16,7 @@ export function SectorCard({ title, image, offset, isActive, total }: SectorCard
   const lines = title.split("\n");
   const abs = Math.abs(offset);
   
-  // Convert offset to an orbital angle (radians)
-  // Adjusted factor to keep 5 cards within "viewable" front half
-  const angle = (offset / total) * Math.PI; // Halved the rotation range to show 5 cards
+   const angle = (offset / total) * Math.PI; 
   
   const translateX = Math.sin(angle) * 520; 
   const translateZ = (Math.cos(angle) - 1) * 350;
@@ -29,11 +27,9 @@ export function SectorCard({ title, image, offset, isActive, total }: SectorCard
   const rotateZ = (offset / total) * 35;
   const scale = 1 - abs * 0.12;
   
-  // Opacity: Show all 5 front cards clearly
-  const opacity = isActive ? 1 : Math.max(0.4, 1 - abs * 0.25);
+   const opacity = isActive ? 1 : Math.max(0.4, 1 - abs * 0.25);
   
-  // Blur effect for far-most cards only
-  const blur = abs > 1.2 ? `blur(${Math.min(5, (abs - 1.2) * 6)}px)` : "blur(0px)";
+   const blur = abs > 1.2 ? `blur(${Math.min(5, (abs - 1.2) * 6)}px)` : "blur(0px)";
 
   return (
     <motion.article
@@ -51,7 +47,7 @@ export function SectorCard({ title, image, offset, isActive, total }: SectorCard
         zIndex: Math.round((5 - abs) * 10),
       }}
       transition={{
-        duration: 0.6,
+        duration: 0.35,
         ease: [0.22, 0.61, 0.36, 1],
         zIndex: { duration: 0 }
       }}

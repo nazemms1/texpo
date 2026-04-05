@@ -1,0 +1,138 @@
+.section {
+  padding: 5rem 0 4rem;
+ 
+ 
+}
+
+.inner {
+ 
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.title {
+  font-family: 'Nulshock', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #030a1e;
+  text-align: center;
+}
+
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+ 
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #e8ecf0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.mapImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;   
+  object-position: center;
+}
+
+.navBtn {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  color: #030a1e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.navBtn:hover {
+  background: #42beb3;
+  color: #ffffff;
+  border-color: #42beb3;
+  box-shadow: 0 6px 18px rgba(66, 190, 179, 0.3);
+  transform: scale(1.05);
+}
+
+.navBtn:active {
+  transform: scale(0.97);
+}
+
+.dots {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dotActive {
+  background: #42beb3;
+  transform: scale(1.3);
+}
+
+.counter {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .navBtn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carouselWrapper {
+    gap: 0.5rem;
+  }
+
+  .navBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navBtn svg {
+    width: 18px;
+    height: 18px;
+  }
+}

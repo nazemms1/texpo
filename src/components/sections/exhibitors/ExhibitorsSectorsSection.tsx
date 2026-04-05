@@ -11,9 +11,6 @@ import { SectorCard } from "./SectorCard";
 import styles from "./ExhibitorsSectorsSection.module.css";
 
 const SECTORS = [
-
-
-
   {
     title: "Artificial Intelligence\n& Machine Learning",
     image: "/images/sectors/sector-ai-ml.png",
@@ -38,8 +35,7 @@ const SECTORS = [
 
 function getLoopDistance(index: number, current: number, total: number) {
   const raw = index - current;
-  // This calculates the shortest distance in a loop (e.g. from -2.5 to 2.5)
-  return ((((raw + total / 2) % total) + total) % total) - total / 2;
+   return ((((raw + total / 2) % total) + total) % total) - total / 2;
 }
 
 export function ExhibitorsSectorsSection() {
@@ -59,8 +55,7 @@ export function ExhibitorsSectorsSection() {
 
     const updateArc = () => {
       const scrollProgress = embla.scrollProgress();
-      // Embla progress can be > 1 or < 0 if not looped, but here we assume loop:true
-      // normalizedCurrent is the "center index" based on scroll progress
+ 
       const current = ((scrollProgress * total) % total + total) % total;
 
       setOffsets(
@@ -73,11 +68,13 @@ export function ExhibitorsSectorsSection() {
     embla.on("scroll", updateArc);
     embla.on("select", updateArc);
     embla.on("reInit", updateArc);
+    embla.on("settle", updateArc);
 
     return () => {
       embla.off("scroll", updateArc);
       embla.off("select", updateArc);
       embla.off("reInit", updateArc);
+      embla.off("settle", updateArc);
     };
   }, [embla, total]);
 
@@ -99,8 +96,7 @@ export function ExhibitorsSectorsSection() {
           </header>
 
           <div className={styles.carouselContainer}>
-            {/* The 3D Stage where cards are rendered centrally */}
-            <div className={styles.stage3D}>
+             <div className={styles.stage3D}>
               {SECTORS.map((sector, index) => (
                 <SectorCard
                   key={sector.title}
@@ -113,8 +109,7 @@ export function ExhibitorsSectorsSection() {
               ))}
             </div>
 
-            {/* Invisible Carousel for interaction and state management */}
-            <div className={styles.interactionLayer}>
+             <div className={styles.interactionLayer}>
               <Carousel
                 className={styles.carousel}
                 slideSize="100%"
@@ -124,6 +119,7 @@ export function ExhibitorsSectorsSection() {
                   align: "center",
                   loop: true,
                   skipSnaps: false,
+                  duration: 15,
                 }}
                 getEmblaApi={setEmbla}
                 onSlideChange={setActiveIndex}
@@ -142,7 +138,11 @@ export function ExhibitorsSectorsSection() {
               <button
                 key={i}
                 className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ""}`}
-                onClick={() => embla?.scrollTo(i)}
+                onClick={() => {
+                  setActiveIndex(i);
+                  setOffsets(SECTORS.map((_, idx) => getLoopDistance(idx, i, total)));
+                  embla?.scrollTo(i, true);
+                }}
                 aria-label={`Go to sector ${i + 1}`}
               />
             ))}

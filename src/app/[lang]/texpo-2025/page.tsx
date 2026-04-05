@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { PageHero } from "@/src/components/sections/hero/PageHero";
 import { Texpo2025Section } from "@/src/components/sections/texpo2025/Texpo2025Section";
 import { SponsorsSection } from "@/src/components/sections/sponsors/SponsorsSection";
+import { StatisticsSection } from "@/src/components/sections/statistics/StatisticsSection";
+import { AboutExhibition } from "@/src/components/sections/about-exhibition/AboutExhibition";
+import { InfoCardSection } from "@/src/components/sections/info-card/InfoCardSection";
 
 export const metadata: Metadata = {
   title: "Texpo 2025 — TEXPO",
@@ -12,11 +15,14 @@ export const metadata: Metadata = {
 export default function Texpo2025Page() {
   return (
     <>
-      <PageHero title="TEXPO 2025" />
+      <PageHero title="TEXPO "
+      titleAccent="2025" />
       <div className="withLinesBg">
-        <Texpo2025Section />
+        <StatisticsSection />
       </div>
-      <SponsorsSection />
+              <AboutExhibition variant="about"  hideButtons={true}/>
+       <InfoCardSection />
+   
     </>
   );
 }

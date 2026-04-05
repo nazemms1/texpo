@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { IconArrowRight } from '@tabler/icons-react';
@@ -11,6 +12,7 @@ interface PillButtonProps {
   variant?: 'primary' | 'outline' | 'ghost';
   onClick?: () => void;
   className?: string;
+  isGroupHovered?: boolean;
 }
 
 export function PillButton({
@@ -19,13 +21,15 @@ export function PillButton({
   variant = 'primary',
   onClick,
   className = '',
+  isGroupHovered,
 }: PillButtonProps) {
   const cls = `${styles.pill} ${styles[variant]} ${className}`;
 
   const inner = (
     <motion.span
       className={cls}
-      whileHover={{ scale: 1.03 }}
+      animate={isGroupHovered !== undefined ? { scale: isGroupHovered ? 1.03 : 1 } : undefined}
+      whileHover={isGroupHovered === undefined ? { scale: 1.03 } : undefined}
       whileTap={{ scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
@@ -49,6 +53,7 @@ interface ArrowCircleProps {
   variant?: 'primary' | 'outline' | 'ghost' | 'dashed';
   onClick?: () => void;
   className?: string;
+  isGroupHovered?: boolean;
 }
 
 export function ArrowCircle({
@@ -56,7 +61,11 @@ export function ArrowCircle({
   variant = 'primary',
   onClick,
   className = '',
+  isGroupHovered,
 }: ArrowCircleProps) {
+  const [localHovered, setLocalHovered] = useState(false);
+  const isHovered = isGroupHovered !== undefined ? isGroupHovered : localHovered;
+
   const isDashed = variant === 'dashed';
   const cls = isDashed
     ? `${styles.circle} ${styles.dashedCircle} ${className}`
@@ -65,9 +74,11 @@ export function ArrowCircle({
   const inner = (
     <motion.span
       className={cls}
-      whileHover={{ scale: 1.08 }}
+      animate={{ scale: isHovered ? 1.08 : 1 }}
       whileTap={{ scale: 0.94 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      onHoverStart={() => setLocalHovered(true)}
+      onHoverEnd={() => setLocalHovered(false)}
     >
       {isDashed && (
         <svg
@@ -86,7 +97,13 @@ export function ArrowCircle({
           />
         </svg>
       )}
-      <IconArrowRight size={20} stroke={2} />
+      <motion.span
+        className={styles.iconWrapper}
+        animate={{ rotate: isHovered ? -45 : 0 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+      >
+        <IconArrowRight size={20} stroke={2} />
+      </motion.span>
     </motion.span>
   );
 
@@ -98,5 +115,29 @@ export function ArrowCircle({
     <button onClick={onClick} className={styles.link}>
       {inner}
     </button>
+  );
+}
+
+interface ButtonPairProps {
+  pillHref: string;
+  arrowHref: string;
+  variant?: 'primary' | 'outline' | 'ghost';
+  children: React.ReactNode;
+}
+
+export function ButtonPair({ pillHref, arrowHref, variant = 'primary', children }: ButtonPairProps) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      style={{ display: 'contents' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <PillButton href={pillHref} variant={variant} isGroupHovered={hovered}>
+        {children}
+      </PillButton>
+      <ArrowCircle href={arrowHref} variant={variant} isGroupHovered={hovered} />
+    </div>
   );
 }
