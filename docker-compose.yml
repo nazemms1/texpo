@@ -6,7 +6,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     ports:
-      - "8105:80"
+      - "8105:3000"
     env_file:
       - $envfile
     restart: unless-stopped
