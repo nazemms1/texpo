@@ -36,3 +36,18 @@
 .iconBtn:hover {
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .bar {
+    width: 48px;
+    height: 160px;
+    gap: 6px;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+  }
+
+  .iconBtn {
+    width: 28px;
+    height: 28px;
+  }
+}

@@ -50,6 +50,23 @@ function bezier(t: number) {
 
 const T_VALUES = [0.05, 0.25, 0.5, 0.75, 0.95];
 
+// Mobile: portrait viewBox 0 0 360 480
+// Arc group baseY values: 160, 300, 440 (each dips 80px at center)
+function mobileBezier(t: number, baseY: number) {
+  const x = 360 * t;
+  const y = baseY - 160 * t + 160 * t * t;
+  return { x, y };
+}
+
+// Distribute 5 stats across 3 arcs: 2 on arc1, 1 on arc2, 2 on arc3
+const MOBILE_DISTRIBUTION = [
+  { baseY: 160, t: 0.25 },
+  { baseY: 160, t: 0.75 },
+  { baseY: 300, t: 0.5  },
+  { baseY: 440, t: 0.25 },
+  { baseY: 440, t: 0.75 },
+];
+
 export function StatisticsSection() {
   const { data, loading } = useApi(() => homeService.getStats());
 
@@ -87,8 +104,55 @@ export function StatisticsSection() {
         ))}
       </div>
 
-      {/* Desktop arc layout */}
-      <div className={styles.arcWrapper}>
+      {/* Mobile arc layout – portrait orientation, stats spread across 3 arcs */}
+      <div className={styles.mobileArcWrapper}>
+        <svg
+          className={styles.mobileArc}
+          viewBox="0 0 360 480"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0,160 Q180,80 360,160"  stroke="#133854" strokeWidth="1" fill="none" />
+          <path d="M0,300 Q180,220 360,300" stroke="#133854" strokeWidth="1" fill="none" />
+          <path d="M0,440 Q180,360 360,440" stroke="#133854" strokeWidth="1" fill="none" />
+
+          {stats.map((stat, i) => {
+            if (i >= MOBILE_DISTRIBUTION.length) return null;
+            const { baseY, t } = MOBILE_DISTRIBUTION[i];
+            const { x, y } = mobileBezier(t, baseY);
+            return (
+              <g key={`mobile-arc-${stat.value}-${i}`} transform={`translate(${x}, ${y})`}>
+                <motion.circle
+                  cx={0} cy={0} r={5}
+                  fill="#42BEB3"
+                  fillOpacity="0.8"
+                  style={{ filter: 'drop-shadow(0px 0px 6px #42BEB3)', transformBox: 'fill-box', transformOrigin: 'center' }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
+                />
+                <foreignObject x="-55" y="-75" width="110" height="75">
+                  <motion.div
+                    // @ts-expect-error foreignObject requires XHTML namespace on this node
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    className={styles.item}
+                    variants={fadeInUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                  >
+                    <CountUpValue value={stat.value} />
+                    <span className={styles.label}>{stat.label}</span>
+                  </motion.div>
+                </foreignObject>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+       <div className={styles.arcWrapper}>
         <svg
           className={styles.arc}
           viewBox="0 0 1100 220"

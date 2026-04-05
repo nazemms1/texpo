@@ -130,6 +130,6 @@
   }
 
   .socialBar {
-    display: none;
+    top: 50%;
   }
 }

@@ -130,7 +130,7 @@ export function ButtonPair({ pillHref, arrowHref, variant = 'primary', children 
 
   return (
     <div
-      style={{ display: 'contents' }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >

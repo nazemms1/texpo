@@ -122,3 +122,38 @@
 [dir="rtl"] .iconWrapper {
   transform: scaleX(-1);
 }
+
+@media (max-width: 1280px) {
+  .pill {
+    width: 13rem;
+    height: 72px;
+  }
+  .circle {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pill {
+    width: 10rem;
+    height: 60px;
+    font-size: 0.875rem;
+  }
+  .circle {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pill {
+    width: 8rem;
+    height: 52px;
+    font-size: 0.8rem;
+  }
+  .circle {
+    width: 52px;
+    height: 52px;
+  }
+}
