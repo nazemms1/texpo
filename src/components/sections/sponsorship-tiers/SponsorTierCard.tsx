@@ -16,7 +16,8 @@ export function SponsorTierCard({ tier, ctaHref }: SponsorTierCardProps) {
 
   return (
     <article
-      className={`${styles.card} ${styles[variant]}`}
+      className={styles.card}
+      data-variant={variant}
       aria-label={`${title} sponsorship tier`}
     >
       {badge ? (

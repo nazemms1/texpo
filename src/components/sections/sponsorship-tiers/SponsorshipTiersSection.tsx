@@ -9,7 +9,6 @@ import styles from './SponsorshipTiersSection.module.css';
 
 export interface SponsorshipTiersSectionProps {
   id?: string;
-  /** رابط التمرير لنموذج الاهتمام (افتراضي: #sponsor-enquiry) */
   enquiryAnchor?: string;
 }
 

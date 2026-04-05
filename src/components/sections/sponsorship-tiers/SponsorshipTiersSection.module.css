@@ -35,7 +35,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
-  /* محاذاة من الأعلى: كل بطاقة تحتفظ بارتفاعها دون تمدد لأطول صف */
   align-items: start;
 }
 
