@@ -8,7 +8,7 @@ import {
   fadeInUp,
 } from "@/src/lib/animations";
 import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
-import { PillButton, ArrowCircle } from "@/src/components/ui/Button/AnimatedButton";
+import { ArrowCircle, ButtonPair } from "@/src/components/ui/Button/AnimatedButton";
 import { IconMapPin, IconPlayerPlay } from "@tabler/icons-react";
 import styles from "./AboutExhibition.module.css";
 
@@ -71,19 +71,15 @@ export function AboutExhibition({ variant = "home", hideButtons = false }: About
           {!hideButtons && (
             <motion.div className={styles.actions} variants={fadeInUp}>
               {variant === "about" && <ArrowCircle href="#" variant="dashed" />}
-              <PillButton href="#" variant="primary">
+              <ButtonPair pillHref="#" arrowHref="#" variant="primary">
                 <IconMapPin size={16} />
                 View in Map
-              </PillButton>
-              <ArrowCircle href="#" variant="primary" />
+              </ButtonPair>
               {variant === "home" && (
-                <>
-                  <PillButton href="#" variant="outline">
-                    <IconPlayerPlay size={16} />
-                    Watch
-                  </PillButton>
-                  <ArrowCircle href="#" variant="outline" />
-                </>
+                <ButtonPair pillHref="#" arrowHref="#" variant="outline">
+                  <IconPlayerPlay size={16} />
+                  Watch
+                </ButtonPair>
               )}
             </motion.div>
           )}
