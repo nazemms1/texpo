@@ -36,9 +36,7 @@ export function SponsorsMotionSection() {
         <div className={styles.inner}>
           <header className={styles.header}>
             <SectionTitle title="SPONSORS" align="center" />
-            <p className={styles.subtitle}>
-              World-leading organisations that power the TEXPO experience.
-            </p>
+        
           </header>
 
           {error && (
