@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { IconChevronDown } from "@tabler/icons-react";
 
 import { PageHero } from "@/src/components/sections/hero/PageHero";
-import { BecomeSponsorIntroSection } from "@/src/components/sections/become-sponsor/BecomeSponsorIntroSection";
+import { SponsorshipTiersSection } from "@/src/components/sections/sponsorship-tiers/SponsorshipTiersSection";
+import { CompareBenefitsSection } from "@/src/components/sections/compare-benefits/CompareBenefitsSection";
 import { BecomeASponsorSection } from "@/src/components/sections/become-a-sponsor/BecomeASponsorSection";
-import { SponsorsMotionSection } from "@/src/components/sections/sponsers-section/SponsorsMotionSection";
+import { InfoCardSection } from "@/src/components/sections/info-card/InfoCardSection";
+import { WhyTexpoSection } from "@/src/components/sections/why-texpo/WhyTexpoSection";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -21,11 +23,10 @@ export default function BecomeSponsorPage() {
       
       </div>
 
-      <BecomeSponsorIntroSection id="become-sponsor-intro" />
-
-      <div className="withLinesBg">
-        <SponsorsMotionSection />
-      </div>
+      <SponsorshipTiersSection id="become-sponsor-intro" />
+      <CompareBenefitsSection />
+      <WhyTexpoSection />
+      <InfoCardSection />
       <BecomeASponsorSection />
     </>
   );

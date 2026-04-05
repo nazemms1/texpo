@@ -6,7 +6,7 @@
 }
 
 .inner {
-  max-width: 1100px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 2rem;
   text-align: center;
@@ -16,16 +16,16 @@
   font-family: 'Nulshock', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: #07365f;
   font-size: clamp(1.4rem, 2.8vw, 2.4rem);
   line-height: 1.2;
-  margin-bottom: 1.25rem;
+  margin: 0 0 1rem;
 }
 
 .subtitle {
-  margin: 0 auto;
-  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  max-width: 640px;
   color: rgba(7, 54, 95, 0.62);
   font-family: 'URWGeometricArabic', sans-serif;
   font-size: clamp(0.9rem, 1.25vw, 1.05rem);
@@ -42,7 +42,6 @@
   border-radius: 50%;
   pointer-events: none;
   opacity: 0.35;
-
   background-image: repeating-radial-gradient(
     circle at 40% 40%,
     rgba(7, 54, 95, 0.12) 0px,
@@ -50,8 +49,6 @@
     transparent 1px,
     transparent 22px
   );
-
-  /* Keep it looking like a right-side semi circle */
   clip-path: inset(0 0 0 45%);
 }
 
@@ -66,4 +63,3 @@
     height: 520px;
   }
 }
-
