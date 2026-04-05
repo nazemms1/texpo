@@ -52,15 +52,18 @@
 }
 
 .value {
+    font-family: 'Nulshock', sans-serif;
+
   font-size: clamp(1.5rem, 3vw, 2.4rem);
   font-weight: 900;
   color: #133854;
+ padding-left: 15;
   line-height: 1;
 }
 
 .label {
     font-family: 'URWGeometricArabic-Medium', sans-serif;
-
+ padding-left: 5;
   color: #555960;
   letter-spacing: 0.04em;
   text-transform: uppercase;
