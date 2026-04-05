@@ -24,7 +24,7 @@ const contactInfo = [
 ];
 
 export function ContactSection() {
-  return (
+  return ( 
     <TwoPanelFormSection
       title="CONTACT US"
       subtitle="Submit your interest and our partnership team will contact you with a tailored sponsorship proposal within 24 hours."
