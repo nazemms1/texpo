@@ -102,6 +102,8 @@ button {
   background-size: 100% auto;
 }
 
+ 
+
 [data-mantine-color-scheme] {
   color-scheme: dark;
 }
