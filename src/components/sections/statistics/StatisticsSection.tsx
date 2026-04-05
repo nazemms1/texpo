@@ -2,8 +2,12 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { Skeleton } from "@mantine/core";
 import { fadeInUp } from "@/src/lib/animations";
 import { STATS } from "@/src/lib/constants";
+import { useApi } from "@/src/hooks/useApi";
+import { homeService } from "@/src/lib/api";
+import type { StatApiItem } from "@/src/types/api";
 import styles from "./StatisticsSection.module.css";
 
 function parseValue(value: string): { num: number; suffix: string } {
@@ -47,11 +51,27 @@ function bezier(t: number) {
 const T_VALUES = [0.05, 0.25, 0.5, 0.75, 0.95];
 
 export function StatisticsSection() {
+  const { data, loading } = useApi(() => homeService.getStats());
+
+  const stats: StatApiItem[] = data ?? STATS;
+
+  if (loading) {
+    return (
+      <section className={styles.section}>
+        <div className={styles.mobileGrid}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Skeleton key={i} height={80} radius="md" />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.section}>
       {/* Mobile grid layout */}
       <div className={styles.mobileGrid}>
-        {STATS.map((stat, i) => (
+        {stats.map((stat, i) => (
           <motion.div
             key={`mobile-${stat.value}-${i}`}
             className={styles.mobileItem}
@@ -94,7 +114,7 @@ export function StatisticsSection() {
             fill="none"
           />
 
-          {STATS.map((stat, i) => {
+          {stats.map((stat, i) => {
             const { x, y } = bezier(T_VALUES[i]);
             return (
               <g
