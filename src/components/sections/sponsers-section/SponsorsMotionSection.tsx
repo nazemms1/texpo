@@ -39,11 +39,11 @@ export function SponsorsMotionSection() {
         
           </header>
 
-          {error && (
+          {/* {error && (
             <p style={{ textAlign: "center", color: "#ef4444", marginBottom: "1rem", fontSize: "0.875rem" }}>
               {error}
             </p>
-          )}
+          )} */}
 
           <div className={styles.scrollWrapper}>
             {loading ? (

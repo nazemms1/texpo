@@ -46,15 +46,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-       <motion.div
-        className={styles.socialBar}
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.9, duration: 0.6 }}
-      >
-        <SocialIcons />
-      </motion.div>
- 
       <motion.div
         className={styles.scrollIndicator}
         initial={{ opacity: 0 }}

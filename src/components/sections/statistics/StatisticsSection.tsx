@@ -42,13 +42,19 @@ function CountUpValue({ value }: { value: string }) {
   );
 }
 
-function bezier(t: number) {
+function bezier(t: number, pathIdx: number = 0) {
+  const baseY = 160 + pathIdx * 35;
+  const peakY = pathIdx * 35;
   const x = (1 - t) * (1 - t) * 0 + 2 * t * (1 - t) * 550 + t * t * 1100;
-  const y = (1 - t) * (1 - t) * 160 + 2 * t * (1 - t) * 0 + t * t * 160;
-  return { x, y };
+  const y = (1 - t) * (1 - t) * baseY + 2 * t * (1 - t) * peakY + t * t * baseY;
+  return { x, y: y + 100 }; // Shifted down by 100 to avoid top clipping
 }
 
-const T_VALUES = [0.05, 0.25, 0.5, 0.75, 0.95];
+const T_VALUES_ROWS = [
+  [0.05, 0.25, 0.5, 0.75, 0.95],
+  [0.15, 0.35, 0.55, 0.75, 0.90], // Staggered for second arc
+  [0.05, 0.25, 0.5, 0.75, 0.95],
+];
 
  function mobileBezier(t: number, baseY: number) {
   const x = 360 * t;
@@ -56,18 +62,22 @@ const T_VALUES = [0.05, 0.25, 0.5, 0.75, 0.95];
   return { x, y };
 }
 
- const MOBILE_DISTRIBUTION = [
-  { baseY: 160, t: 0.25 },
-  { baseY: 160, t: 0.75 },
-  { baseY: 300, t: 0.5  },
-  { baseY: 440, t: 0.25 },
-  { baseY: 440, t: 0.75 },
+const MOBILE_DISTRIBUTION = [
+  { baseY: 160, t: 0.15 },
+  { baseY: 160, t: 0.50 },
+  { baseY: 160, t: 0.85 },
+  { baseY: 300, t: 0.15 },
+  { baseY: 300, t: 0.50 },
+  { baseY: 300, t: 0.85 },
+  { baseY: 440, t: 0.15 },
+  { baseY: 440, t: 0.50 },
+  { baseY: 440, t: 0.85 },
 ];
 
-export function StatisticsSection() {
+export function StatisticsSection({ manualStats }: { manualStats?: StatApiItem[] }) {
   const { data, loading } = useApi(() => homeService.getStats());
 
-  const stats: StatApiItem[] = data ?? STATS;
+  const stats: StatApiItem[] = manualStats ?? data ?? STATS;
 
   if (loading) {
     return (
@@ -83,8 +93,7 @@ export function StatisticsSection() {
 
   return (
     <section className={styles.section}>
-      {/* Mobile grid layout */}
-      <div className={styles.mobileGrid}>
+       <div className={styles.mobileGrid}>
         {stats.map((stat, i) => (
           <motion.div
             key={`mobile-${stat.value}-${i}`}
@@ -101,121 +110,124 @@ export function StatisticsSection() {
         ))}
       </div>
 
-      {/* Mobile arc layout – portrait orientation, stats spread across 3 arcs */}
-      <div className={styles.mobileArcWrapper}>
-        <svg
-          className={styles.mobileArc}
-          viewBox="0 0 360 480"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M0,160 Q180,80 360,160"  stroke="#133854" strokeWidth="1" fill="none" />
-          <path d="M0,300 Q180,220 360,300" stroke="#133854" strokeWidth="1" fill="none" />
-          <path d="M0,440 Q180,360 360,440" stroke="#133854" strokeWidth="1" fill="none" />
+       <div className={styles.mobileArcWrapper}>
+          <svg
+            className={styles.mobileArc}
+            viewBox="0 0 360 480"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M0,160 Q180,80 360,160"  stroke="#133854" strokeWidth="1" fill="none" />
+            <path d="M0,300 Q180,220 360,300" stroke="#133854" strokeWidth="1" fill="none" />
+            <path d="M0,440 Q180,360 360,440" stroke="#133854" strokeWidth="1" fill="none" />
 
-          {stats.map((stat, i) => {
-            if (i >= MOBILE_DISTRIBUTION.length) return null;
-            const { baseY, t } = MOBILE_DISTRIBUTION[i];
-            const { x, y } = mobileBezier(t, baseY);
-            return (
-              <g key={`mobile-arc-${stat.value}-${i}`} transform={`translate(${x}, ${y})`}>
-                <motion.circle
-                  cx={0} cy={0} r={5}
-                  fill="#42BEB3"
-                  fillOpacity="0.8"
-                  style={{ filter: 'drop-shadow(0px 0px 6px #42BEB3)', transformBox: 'fill-box', transformOrigin: 'center' }}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
-                />
-                <foreignObject x="-55" y="-75" width="110" height="75">
-                  <motion.div
-                    // @ts-expect-error foreignObject requires XHTML namespace on this node
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    className={styles.item}
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
+            {stats.map((stat, i) => {
+              if (i >= MOBILE_DISTRIBUTION.length) return null;
+              const { baseY, t } = MOBILE_DISTRIBUTION[i];
+              const { x, y } = mobileBezier(t, baseY);
+              return (
+                <g key={`mobile-arc-${stat.value}-${i}`} transform={`translate(${x}, ${y})`}>
+                  <motion.circle
+                    cx={0} cy={0} r={5}
+                    fill="#42BEB3"
+                    fillOpacity="0.8"
+                    style={{ filter: 'drop-shadow(0px 0px 6px #42BEB3)', transformBox: 'fill-box', transformOrigin: 'center' }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: false }}
-                  >
-                    <CountUpValue value={stat.value} />
-                    <span className={styles.label}>{stat.label}</span>
-                  </motion.div>
-                </foreignObject>
-              </g>
-            );
-          })}
-        </svg>
+                    transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
+                  />
+                  <foreignObject x="-70" y="-75" width="140" height="75">
+                    <motion.div
+                      // @ts-expect-error foreignObject requires XHTML namespace on this node
+                      xmlns="http://www.w3.org/1999/xhtml"
+                      className={styles.item}
+                      variants={fadeInUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: false }}
+                    >
+                      <CountUpValue value={stat.value} />
+                      <span className={styles.label}>{stat.label}</span>
+                    </motion.div>
+                  </foreignObject>
+                </g>
+              );
+            })}
+          </svg>
       </div>
 
        <div className={styles.arcWrapper}>
-        <svg
-          className={styles.arc}
-          viewBox="0 0 1100 220"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0,160 Q550,0 1100,160"
-            stroke="#133854"
-            strokeWidth="0.5"
+          <svg
+            className={styles.arc}
+            viewBox="0 0 1100 450"
             fill="none"
-          />
-          <path
-            d="M0,195 Q550,35 1100,195"
-            stroke="#133854"
-            strokeWidth="0.5"
-            fill="none"
-          />
-          <path
-            d="M0,230 Q550,70 1100,230"
-            stroke="#133854"
-            strokeWidth="0.5"
-            fill="none"
-          />
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0,260 Q550,100 1100,260"
+              stroke="#133854"
+              strokeWidth="0.5"
+              fill="none"
+            />
+            <path
+              d="M0,295 Q550,135 1100,295"
+              stroke="#133854"
+              strokeWidth="0.5"
+              fill="none"
+            />
+            <path
+              d="M0,330 Q550,170 1100,330"
+              stroke="#133854"
+              strokeWidth="0.5"
+              fill="none"
+            />
 
-          {stats.map((stat, i) => {
-            const { x, y } = bezier(T_VALUES[i]);
-            return (
-              <g
-                key={`${stat.value}-${stat.label}-${i}`}
-                transform={`translate(${x}, ${y})`}
-              >
-                <motion.circle
-                  cx={0}
-                  cy={0}
-                  r={6}
-                  fill="#42BEB3"
-                  fillOpacity="0.8"
-                  style={{
-                    filter: 'drop-shadow(0px 0px 6px #42BEB3)',
-                    transformBox: 'fill-box',
-                    transformOrigin: 'center',
-                  }}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
-                />
-                <foreignObject x="-50" y="-80" width="120" height="80">
-                  <motion.div
-                    // @ts-expect-error foreignObject requires XHTML namespace on this node
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    className={styles.item}
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
+            {stats.map((stat, i) => {
+              const pathIdx = Math.floor(i / 5);
+              const itemIdx = i % 5;
+              if (pathIdx > 2) return null;
+
+              const { x, y } = bezier(T_VALUES_ROWS[pathIdx][itemIdx], pathIdx);
+              return (
+                <g
+                  key={`${stat.value}-${stat.label}-${i}`}
+                  transform={`translate(${x}, ${y})`}
+                >
+                  <motion.circle
+                    cx={0}
+                    cy={0}
+                    r={6}
+                    fill="#42BEB3"
+                    fillOpacity="0.8"
+                    style={{
+                      filter: 'drop-shadow(0px 0px 6px #42BEB3)',
+                      transformBox: 'fill-box',
+                      transformOrigin: 'center',
+                    }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: false }}
-                  >
-                    <CountUpValue value={stat.value} />
-                    <span className={styles.label}>{stat.label}</span>
-                  </motion.div>
-                </foreignObject>
-              </g>
-            );
-          })}
-        </svg>
+                    transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
+                  />
+                  <foreignObject x="-100" y="-80" width="200" height="80">
+                    <motion.div
+                      // @ts-expect-error foreignObject requires XHTML namespace on this node
+                      xmlns="http://www.w3.org/1999/xhtml"
+                      className={styles.item}
+                      variants={fadeInUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: false }}
+                    >
+                      <CountUpValue value={stat.value} />
+                      <span className={styles.label}>{stat.label}</span>
+                    </motion.div>
+                  </foreignObject>
+                </g>
+              );
+            })}
+          </svg>
       </div>
     </section>
   );

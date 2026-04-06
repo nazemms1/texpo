@@ -1,6 +1,19 @@
 .section {
-    font-family: 'URWGeometricArabic-Regular', sans-serif;
-
+  font-family: 'URWGeometricArabic-Regular', sans-serif;
   background: transparent;
   padding: 0;
 }
+
+.container {
+  padding-left: 190px !important;
+  padding-right: 190px !important;
+  
+}
+
+@media (max-width: 1920px) {
+  .container {
+    padding-left: clamp(1rem, 5vw, 190px) !important;
+    padding-right: clamp(1rem, 5vw, 190px) !important;
+  }
+}
+

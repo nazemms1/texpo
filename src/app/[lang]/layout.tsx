@@ -7,6 +7,8 @@ export function generateStaticParams() {
   return VALID_LANGS.map((lang) => ({ lang }));
 }
 
+import { FloatingSocialBar } from '@/src/components/layout/FloatingSocialBar';
+
 export default async function LangLayout({
   children,
   params,
@@ -25,6 +27,7 @@ export default async function LangLayout({
   return (
     <div dir={dir}>
       <Header />
+      <FloatingSocialBar />
       <main>{children}</main>
       <Footer />
     </div>

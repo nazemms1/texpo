@@ -6,15 +6,15 @@ import { IconMail, IconPhone, IconMapPin } from '@tabler/icons-react';
 import { TwoPanelFormSection } from '@/src/components/sections/shared/TwoPanelFormSection';
 import { useMutation } from '@/src/hooks/useMutation';
 import { contactService } from '@/src/lib/api';
-import type { ContactFormPayload } from '@/src/types/api';
+import type { ContactFormPayload, ContactUsApiData } from '@/src/types/api';
 
-const contactInfo = [
-  { Icon: IconMail,    label: 'Email Us', value: 'info@texpo-exhibition.com' },
-  { Icon: IconPhone,   label: 'Call Us',  value: '0949333200' },
-  { Icon: IconMapPin,  label: 'Office',   value: 'Damascus, Syria - Exhibition City' },
-];
+export function ContactSection({ formData }: { formData?: ContactUsApiData['formData'] }) {
+  const contactInfo = [
+    { Icon: IconMail,    label: 'Email Us', value: formData?.email || 'info@texpo-exhibition.com' },
+    { Icon: IconPhone,   label: 'Call Us',  value: formData?.phone || '0949333200' },
+    { Icon: IconMapPin,  label: 'Office',   value: formData?.address || 'Damascus, Syria - Exhibition City' },
+  ];
 
-export function ContactSection() {
   const { submit, loading, error, success } = useMutation(contactService.submit);
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
@@ -31,11 +31,11 @@ export function ContactSection() {
     };
     submit(payload);
   }
-
+ 
   return (
     <TwoPanelFormSection
-      title="CONTACT US"
-      subtitle="Submit your interest and our partnership team will contact you with a tailored sponsorship proposal within 24 hours."
+      title={formData?.title || "CONTACT US"}
+      subtitle={formData?.subtitle || "Submit your interest and our partnership team will contact you with a tailored sponsorship proposal within 24 hours."}
       contactItems={contactInfo}
       onSubmit={handleSubmit}
       isSubmitting={loading}

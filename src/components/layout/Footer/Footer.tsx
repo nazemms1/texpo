@@ -2,15 +2,25 @@
 
 import { IconMapPin, IconPhone, IconMail } from '@tabler/icons-react';
 import styles from './Footer.module.css';
-
-const contactItems = [
-  { Icon: IconMapPin, text: 'Damascus, Syria – Exhibition City' },
-  { Icon: IconPhone, text: '0949333200' },
-  { Icon: IconPhone, text: '0112131184 - 0112131186' },
-  { Icon: IconMail, text: 'info@texpo-exhibition.com' },
-];
+import { useApi } from '@/src/hooks/useApi';
+import { publicDataService } from '@/src/lib/api';
 
 export function Footer() {
+  const { data } = useApi(() => publicDataService.getPublicData());
+
+  const address = data?.find((i) => i.key === 'address')?.value || ' ';
+  const phone = data?.find((i) => i.key === 'phone')?.value;
+  const mobile = data?.find((i) => i.key === 'mobile')?.value;
+  const email = data?.find((i) => i.key === 'email')?.value || ' ';
+  const dateRange = data?.find((i) => i.key === 'date_range')?.value || ' ';
+
+  const contactItems = [
+    { Icon: IconMapPin, text: address },
+    ...(mobile ? [{ Icon: IconPhone, text: mobile }] : []),
+    ...(phone ? [{ Icon: IconPhone, text: phone }] : []),
+    { Icon: IconMail, text: email },
+  ];
+
   return (
     <footer className={styles.footer}>
       <div className={styles.main}>
@@ -19,8 +29,8 @@ export function Footer() {
           alt="TEXPO"
           className={styles.logo}
         />
-        <p className={styles.location}>Damascus, Syria – Exhibition City</p>
-        <p className={styles.date}>17 JUNE - 20 JUNE 2026</p>
+        <p className={styles.location}>{address}</p>
+        <p className={styles.date}>{dateRange}</p>
       </div>
 
       <div className={styles.bar}>
@@ -28,7 +38,7 @@ export function Footer() {
           <span key={i} className={styles.barItem}>
             {i !== 0 && <span className={styles.sep}>|</span>}
             <Icon size={15} className={styles.barIcon} />
-            <span className={styles.footerText} >{text}</span>
+            <span className={styles.footerText}>{text}</span>
           </span>
         ))}
       </div>

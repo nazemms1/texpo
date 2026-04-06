@@ -21,9 +21,13 @@ const audiences = [
   { label: 'Smart Cities & Infrastructure' },
 ];
 
-export function TargetAudienceSection() {
-   const bgType1 = `linear-gradient(135deg, rgba(50, 85, 141, 0.8) 0%, rgba(13, 14, 18, 0.95) 100%), url(${image1.src})`;
+export function TargetAudienceSection({ title, description, items }: { title?: string; description?: string; items?: { title: string; image: string }[] }) {
+  const bgType1 = `linear-gradient(135deg, rgba(50, 85, 141, 0.8) 0%, rgba(13, 14, 18, 0.95) 100%), url(${image1.src})`;
   const bgType2 = `linear-gradient(135deg, rgba(66, 190, 179, 0.8) 0%, rgba(13, 14, 18, 0.95) 100%), url(${image2.src})`;
+
+  const displayTitle = title || 'TARGET AUDIENCE FOR VISITING TEXPO LAND | 2ND EDITION';
+  const displaySubtitle = description || 'The exhibition targets a wide range of visitors, including decision-makers, investors, entrepreneurs, technology and innovation professionals, government and academic entities, as well as those interested in technology and innovation from various sectors. This helps foster knowledge exchange, build partnerships, and enhance optimal value for all parties.';
+  const displayItems = items || audiences.map(a => ({ title: a.label, image: '' }));
 
   return (
     <section className={styles.section}>
@@ -36,10 +40,10 @@ export function TargetAudienceSection() {
           viewport={{ once: false, amount: 0.3 }}
         >
           <h2 className={styles.title}>
-            TARGET AUDIENCE FOR VISITING TEXPO LAND | 2ND EDITION
+            {displayTitle}
           </h2>
           <p className={styles.subtitle}>
-            The exhibition targets a wide range of visitors, including decision-makers, investors, entrepreneurs, technology and innovation professionals, government and academic entities, as well as those interested in technology and innovation from various sectors. This helps foster knowledge exchange, build partnerships, and enhance optimal value for all parties.
+            {displaySubtitle}
           </p>
         </motion.div>
 
@@ -50,20 +54,26 @@ export function TargetAudienceSection() {
           whileInView="visible"
           viewport={{ once: false, amount: 0.1 }}
         >
-          {audiences.map(({ label }, index) => (
-            <motion.div
-              key={label}
-              className={styles.card}
-              variants={fadeInUp}
-              style={{ 
-                background: index % 2 === 0 ? bgType1 : bgType2,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            >
-              <span className={styles.cardLabel}>{label}</span>
-            </motion.div>
-          ))}
+          {displayItems.map(({ title: label, image }, index) => {
+            const bg = image 
+              ? `linear-gradient(135deg, rgba(13, 14, 18, 0.4) 0%, rgba(13, 14, 18, 0.95) 100%), url(${image})`
+              : (index % 2 === 0 ? bgType1 : bgType2);
+
+            return (
+              <motion.div
+                key={`${label}-${index}`}
+                className={styles.card}
+                variants={fadeInUp}
+                style={{ 
+                  background: bg,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              >
+                <span className={styles.cardLabel}>{label}</span>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

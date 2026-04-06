@@ -7,7 +7,7 @@ import facebookIcon from '../../../assets/Icons/facebook.svg';
 import instagramIcon from '../../../assets/Icons/instagram.svg';
 import linkedinIcon from '../../../assets/Icons/linkedin.svg';
 import { useApi } from '@/src/hooks/useApi';
-import { socialService } from '@/src/lib/api';
+import { publicDataService } from '@/src/lib/api';
 import type { SocialLinkApiItem } from '@/src/types/api';
 
 const LOCAL_ICONS: Record<string, string> = {
@@ -16,16 +16,18 @@ const LOCAL_ICONS: Record<string, string> = {
   linkedin:  linkedinIcon as unknown as string,
 };
 
-const FALLBACK_ICONS: SocialLinkApiItem[] = [
-  { platform: 'linkedin',  href: '#' },
-  { platform: 'facebook',  href: '#' },
-  { platform: 'instagram', href: '#' },
-];
-
 export function SocialIcons({ horizontal = false }: { horizontal?: boolean }) {
-  const { data } = useApi(() => socialService.getSocialLinks());
+  const { data } = useApi(() => publicDataService.getPublicData());
 
-  const links: SocialLinkApiItem[] = data ?? FALLBACK_ICONS;
+  const facebook = data?.find((i) => i.key === 'facebook_url')?.value;
+  const instagram = data?.find((i) => i.key === 'instagram_url')?.value;
+  const linkedin = data?.find((i) => i.key === 'linkedin_url')?.value;
+
+  const links: SocialLinkApiItem[] = [
+    { platform: 'facebook',  href: facebook || '#' },
+    { platform: 'instagram', href: instagram || '#' },
+    { platform: 'linkedin',  href: linkedin || '#' },
+  ];
 
   return (
     <div className={`${styles.bar} ${horizontal ? styles.horizontal : ''}`}>

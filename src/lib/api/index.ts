@@ -6,4 +6,6 @@ export { bookStandService } from './services/bookStandService';
 export { becomeSponsorService } from './services/becomeSponsorService';
 export { visitorsService } from './services/visitorsService';
 export { aboutService } from './services/aboutService';
+export { publicDataService } from './services/publicDataService';
+export { texpoPageService } from './services/texpoPageService';
 export { default as apiClient } from './client';

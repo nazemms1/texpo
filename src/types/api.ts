@@ -87,3 +87,60 @@ export interface AboutApiData {
   description: string;
   highlights?: { icon?: string; text: string }[];
 }
+
+export interface PublicDataItem {
+  key: string;
+  name: string;
+  value: string | null;
+}
+
+export interface TexpoPageData {
+  statistics: { key: string; value: string }[];
+  title: string;
+  description: string;
+  image: string;
+  items: {
+    title: string;
+    description: string;
+    image: string;
+  }[];
+}
+
+export interface ContactUsApiData {
+  data: {
+    lan: string | null;
+    lag: string | null;
+    image: string;
+  };
+  formData: {
+    title: string;
+    subtitle: string;
+    email: string | null;
+    phone: string | null;
+    address: string;
+    description: string;
+  };
+}
+
+export interface VisitorsPageData {
+  title: string;
+  description: string;
+  items: {
+    title: string;
+    image: string;
+  }[];
+}
+
+export interface AboutUsSectionItem {
+  key: string;
+  title: string;
+  description: string;
+  image: string;
+  items: {
+    title: string;
+    description: string;
+    image: string;
+  }[];
+}
+
+export type AboutUsApiData = AboutUsSectionItem[];

@@ -1,16 +1,15 @@
-import type { Metadata } from "next";
+'use client';
+
 import { PageHero } from "@/src/components/sections/hero/PageHero";
 import { ContactHeroCard } from "@/src/components/sections/contact/ContactHeroCard";
 import { ContactMap } from "@/src/components/sections/contact/ContactMap";
 import { ContactSection } from "@/src/components/sections/contact/ContactSection";
-
-export const metadata: Metadata = {
-  title: "Contact Us — TEXPO",
-  description:
-    "Get in touch with the TEXPO team for sponsorships, media, or general enquiries.",
-};
+import { useApi } from "@/src/hooks/useApi";
+import { contactService } from "@/src/lib/api";
 
 export default function ContactPage() {
+  const { data } = useApi(() => contactService.getContactInfo());
+
   return (
     <>
       <PageHero title="CONTACT" titleAccent="US" />
@@ -22,10 +21,10 @@ export default function ContactPage() {
           paddingBottom: "4rem",
         }}
       >
-        <ContactHeroCard />
+        <ContactHeroCard image={data?.data?.image} />
       </div>
-      <ContactMap />
-      <ContactSection />
+      <ContactMap lan={data?.data?.lan} lag={data?.data?.lag} />
+      <ContactSection formData={data?.formData} />
     </>
   );
 }

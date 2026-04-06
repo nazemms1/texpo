@@ -35,7 +35,7 @@ const SECTORS = [
 
 function getLoopDistance(index: number, current: number, total: number) {
   const raw = index - current;
-   return ((((raw + total / 2) % total) + total) % total) - total / 2;
+  return ((((raw + total / 2) % total) + total) % total) - total / 2;
 }
 
 export function ExhibitorsSectorsSection() {
@@ -55,7 +55,7 @@ export function ExhibitorsSectorsSection() {
 
     const updateArc = () => {
       const scrollProgress = embla.scrollProgress();
- 
+
       const current = ((scrollProgress * total) % total + total) % total;
 
       setOffsets(
@@ -96,7 +96,7 @@ export function ExhibitorsSectorsSection() {
           </header>
 
           <div className={styles.carouselContainer}>
-             <div className={styles.stage3D}>
+            <div className={styles.stage3D}>
               {SECTORS.map((sector, index) => (
                 <SectorCard
                   key={sector.title}
@@ -109,7 +109,7 @@ export function ExhibitorsSectorsSection() {
               ))}
             </div>
 
-             <div className={styles.interactionLayer}>
+            <div className={styles.interactionLayer}>
               <Carousel
                 className={styles.carousel}
                 slideSize="100%"

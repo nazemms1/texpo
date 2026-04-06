@@ -31,11 +31,25 @@ const points = [
     body: 'Through trade agreements and partnerships with neighboring countries, Syria has become a key connector between Middle Eastern markets, facilitating trade and investment flows within the region.',
   },
 ];
-export function WhySyriaSection() {
+
+export function WhySyriaSection({ title, description, image, items }: { title?: string; description?: string; image?: string; items?: { title: string; description: string; image: string }[] }) {
+  const displayTitle = title || "WHY SYRIA?";
+  const displayIntro = description || "Syria today represents a strategic turning point in the region, witnessing unprecedented economic openness and digital transformation, making it an attractive destination for investors. With the rising demand for technology across all sectors, the Syrian market is filled with promising opportunities for growth and investment in various technological fields.";
+  const displayImage = image || "/images/syria.svg";
+
+  const displayPoints = items?.map((item, idx) => {
+    const fallbackIcons = ['/Icons/Icon-one.svg', '/Icons/Icon-two.svg', '/Icons/Icon-three.svg', '/Icons/Icon-four.svg', '/Icons/Icon-five.svg'];
+    return {
+      title: item.title,
+      body: item.description,
+      icon: item.image && item.image.length > 25 ? item.image : fallbackIcons[idx % fallbackIcons.length],
+    };
+  }) || points;
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-         <motion.div
+        <motion.div
           className={styles.mapCol}
           variants={fadeInLeft}
           initial="hidden"
@@ -43,13 +57,13 @@ export function WhySyriaSection() {
           viewport={{ once: false, amount: 0.3 }}
         >
           <img
-            src="/images/syria.svg"
+            src={displayImage}
             alt="Map of Syria"
             className={styles.mapImage}
           />
         </motion.div>
 
-         <motion.div
+        <motion.div
           className={styles.contentCol}
           variants={staggerContainer}
           initial="hidden"
@@ -57,22 +71,18 @@ export function WhySyriaSection() {
           viewport={{ once: false, amount: 0.15 }}
         >
           <motion.h2 className={styles.title} variants={fadeInRight}>
-            WHY SYRIA?
+            {displayTitle}
           </motion.h2>
 
           <motion.p className={styles.intro} variants={fadeInUp}>
-            Syria today represents a strategic turning point in the region, witnessing unprecedented
-            economic openness and digital transformation, making it an attractive destination for
-            investors. With the rising demand for technology across all sectors, the Syrian market is
-            filled with promising opportunities for growth and investment in various technological
-            fields.
+            {displayIntro}
           </motion.p>
 
           <div className={styles.points}>
-            {points.map(({ icon, title, body }) => (
-              <motion.div key={title} className={styles.point} variants={fadeInUp}>
-                   <img src={icon} alt=""   />
-                 
+            {displayPoints.map(({ icon, title, body }, idx) => (
+              <motion.div key={`${title}-${idx}`} className={styles.point} variants={fadeInUp}>
+                <img src={icon} alt="" />
+
                 <div>
                   <h3 className={styles.pointTitle}>{title}</h3>
                   <p className={styles.pointBody}>{body}</p>

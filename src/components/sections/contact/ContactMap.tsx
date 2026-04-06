@@ -3,7 +3,11 @@
 import { motion } from 'framer-motion';
 import styles from './ContactMap.module.css';
 
-export function ContactMap() {
+export function ContactMap({ lan, lag }: { lan?: string | null; lag?: string | null }) {
+  const latitude = lan || "33.4069";
+  const longitude = lag || "36.4246";
+  const bbox = `${parseFloat(longitude) - 0.02}%2C${parseFloat(latitude) - 0.01}%2C${parseFloat(longitude) + 0.02}%2C${parseFloat(latitude) + 0.01}`;
+
   return (
     <section className={styles.section}>
       <motion.div
@@ -21,7 +25,7 @@ export function ContactMap() {
           allowFullScreen={false}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=36.402%2C33.393%2C36.446%2C33.419&amp;layer=cyclemap&amp;marker=33.4069%2C36.4246"
+          src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&amp;layer=transportmap&amp;marker=${latitude}%2C${longitude}`}
         ></iframe>
       </motion.div>
     </section>

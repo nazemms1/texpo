@@ -47,25 +47,28 @@ export function InfoCard({
       />
 
       <Stack pos="absolute" inset={0} className={styles.content}>
-        <Box
-          pt={{ base: 20, sm: 26 }}
-          pl={{ base: 20, sm: 26 }}
-          pr={{ base: 16, sm: 20 }}
-          className={styles.titleRow}
-        >
-          <Title order={2} c="white" fw={700} className={styles.title}>
-            {title}
-          </Title>
-          <Box
-            w={{ base: 140, sm: 220, lg: 453 }}
-            h={4}
-            bg="rgba(255, 255, 255, 0.9)"
-            className={styles.line}
-          />
+        <Box className={styles.titleContainer}>
+          <Box className={styles.titleTopRow}>
+            <Title order={2} m={0} c="white" fw={700} className={styles.titlePart}>
+              {title.split(' ')[0]}
+            </Title>
+            <Box
+              h={4}
+              // w={2}
+              bg="rgba(255, 255, 255, 0.9)"
+              className={styles.line}
+              m={0}
+            />
+          </Box>
+          {title.split(' ').length > 1 && (
+            <Title order={2} m={0} c="white" fw={700} className={styles.titlePart}>
+              {title.split(' ').slice(1).join(' ')}
+            </Title>
+          )}
         </Box>
 
-        <Box mt="auto" px={{ base: 14, sm: 22 }} pb={{ base: 10, sm: 14 }}>
-          <Text c="white" maw={1100} className={styles.description}>
+        <Box mt="auto">
+          <Text   className={styles.description}>
             {description}
           </Text>
         </Box>

@@ -67,6 +67,7 @@ export function BecomeASponsorSection() {
                 className={styles.input}
                 type="text"
                 placeholder="Tech Global Inc."
+                 required
               />
             </motion.label>
           </div>
@@ -88,6 +89,7 @@ export function BecomeASponsorSection() {
                 className={styles.input}
                 type="text"
                 placeholder="London, UK"
+                   required
               />
             </motion.label>
           </div>
@@ -104,6 +106,7 @@ export function BecomeASponsorSection() {
                   name="sponsorshipCategory"
                   className={`${styles.input} ${styles.selectField}`}
                   defaultValue=""
+                     required
                 >
                   <option value="" disabled>Diamond (Main Sponsor)</option>
                   <option value="platinum">Platinum</option>
@@ -123,6 +126,7 @@ export function BecomeASponsorSection() {
                 className={styles.input}
                 type="tel"
                 placeholder="+1 234 567 890"
+                   required
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
@@ -132,6 +136,7 @@ export function BecomeASponsorSection() {
                 className={styles.input}
                 type="email"
                 placeholder="john@company.com"
+                   required
               />
             </motion.label>
           </div>
