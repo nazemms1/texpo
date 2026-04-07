@@ -9,15 +9,20 @@ import {
 } from "@/src/lib/animations";
 import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
 import { ArrowCircle, ButtonPair } from "@/src/components/ui/Button/AnimatedButton";
-import { IconMapPin, IconPlayerPlay } from "@tabler/icons-react";
+import { useParams } from "next/navigation";
+import { aboutTranslations, Lang } from "@/src/lib/i18n";
+import { Stack } from "@mantine/core";
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+import { getImageUrl } from "@/src/lib/helpers";
 import styles from "./AboutExhibition.module.css";
 
 interface AboutExhibitionProps {
   variant?: "home" | "about";
   hideButtons?: boolean;
-  title?: string;
-  description?: string;
-  image?: string;
+  title?: string | null;
+  description?: string | null;
+  image?: any;
+  loading?: boolean;
 }
 
 export function AboutExhibition({
@@ -26,7 +31,38 @@ export function AboutExhibition({
   title,
   description,
   image,
+  loading,
 }: AboutExhibitionProps) {
+  const { lang } = useParams();
+  const currentLang = (lang as Lang) || 'en';
+  const t = aboutTranslations[currentLang];
+
+  if (loading) {
+    return (
+      <section className={styles.section}>
+        <div className={styles.inner}>
+          <div className={styles.left}>
+            <Skeleton variant="title" width="60%" height={38} />
+            <Stack gap="xs" mt="md">
+              <Skeleton variant="text" width="100%" height={14} />
+              <Skeleton variant="text" width="95%" height={14} />
+              <Skeleton variant="text" width="80%" height={14} />
+            </Stack>
+            <div className={styles.actions} style={{ marginTop: '2.5rem', display: 'flex', gap: '1.25rem' }}>
+              <Skeleton variant="button" width={140} height={46} />
+              <Skeleton variant="button" width={140} height={46} />
+            </div>
+          </div>
+          <div className={styles.right}>
+            <Skeleton variant="image" height={320} width="100%" radius="24px" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+   if (!title && !description) return null;
+
   return (
     <section className={styles.section}>
       <div className={styles.waveTop} />
@@ -40,63 +76,22 @@ export function AboutExhibition({
           viewport={{ once: false, amount: 0.25 }}
         >
           <motion.div variants={fadeInLeft}>
-            <SectionTitle title={title || "ABOUT THE EXHIBITION"} />
+            <SectionTitle title={title || ""} />
           </motion.div>
 
-          {description ? (
-            <motion.p className={styles.body} variants={fadeInUp}>
-              {description}
-            </motion.p>
-          ) : (
-            <>
-              <motion.p className={styles.body} variants={fadeInUp}>
-                TEXPO Exhibition is a specialized platform for technology, modern
-                innovations, and cutting-edge solutions. It brings together a
-                select group of companies, entrepreneurs, and experts to
-                showcase the latest digital and technological solutions in the
-                fields of telecommunications, software, artificial intelligence,
-                and automation. The exhibition aims to support Syria&apos;s
-                digital transformation journey by fostering knowledge exchange,
-                building strategic partnerships, and connecting the public and
-                private sectors with technologies that enhance service
-                development and business efficiency. The exhibition also
-                highlights promising investment opportunities in the
-              </motion.p>
-
-              <motion.p className={styles.body} variants={fadeInUp}>
-                Syrian market, particularly in tech startups, digital
-                infrastructure, and innovative solutions that meet the needs of
-                the rebuilding and development phase. This makes it a genuine
-                opportunity for investors to participate in building a
-                sustainable digital economy.
-              </motion.p>
-
-              <motion.p className={styles.body} variants={fadeInUp}>
-                Following the great success of the first edition of TEXPO, and
-                the wide positive impression it left on participants and
-                visitors, the second edition is launching to continue the
-                creative journey and open broader horizons for pioneering ideas
-                and advanced innovative technical solutions. This edition will
-                serve as an interactive platform that gathers innovators,
-                entrepreneurs, and tech companies under one roof, with the goal
-                of sharing experiences, showcasing the latest technologies, and
-                creating real opportunities that contribute to shaping a
-                smarter, more innovative future.
-              </motion.p>
-            </>
-          )}
+          <motion.p className={styles.body} variants={fadeInUp}>
+            {description}
+          </motion.p>
 
           {!hideButtons && (
             <motion.div className={styles.actions} variants={fadeInUp}>
               {variant === "about" && <ArrowCircle href="#" variant="dashed" />}
               <ButtonPair pillHref="#" arrowHref="#" variant="primary">
-                <IconMapPin size={16} />
-                View in Map
+                 {t.viewMap}
               </ButtonPair>
               {variant === "home" && (
                 <ButtonPair pillHref="#" arrowHref="#" variant="outline">
-                  <IconPlayerPlay size={16} />
-                  Watch
+                   {t.watch}
                 </ButtonPair>
               )}
             </motion.div>
@@ -111,7 +106,7 @@ export function AboutExhibition({
           viewport={{ once: false, amount: 0.3 }}
         >
           <img
-            src={image || "/logos/texpo.svg"}
+            src={getImageUrl(image) || "/logos/texpo.svg"}
             alt=""
             className={styles.bgImage}
             aria-hidden="true"

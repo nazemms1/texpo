@@ -3,13 +3,16 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { IconArrowRight } from '@tabler/icons-react';
+import { useParams } from 'next/navigation';
+import { Lang } from '@/src/lib/i18n';
+import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 import styles from './AnimatedButton.module.css';
 
 interface PillButtonProps {
   children: React.ReactNode;
   href?: string;
   variant?: 'primary' | 'outline' | 'ghost';
+  size?: 'md' | 'lg';
   onClick?: () => void;
   className?: string;
   isGroupHovered?: boolean;
@@ -19,11 +22,12 @@ export function PillButton({
   children,
   href,
   variant = 'primary',
+  size = 'md',
   onClick,
   className = '',
   isGroupHovered,
 }: PillButtonProps) {
-  const cls = `${styles.pill} ${styles[variant]} ${className}`;
+  const cls = `${styles.pill} ${styles[variant]} ${styles[size]} ${className}`;
 
   const inner = (
     <motion.span
@@ -51,6 +55,7 @@ export function PillButton({
 interface ArrowCircleProps {
   href?: string;
   variant?: 'primary' | 'outline' | 'ghost' | 'dashed';
+  size?: 'md' | 'lg';
   onClick?: () => void;
   className?: string;
   isGroupHovered?: boolean;
@@ -59,17 +64,21 @@ interface ArrowCircleProps {
 export function ArrowCircle({
   href,
   variant = 'primary',
+  size = 'md',
   onClick,
   className = '',
   isGroupHovered,
 }: ArrowCircleProps) {
+  const { lang } = useParams();
+  const isAr = lang === 'ar';
+  
   const [localHovered, setLocalHovered] = useState(false);
   const isHovered = isGroupHovered !== undefined ? isGroupHovered : localHovered;
 
   const isDashed = variant === 'dashed';
   const cls = isDashed
-    ? `${styles.circle} ${styles.dashedCircle} ${className}`
-    : `${styles.circle} ${styles[`${variant}Circle`]} ${className}`;
+    ? `${styles.circle} ${styles.dashedCircle} ${styles[size]} ${className}`
+    : `${styles.circle} ${styles[`${variant}Circle`]} ${styles[size]} ${className}`;
 
   const inner = (
     <motion.span
@@ -99,7 +108,7 @@ export function ArrowCircle({
       )}
       <motion.span
         className={styles.iconWrapper}
-        animate={{ rotate: isHovered ? -45 : 0 }}
+        animate={{ rotate: isAr ? (isHovered ? -135 : -180) : (isHovered ? -45 : 0) }}
         transition={{ type: 'spring', stiffness: 400, damping: 28 }}
       >
         <IconArrowRight size={20} stroke={2} />
@@ -122,10 +131,11 @@ interface ButtonPairProps {
   pillHref: string;
   arrowHref: string;
   variant?: 'primary' | 'outline' | 'ghost';
+  size?: 'md' | 'lg';
   children: React.ReactNode;
 }
 
-export function ButtonPair({ pillHref, arrowHref, variant = 'primary', children }: ButtonPairProps) {
+export function ButtonPair({ pillHref, arrowHref, variant = 'primary', size = 'md', children }: ButtonPairProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -134,10 +144,10 @@ export function ButtonPair({ pillHref, arrowHref, variant = 'primary', children 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <PillButton href={pillHref} variant={variant} isGroupHovered={hovered}>
+      <PillButton href={pillHref} variant={variant} size={size} isGroupHovered={hovered}>
         {children}
       </PillButton>
-      <ArrowCircle href={arrowHref} variant={variant} isGroupHovered={hovered} />
+      <ArrowCircle href={arrowHref} variant={variant} size={size} isGroupHovered={hovered} />
     </div>
   );
 }

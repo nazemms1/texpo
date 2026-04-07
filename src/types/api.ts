@@ -42,25 +42,25 @@ export interface SocialLinkApiItem {
 }
 
 export interface ContactFormPayload {
-  fullName: string;
-  companyName: string;
-  sector: string;
-  country: string;
+  full_name: string;
+  company_name: string;
+  business_sector: string;
+  country_city: string;
   address: string;
-  phone: string;
+  phone_number: string;
   email: string;
   message: string;
 }
 
 export interface BookStandPayload {
-  firstName: string;
-  lastName: string;
-  jobTitle: string;
-  companyName: string;
-  companyWebsite: string;
-  email: string;
+  first_name: string;
+  last_name: string;
+  job_title: string;
+  company_name: string;
+  company_website: string;
+  work_email: string;
   phone: string;
-  country: string;
+  country_of_residence: string;
   sector: string;
 }
 
@@ -143,4 +143,13 @@ export interface AboutUsSectionItem {
   }[];
 }
 
+export interface HomeSectionData {
+  key: string;
+  title: string | null;
+  description: string | null;
+  media: any | null;
+  'meta-data'?: any;
+}
+
+export type HomeResponse = HomeSectionData[];
 export type AboutUsApiData = AboutUsSectionItem[];

@@ -12,10 +12,13 @@ type ContactItem = {
 
 type TwoPanelFormSectionClassNames = typeof styles;
 
+import { Skeleton } from '@/src/components/ui/Skeleton/Skeleton';
+
 interface TwoPanelFormSectionProps {
   id?: string;
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
   contactItems: ContactItem[];
   terms: string[];
   renderFormFields: (classNames: TwoPanelFormSectionClassNames) => React.ReactNode;
@@ -24,6 +27,7 @@ interface TwoPanelFormSectionProps {
   logoAlt?: string;
   onSubmit?: (e: React.SyntheticEvent<HTMLFormElement>) => void;
   isSubmitting?: boolean;
+  loading?: boolean;
   submitSuccess?: boolean;
   submitError?: string | null;
   successMessage?: string;
@@ -33,6 +37,7 @@ export function TwoPanelFormSection({
   id,
   title,
   subtitle,
+  description,
   contactItems,
   terms,
   renderFormFields,
@@ -41,10 +46,49 @@ export function TwoPanelFormSection({
   logoAlt = 'TEXPO',
   onSubmit,
   isSubmitting = false,
+  loading = false,
   submitSuccess = false,
   submitError = null,
   successMessage = 'Your request has been submitted successfully!',
 }: TwoPanelFormSectionProps) {
+  if (loading) {
+    return (
+      <section id={id} className={styles.section}>
+        <div className={styles.inner}>
+          <div className={styles.infoPanel}>
+            <Skeleton variant="image" height={48} width={120} mb="xl" />
+            <Skeleton variant="title" width="60%" mb="md" />
+            <Skeleton variant="text" width="80%" mb="sm" />
+            <div className={styles.contactList}>
+              {[1, 2, 3].map((i) => (
+                <div key={i} className={styles.contactItem}>
+                  <Skeleton variant="image" height={40} width={40} radius="50%" />
+                  <div style={{ flex: 1 }}>
+                    <Skeleton variant="text" width="40%" mb="xs" />
+                    <Skeleton variant="text" width="60%" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={styles.formPanel}>
+             <div className={styles.form}>
+                <div className={styles.row}>
+                   <Skeleton variant="text" height={50} />
+                   <Skeleton variant="text" height={50} />
+                </div>
+                <div className={styles.row}>
+                   <Skeleton variant="text" height={50} />
+                   <Skeleton variant="text" height={50} />
+                </div>
+                <Skeleton variant="card" height={100} mb="xl" />
+                <Skeleton variant="button" />
+             </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
   return (
     <section id={id} className={styles.section}>
       <div className={styles.inner}>
@@ -53,7 +97,7 @@ export function TwoPanelFormSection({
           variants={fadeInLeft}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <img
             src={logoSrc}
@@ -81,7 +125,13 @@ export function TwoPanelFormSection({
             ))}
           </div>
 
-          <div className={styles.termsWrapper}>
+          {description && (
+            <div className={styles.descriptionWrapper} style={{ marginTop: 'auto', marginBottom: '1.5rem' }}>
+              <p className={styles.description}>{description}</p>
+            </div>
+          )}
+
+          <div className={styles.termsWrapper} style={{ marginTop: description ? '0' : 'auto' }}>
             {terms.map((text, index) => (
               <p key={index} className={styles.termsText}>
                 {text}
@@ -95,7 +145,7 @@ export function TwoPanelFormSection({
           variants={fadeInRight}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <form
             className={styles.form}
@@ -109,7 +159,7 @@ export function TwoPanelFormSection({
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false }}
+              viewport={{ once: true }}
             >
               {renderFormFields(styles)}
 
@@ -141,4 +191,3 @@ export function TwoPanelFormSection({
     </section>
   );
 }
-

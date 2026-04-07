@@ -1,0 +1,75 @@
+.skeleton {
+  --sk-bg: rgba(255, 255, 255, 0.03);
+  --sk-shimmer: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  
+  background-color: var(--sk-bg) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* On dark backgrounds, ensure it's slightly more visible but still light */
+[data-mantine-color-scheme="dark"] .skeleton {
+  --sk-bg: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: var(--sk-shimmer);
+  animation: shimmer 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Refined variants with smaller defaults */
+.title {
+  height: 32px;
+  width: 50%;
+  margin-bottom: 2rem;
+  border-radius: 20px !important;
+}
+
+.text {
+  height: 12px;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 10px !important;
+}
+
+.image {
+  height: 250px;
+  width: 100%;
+  border-radius: 32px !important;
+}
+
+.button {
+  height: 44px;
+  width: 140px;
+  border-radius: 100px !important;
+}
+
+.card {
+  height: 200px;
+  width: 100%;
+  border-radius: 24px !important;
+}
+
+.circular {
+  border-radius: 50% !important;
+}

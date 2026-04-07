@@ -1,11 +1,12 @@
+export { aboutService } from './services/aboutService';
+export { becomeSponsorService } from './services/becomeSponsorService';
+export { bookStandService } from './services/bookStandService';
+export { contactService } from './services/contactService';
 export { homeService } from './services/homeService';
+export { publicDataService } from './services/publicDataService';
 export { socialService } from './services/socialService';
 export { sponsorsService } from './services/sponsorsService';
-export { contactService } from './services/contactService';
-export { bookStandService } from './services/bookStandService';
-export { becomeSponsorService } from './services/becomeSponsorService';
-export { visitorsService } from './services/visitorsService';
-export { aboutService } from './services/aboutService';
-export { publicDataService } from './services/publicDataService';
 export { texpoPageService } from './services/texpoPageService';
+export { visitorsService } from './services/visitorsService';
+export { staticDataService } from './services/staticDataService';
 export { default as apiClient } from './client';

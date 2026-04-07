@@ -1,11 +1,31 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { fadeInUp } from '@/src/lib/animations';
 import styles from './MapSection.module.css';
+import { getImageUrl } from '@/src/lib/helpers';
+import { Skeleton } from '@/src/components/ui/Skeleton/Skeleton';
 
-export function MapSection() {
+export function MapSection({ 
+  title, 
+  image, 
+  loading 
+}: { 
+  title?: string | null; 
+  image?: any; 
+  loading?: boolean;
+}) {
+  if (loading) {
+    return (
+      <section className={styles.section}>
+        <div className={styles.inner}>
+          <Skeleton variant="card" height={380} width="100%" radius="32px" />
+          <Skeleton variant="title" width="40%" mx="auto" mt="xl" />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
@@ -16,13 +36,10 @@ export function MapSection() {
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
         >
-          <Image
-            src="/images/Map.svg"
-            alt="Participating Countries Map"
-            width={1200}
-            height={600}
+          <img
+            src={getImageUrl(image) || "/images/Map.svg"}
+            alt={title || "Participating Countries Map"}
             className={styles.map}
-            priority
           />
           <motion.h2
             className={styles.title}
@@ -31,7 +48,7 @@ export function MapSection() {
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
           >
-            PARTICIPATING COUNTRIES AT TEXPO LAND | 2ND EDITION
+            {title || "PARTICIPATING COUNTRIES AT TEXPO LAND | 2ND EDITION"}
           </motion.h2>
         </motion.div>
       </div>

@@ -1,35 +1,46 @@
 import { Container } from "@/src/components/layout/Container";
 import { InfoCard } from "@/src/components/ui/InfoCard/InfoCard";
 import styles from "./InfoCardSection.module.css";
+import { Stack, Box } from "@mantine/core";
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+import { getImageUrl } from "@/src/lib/helpers";
 
 interface InfoCardItem {
   title?: string;
   description?: string;
-  image?: string;
+  image?: any;
+  media?: any;
 }
 
 interface InfoCardSectionProps {
   items?: InfoCardItem[];
+  loading?: boolean;
 }
 
-export function InfoCardSection({ items }: InfoCardSectionProps) {
-  const displayItems = items?.length ? items : [
-    {
-      title: "Our Message",
-      description: "TEXPO LAND is considered a launchpad that brings together investors, innovators, and technology industry leaders from around the world, with the goal of driving digital transformation in Syria and the region at large, and achieving sustainable growth for businesses and investors. We are committed to facilitating business growth by promoting innovative technological solutions, strengthening strategic partnerships, and enabling cross-border collaboration. Through our events, we aim to accelerate the adoption of modern technologies and open new opportunities and markets for both investors and companies alike..",
-      image: "/images/global-expo-floor.png"
-    }
-  ];
+export function InfoCardSection({ items, loading }: InfoCardSectionProps) {
+  if (loading) {
+    return (
+      <section className={styles.section}>
+        <Container size="full" className={styles.container}>
+          <Box style={{ width: '100%', borderRadius: '24px', overflow: 'hidden' }}>
+            <Skeleton variant="card" height={300} width="100%" />
+          </Box>
+        </Container>
+      </section>
+    );
+  }
+
+  if (!items || items.length === 0) return null;
 
   return (
     <section className={styles.section}>
       <Container size="full" className={styles.container}>
-        {displayItems.map((item, index) => (
-          <div key={index} style={{ marginBottom: index < displayItems.length - 1 ? '2rem' : 0 }}>
+        {items.map((item, index) => (
+          <div key={index} style={{ marginBottom: index < items.length - 1 ? '2rem' : 0 }}>
             <InfoCard
               title={item.title!}
               description={item.description!}
-              imageUrl={item.image!}
+              imageUrl={getImageUrl(item.media || item.image)}
             />
           </div>
         ))}

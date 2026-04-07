@@ -21,13 +21,45 @@ const audiences = [
   { label: 'Smart Cities & Infrastructure' },
 ];
 
-export function TargetAudienceSection({ title, description, items }: { title?: string; description?: string; items?: { title: string; image: string }[] }) {
-  const bgType1 = `linear-gradient(135deg, rgba(50, 85, 141, 0.8) 0%, rgba(13, 14, 18, 0.95) 100%), url(${image1.src})`;
-  const bgType2 = `linear-gradient(135deg, rgba(66, 190, 179, 0.8) 0%, rgba(13, 14, 18, 0.95) 100%), url(${image2.src})`;
+import { getImageUrl } from '@/src/lib/helpers';
+import { Skeleton } from '@mantine/core';
 
-  const displayTitle = title || 'TARGET AUDIENCE FOR VISITING TEXPO LAND | 2ND EDITION';
-  const displaySubtitle = description || 'The exhibition targets a wide range of visitors, including decision-makers, investors, entrepreneurs, technology and innovation professionals, government and academic entities, as well as those interested in technology and innovation from various sectors. This helps foster knowledge exchange, build partnerships, and enhance optimal value for all parties.';
-  const displayItems = items || audiences.map(a => ({ title: a.label, image: '' }));
+export function TargetAudienceSection({ 
+  title, 
+  description, 
+  items,
+  loading
+}: { 
+  title?: string; 
+  description?: string; 
+  items?: { title: string; image: any }[];
+  loading?: boolean;
+}) {
+  if (loading) {
+    return (
+      <section className={styles.section}>
+        <div className={styles.inner}>
+          <div className={styles.header}>
+            <Skeleton bg="gray.3" height={40} width="60%" radius="xl" mx="auto" mb="md" animate />
+            <Skeleton bg="gray.3" height={20} width="80%" radius="xl" mx="auto" animate />
+          </div>
+          <div className={styles.grid}>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Skeleton key={i} bg="gray.3" height={120} radius="24px" animate />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!items || items.length === 0) return null;
+
+  const gradient1 = 'linear-gradient(135deg, rgba(50, 85, 141, 0.6) 0%, rgba(13, 14, 18, 0.9) 100%)';
+  const gradient2 = 'linear-gradient(135deg, rgba(66, 190, 179, 0.6) 0%, rgba(13, 14, 18, 0.9) 100%)';
+
+  const displayTitle = title || '';
+  const displaySubtitle = description || '';
 
   return (
     <section className={styles.section}>
@@ -54,10 +86,12 @@ export function TargetAudienceSection({ title, description, items }: { title?: s
           whileInView="visible"
           viewport={{ once: false, amount: 0.1 }}
         >
-          {displayItems.map(({ title: label, image }, index) => {
-            const bg = image 
-              ? `linear-gradient(135deg, rgba(13, 14, 18, 0.4) 0%, rgba(13, 14, 18, 0.95) 100%), url(${image})`
-              : (index % 2 === 0 ? bgType1 : bgType2);
+          {items.map(({ title: label, image }, index) => {
+            const itemImageUrl = getImageUrl(image);
+            const overlay = index % 2 === 0 ? gradient1 : gradient2;
+            const bg = itemImageUrl 
+              ? `${overlay}, url(${itemImageUrl})`
+              : overlay;
 
             return (
               <motion.div
@@ -68,7 +102,7 @@ export function TargetAudienceSection({ title, description, items }: { title?: s
                   background: bg,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
-                }}
+              }}
               >
                 <span className={styles.cardLabel}>{label}</span>
               </motion.div>

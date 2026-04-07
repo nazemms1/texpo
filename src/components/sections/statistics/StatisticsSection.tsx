@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Skeleton } from "@mantine/core";
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
 import { fadeInUp } from "@/src/lib/animations";
 import { STATS } from "@/src/lib/constants";
 import { useApi } from "@/src/hooks/useApi";
@@ -43,8 +43,8 @@ function CountUpValue({ value }: { value: string }) {
 }
 
 function bezier(t: number, pathIdx: number = 0) {
-  const baseY = 160 + pathIdx * 35;
-  const peakY = pathIdx * 35;
+  const baseY = 160 + pathIdx * 55;
+  const peakY = pathIdx * 55;
   const x = (1 - t) * (1 - t) * 0 + 2 * t * (1 - t) * 550 + t * t * 1100;
   const y = (1 - t) * (1 - t) * baseY + 2 * t * (1 - t) * peakY + t * t * baseY;
   return { x, y: y + 100 }; // Shifted down by 100 to avoid top clipping
@@ -52,11 +52,11 @@ function bezier(t: number, pathIdx: number = 0) {
 
 const T_VALUES_ROWS = [
   [0.05, 0.25, 0.5, 0.75, 0.95],
-  [0.15, 0.35, 0.55, 0.75, 0.90], // Staggered for second arc
+  [0.15, 0.35, 0.55, 0.75, 0.90], 
   [0.05, 0.25, 0.5, 0.75, 0.95],
 ];
 
- function mobileBezier(t: number, baseY: number) {
+function mobileBezier(t: number, baseY: number) {
   const x = 360 * t;
   const y = baseY - 160 * t + 160 * t * t;
   return { x, y };
@@ -74,17 +74,34 @@ const MOBILE_DISTRIBUTION = [
   { baseY: 440, t: 0.85 },
 ];
 
-export function StatisticsSection({ manualStats }: { manualStats?: StatApiItem[] }) {
-  const { data, loading } = useApi(() => homeService.getStats());
+export function StatisticsSection({
+  items,
+  loading: parentLoading
+}: {
+  items?: { key: string; value: string }[];
+  loading?: boolean;
+}) {
+  const { data: apiData, loading: apiLoading } = useApi(() => {
+    if (items) return Promise.resolve({ data: items } as any);
+    return homeService.getHomeData().then(res => ({
+      ...res,
+      data: res.data?.find(s => s.key === 'statistics')?.['meta-data'] || []
+    }));
+  });
 
-  const stats: StatApiItem[] = manualStats ?? data ?? STATS;
+  const loading = parentLoading ?? apiLoading;
+  const statsList = items ?? (apiData as any) ?? STATS;
+  const stats: StatApiItem[] = Array.isArray(statsList) ? statsList.map((s: any) => ({
+    value: s.value,
+    label: s.key || s.label
+  })) : [];
 
   if (loading) {
     return (
       <section className={styles.section}>
         <div className={styles.mobileGrid}>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} height={80} radius="md" />
+          {Array.from({ length: 9 }).map((_, i) => (
+            <Skeleton key={i} variant="card" height={80} />
           ))}
         </div>
       </section>
@@ -93,7 +110,7 @@ export function StatisticsSection({ manualStats }: { manualStats?: StatApiItem[]
 
   return (
     <section className={styles.section}>
-       <div className={styles.mobileGrid}>
+      <div className={styles.mobileGrid}>
         {stats.map((stat, i) => (
           <motion.div
             key={`mobile-${stat.value}-${i}`}
@@ -110,124 +127,121 @@ export function StatisticsSection({ manualStats }: { manualStats?: StatApiItem[]
         ))}
       </div>
 
-       <div className={styles.mobileArcWrapper}>
-          <svg
-            className={styles.mobileArc}
-            viewBox="0 0 360 480"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M0,160 Q180,80 360,160"  stroke="#133854" strokeWidth="1" fill="none" />
-            <path d="M0,300 Q180,220 360,300" stroke="#133854" strokeWidth="1" fill="none" />
-            <path d="M0,440 Q180,360 360,440" stroke="#133854" strokeWidth="1" fill="none" />
+      <div className={styles.mobileArcWrapper}>
+        <svg
+          className={styles.mobileArc}
+          viewBox="0 0 360 480"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0,160 Q180,80 360,160" stroke="#133854" strokeWidth="1" fill="none" />
+          <path d="M0,300 Q180,220 360,300" stroke="#133854" strokeWidth="1" fill="none" />
+          <path d="M0,440 Q180,360 360,440" stroke="#133854" strokeWidth="1" fill="none" />
 
-            {stats.map((stat, i) => {
-              if (i >= MOBILE_DISTRIBUTION.length) return null;
-              const { baseY, t } = MOBILE_DISTRIBUTION[i];
-              const { x, y } = mobileBezier(t, baseY);
-              return (
-                <g key={`mobile-arc-${stat.value}-${i}`} transform={`translate(${x}, ${y})`}>
-                  <motion.circle
-                    cx={0} cy={0} r={5}
-                    fill="#42BEB3"
-                    fillOpacity="0.8"
-                    style={{ filter: 'drop-shadow(0px 0px 6px #42BEB3)', transformBox: 'fill-box', transformOrigin: 'center' }}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+          {stats.map((stat, i) => {
+            if (i >= MOBILE_DISTRIBUTION.length) return null;
+            const { baseY, t } = MOBILE_DISTRIBUTION[i];
+            const { x, y } = mobileBezier(t, baseY);
+            return (
+              <g key={`mobile-arc-${stat.value}-${i}`} transform={`translate(${x}, ${y})`}>
+                <motion.circle
+                  cx={0} cy={0} r={5}
+                  fill="#0060A8"
+                  fillOpacity="0.8"
+                  style={{ filter: 'drop-shadow(0px 0px 6px #0060A8)', transformBox: 'fill-box', transformOrigin: 'center' }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
+                />
+                <foreignObject x="-70" y="-75" width="140" height="75">
+                  <motion.div
+                    // @ts-expect-error foreignObject requires XHTML namespace on this node
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    className={styles.item}
+                    variants={fadeInUp}
+                    initial="hidden"
+                    whileInView="visible"
                     viewport={{ once: false }}
-                    transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
-                  />
-                  <foreignObject x="-70" y="-75" width="140" height="75">
-                    <motion.div
-                      // @ts-expect-error foreignObject requires XHTML namespace on this node
-                      xmlns="http://www.w3.org/1999/xhtml"
-                      className={styles.item}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false }}
-                    >
-                      <CountUpValue value={stat.value} />
-                      <span className={styles.label}>{stat.label}</span>
-                    </motion.div>
-                  </foreignObject>
-                </g>
-              );
-            })}
-          </svg>
+                  >
+                    <CountUpValue value={stat.value} />
+                    <span className={styles.label}>{stat.label}</span>
+                  </motion.div>
+                </foreignObject>
+              </g>
+            );
+          })}
+        </svg>
       </div>
 
-       <div className={styles.arcWrapper}>
-          <svg
-            className={styles.arc}
-            viewBox="0 0 1100 450"
+      <div className={styles.arcWrapper}>
+        <svg
+          className={styles.arc}
+          viewBox="0 0 1100 450"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0,260 Q550,100 1100,260"
+            stroke="#133854"
+            strokeWidth="0.5"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0,260 Q550,100 1100,260"
-              stroke="#133854"
-              strokeWidth="0.5"
-              fill="none"
-            />
-            <path
-              d="M0,295 Q550,135 1100,295"
-              stroke="#133854"
-              strokeWidth="0.5"
-              fill="none"
-            />
-            <path
-              d="M0,330 Q550,170 1100,330"
-              stroke="#133854"
-              strokeWidth="0.5"
-              fill="none"
-            />
+          />
+          <path
+            d="M0,315 Q550,155 1100,315"
+            stroke="#133854"
+            strokeWidth="0.5"
+            fill="none"
+          />
+          <path
+            d="M0,370 Q550,210 1100,370"
+            stroke="#133854"
+            strokeWidth="0.5"
+            fill="none"
+          />
 
-            {stats.map((stat, i) => {
-              const pathIdx = Math.floor(i / 5);
-              const itemIdx = i % 5;
-              if (pathIdx > 2) return null;
+          {stats.map((stat, i) => {
+            const pathIdx = Math.floor(i / 5);
+            const itemIdx = i % 5;
+            if (pathIdx > 2) return null;
 
-              const { x, y } = bezier(T_VALUES_ROWS[pathIdx][itemIdx], pathIdx);
-              return (
-                <g
-                  key={`${stat.value}-${stat.label}-${i}`}
-                  transform={`translate(${x}, ${y})`}
-                >
-                  <motion.circle
-                    cx={0}
-                    cy={0}
-                    r={6}
-                    fill="#42BEB3"
-                    fillOpacity="0.8"
-                    style={{
-                      filter: 'drop-shadow(0px 0px 6px #42BEB3)',
-                      transformBox: 'fill-box',
-                      transformOrigin: 'center',
-                    }}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+            const { x, y } = bezier(T_VALUES_ROWS[pathIdx][itemIdx], pathIdx);
+            return (
+              <g
+                key={`${stat.value}-${stat.label}-${i}`}
+                transform={`translate(${x}, ${y})`}
+              >
+                <motion.circle
+                  cx={0}
+                  cy={0}
+                  r={6}
+                  fill="#0060A8"
+                  fillOpacity="0.8"
+                  style={{ filter: 'drop-shadow(0px 0px 6px #0060A8)', transformBox: 'fill-box', transformOrigin: 'center' }}
+
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
+                />
+                <foreignObject x="-100" y="-80" width="200" height="80">
+                  <motion.div
+                    // @ts-expect-error foreignObject requires XHTML namespace on this node
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    className={styles.item}
+                    variants={fadeInUp}
+                    initial="hidden"
+                    whileInView="visible"
                     viewport={{ once: false }}
-                    transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
-                  />
-                  <foreignObject x="-100" y="-80" width="200" height="80">
-                    <motion.div
-                      // @ts-expect-error foreignObject requires XHTML namespace on this node
-                      xmlns="http://www.w3.org/1999/xhtml"
-                      className={styles.item}
-                      variants={fadeInUp}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false }}
-                    >
-                      <CountUpValue value={stat.value} />
-                      <span className={styles.label}>{stat.label}</span>
-                    </motion.div>
-                  </foreignObject>
-                </g>
-              );
-            })}
-          </svg>
+                  >
+                    <CountUpValue value={stat.value} />
+                    <span className={styles.label}>{stat.label}</span>
+                  </motion.div>
+                </foreignObject>
+              </g>
+            );
+          })}
+        </svg>
       </div>
     </section>
   );

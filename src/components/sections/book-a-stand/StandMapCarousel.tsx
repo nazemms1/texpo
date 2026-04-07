@@ -1,20 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './StandMapCarousel.module.css';
+
+import { Skeleton } from '@mantine/core';
 
 interface StandMapCarouselProps {
   images: { src: string; alt: string }[];
   title?: string;
+  loading?: boolean;
 }
 
 export function StandMapCarousel({
-  images,
+  images = [],
   title = 'Exhibition Stand Maps',
+  loading
 }: StandMapCarouselProps) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
+
+  useEffect(() => {
+    if (current >= (images?.length || 0)) {
+      setCurrent(0);
+    }
+  }, [images, current]);
+
+  if (loading) {
+    return (
+      <section className={styles.section}>
+        <div className={styles.inner}>
+          <Skeleton bg="gray.3" height={40} width="60%" radius="xl" mx="auto" mb="xl" animate />
+          <div className={styles.carouselWrapper}>
+             <Skeleton bg="gray.3" height={500} width="100%" radius="xl" animate />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const total = images.length;
 

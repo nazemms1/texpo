@@ -11,19 +11,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 15rem;
-  height: 80px;
   border-radius: 9999px;
-  padding: 8px 10px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: "URWGeometricArabic-SemiBold", "URW Geometric", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
+.pill.md {
+  width: 10rem;
+  height: 56px;
+}
+
+.pill.lg {
+  width: 15rem;
+  height: 72px;
+}
+
 .pill.primary {
-  background: #32558D;
+  background: #002068;
   box-shadow: 0px 4px 4px 0px #32558D40;
   color: #fff;
   border: none;
@@ -35,15 +43,15 @@
 
 .pill.outline {
   background: #ffffff;
-  border: 1px solid #42BEB3;
-  box-shadow: 0px 4px 4px 0px #42BEB340;
-  color: #42BEB3;
+  border: 1px solid #0060A8;
+  box-shadow: 0px 4px 4px 0px #0060A840;
+  color: #0060A8;
   opacity: 0.9;
 }
 
 .pill.outline:hover {
   opacity: 1;
-  box-shadow: 0px 8px 16px 0px #42BEB360;
+  box-shadow: 0px 8px 16px 0px #0060A840;
 }
 
 .pill.ghost {
@@ -61,15 +69,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
   border-radius: 50%;
   cursor: pointer;
   transition: box-shadow 0.25s ease;
 }
 
+.circle.md {
+  width: 56px;
+  height: 56px;
+}
+
+.circle.lg {
+  width: 72px;
+  height: 72px;
+}
+
 .primaryCircle {
-  background: #32558D;
+  background: #002068;
   box-shadow: 0px 4px 4px 0px #32558D40;
   color: #fff;
 }
@@ -80,13 +96,13 @@
 
 .outlineCircle {
   background: #ffffff;
-  border: 1px solid #42BEB3;
-  box-shadow: 0px 4px 4px 0px #42BEB340;
-  color: #42BEB3;
+  border: 1px solid #0060A8;
+  box-shadow: 0px 4px 4px 0px #0060A840;
+  color: #0060A8;
 }
 
 .outlineCircle:hover {
-  box-shadow: 0px 8px 16px 0px #42BEB360;
+  box-shadow: 0px 8px 16px 0px #0060A840;
 }
 
 .ghostCircle {
@@ -101,7 +117,7 @@
 .dashedCircle {
   background: #ffffff;
   box-shadow: 0px 4px 4px 0px #4CBCB340;
-  color: #42BEB3;
+  color: #0060A8;
   position: relative;
 }
 

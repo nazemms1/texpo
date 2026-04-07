@@ -1,19 +1,19 @@
 'use client';
 
 import { PageHero } from "@/src/components/sections/hero/PageHero";
-import { SponsorsSection } from "@/src/components/sections/sponsors/SponsorsSection";
-import { StatisticsSection } from "@/src/components/sections/statistics/StatisticsSection";
+ import { StatisticsSection } from "@/src/components/sections/statistics/StatisticsSection";
 import { AboutExhibition } from "@/src/components/sections/about-exhibition/AboutExhibition";
 import { InfoCardSection } from "@/src/components/sections/info-card/InfoCardSection";
-import { Texpo2025Section } from "@/src/components/sections/texpo2025/Texpo2025Section";
-import { useApi } from "@/src/hooks/useApi";
+ import { useApi } from "@/src/hooks/useApi";
 import { texpoPageService } from "@/src/lib/api";
+import { useParams } from "next/navigation";
 
 export default function Texpo2025Page() {
-  const { data, loading } = useApi(() => texpoPageService.getTexpoPageData());
+  const { lang } = useParams();
+  const { data, loading } = useApi(() => texpoPageService.getTexpoPageData(), [], `texpo2025-${lang}`);
 
-  const stats = data?.statistics?.map((s) => ({
-    label: s.key,
+  const stats = (data as any)?.statistics?.map((s: any) => ({
+    key: s.key,
     value: s.value,
   }));
 
@@ -21,17 +21,17 @@ export default function Texpo2025Page() {
     <>
       <PageHero title="TEXPO " titleAccent="2025" />
       <div className="withLinesBg">
-        <StatisticsSection manualStats={stats || (loading ? [] : undefined)} />
+        <StatisticsSection items={stats} loading={loading} />
       </div>
-      <Texpo2025Section />
-      <AboutExhibition
+       <AboutExhibition
         variant="about"
         hideButtons={true}
         title={data?.title}
         description={data?.description}
         image={data?.image}
+        loading={loading}
       />
-      <InfoCardSection items={data?.items} />
+      <InfoCardSection items={data?.items} loading={loading} />
     </>
   );
 }

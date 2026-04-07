@@ -1,8 +1,7 @@
 import client from '../client';
-import type { ApiResponse, HeroApiData, StatApiItem } from '@/src/types/api';
+import type { ApiResponse, HomeResponse } from '@/src/types/api';
 
 export const homeService = {
-  getHero: () => client.get<never, ApiResponse<HeroApiData>>('/api/hero'),
-
-  getStats: () => client.get<never, ApiResponse<StatApiItem[]>>('/api/stats'),
+  getHomeData: () =>
+    client.get<never, ApiResponse<HomeResponse>>('/api/homepage'),
 };

@@ -23,14 +23,13 @@ export function Header() {
   
         <Link href="/" className={styles.logo}>
           <Image
-            src="/images/logo-emblem.svg"
-            alt="TEXPO emblem"
-            width={36}
-            height={36}
-            className={styles.logoEmblem}
-            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+            src="/logos/logo-header.svg"
+            alt="TEXPO logo"
+            width={160}
+            height={40}
+            className={styles.logoImage}
+            priority
           />
-          <span className={styles.logoText}>TEXPO</span>
         </Link>
 
      

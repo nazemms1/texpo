@@ -26,23 +26,50 @@ const DEFAULT_THEMES = [
   'Cybersecurity & Digital Privacy',
 ];
 
+import { Skeleton } from '@mantine/core';
+
 export function Texpo2025Section() {
-  const { data } = useApi(() => texpoPageService.getTexpoPageData());
+  const { data, loading } = useApi(() => texpoPageService.getTexpoPageData());
+
+  if (loading) {
+    return (
+      <section className={styles.section}>
+        <div className={styles.inner}>
+          <Skeleton height={40} width="40%" radius="xl" mx="auto" mb="xl" animate />
+          <div className={styles.highlights}>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className={styles.highlightCard}>
+                <Skeleton height={40} width={40} circle mb="md" animate />
+                <Skeleton height={20} width="60%" radius="xl" mb="xs" animate />
+                <Skeleton height={15} width="40%" radius="xl" animate />
+              </div>
+            ))}
+          </div>
+          <div className={styles.themesBlock}>
+            <Skeleton height={40} width="30%" radius="xl" mx="auto" mb="xl" animate />
+            <div className={styles.themes}>
+              {Array.from({ length: 8 }).map((_, i) => (
+                <Skeleton key={i} height={30} width={120} radius="xl" animate />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!data) return null;
 
   const icons = [IconCalendar, IconMapPin, IconUsers, IconStar];
-  const highlights = data?.statistics?.length
-    ? data.statistics.map((s, i) => ({
-        Icon: icons[i % icons.length],
-        label: s.key,
-        value: s.value,
-      }))
-    : DEFAULT_HIGHLIGHTS;
+  const highlights = data.statistics?.map((s, i) => ({
+    Icon: icons[i % icons.length],
+    label: s.key,
+    value: s.value,
+  })) || [];
 
-  const themes = data?.items?.length 
-    ? data.items.map(item => (typeof item === 'string' ? item : item.title))
-    : DEFAULT_THEMES;
-  const title = data?.title || 'TEXPO 2025 AT A GLANCE';
-  const description = data?.description || 'TEXPO 2025 will spotlight the technologies and industries driving the next era of human progress.';
+  const themes = data.items?.map(item => (typeof item === 'string' ? item : item.title)) || [];
+  const title = data.title || '';
+  const description = data.description || '';
 
   return (
     <section className={styles.section}>

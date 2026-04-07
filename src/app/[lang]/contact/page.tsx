@@ -6,9 +6,11 @@ import { ContactMap } from "@/src/components/sections/contact/ContactMap";
 import { ContactSection } from "@/src/components/sections/contact/ContactSection";
 import { useApi } from "@/src/hooks/useApi";
 import { contactService } from "@/src/lib/api";
+import { useParams } from "next/navigation";
 
 export default function ContactPage() {
-  const { data } = useApi(() => contactService.getContactInfo());
+  const { lang } = useParams();
+  const { data, loading } = useApi(() => contactService.getContactInfo(), [], `contact-${lang}`);
 
   return (
     <>
@@ -21,10 +23,10 @@ export default function ContactPage() {
           paddingBottom: "4rem",
         }}
       >
-        <ContactHeroCard image={data?.data?.image} />
+        <ContactHeroCard image={data?.data?.image} loading={loading} />
       </div>
-      <ContactMap lan={data?.data?.lan} lag={data?.data?.lag} />
-      <ContactSection formData={data?.formData} />
+      <ContactMap lan={data?.data?.lan} lag={data?.data?.lag} loading={loading} />
+      <ContactSection formData={data?.formData} loading={loading} />
     </>
   );
 }
