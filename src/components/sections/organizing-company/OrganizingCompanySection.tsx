@@ -23,25 +23,7 @@ export function OrganizingCompanySection({
   logo, 
   loading 
 }: OrganizingCompanySectionProps) {
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.inner}>
-          <Skeleton variant="title" width="40%" mx="auto" mb="xl" />
-          <Stack gap="xs">
-            <Skeleton variant="text" width="100%" height={12} />
-            <Skeleton variant="text" width="95%" height={12} />
-            <Skeleton variant="text" width="80%" height={12} mb="xl" />
-          </Stack>
-          <Skeleton variant="image" height={120} width={200} mx="auto" my="xl" />
-          <Stack gap="xs">
-            <Skeleton variant="text" width="100%" height={12} />
-            <Skeleton variant="text" width="90%" height={12} />
-          </Stack>
-        </div>
-      </section>
-    );
-  }
+  if (loading && !description) return null;
 
   const paragraphs = description 
     ? description.split('\n\n').filter(p => p.trim()) 

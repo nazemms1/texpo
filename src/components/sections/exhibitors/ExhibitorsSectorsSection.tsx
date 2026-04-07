@@ -98,21 +98,7 @@ export function ExhibitorsSectorsSection({
     };
   }, [embla, total, displayItems]);
 
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <Container size="full">
-          <div className={styles.inner}>
-            <Skeleton variant="title" width="40%" mx="auto" mb="xl" />
-            <Skeleton variant="text" width="60%" mx="auto" mb="xl" />
-            <div className={styles.stage3D}>
-               <Skeleton variant="card" height={360} width="100%" radius="32px" />
-            </div>
-          </div>
-        </Container>
-      </section>
-    );
-  }
+  if (loading && !items) return null;
 
   const cleanDescription = description 
     ? description.split('including:')[0] + 'including:' 

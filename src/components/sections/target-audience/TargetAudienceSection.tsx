@@ -35,23 +35,7 @@ export function TargetAudienceSection({
   items?: { title: string; image: any }[];
   loading?: boolean;
 }) {
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.inner}>
-          <div className={styles.header}>
-            <Skeleton bg="gray.3" height={40} width="60%" radius="xl" mx="auto" mb="md" animate />
-            <Skeleton bg="gray.3" height={20} width="80%" radius="xl" mx="auto" animate />
-          </div>
-          <div className={styles.grid}>
-            {Array.from({ length: 8 }).map((_, i) => (
-              <Skeleton key={i} bg="gray.3" height={120} radius="24px" animate />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  if (loading && (!items || items.length === 0)) return null;
 
   if (!items || items.length === 0) return null;
 

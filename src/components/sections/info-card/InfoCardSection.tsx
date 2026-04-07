@@ -18,17 +18,7 @@ interface InfoCardSectionProps {
 }
 
 export function InfoCardSection({ items, loading }: InfoCardSectionProps) {
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <Container size="full" className={styles.container}>
-          <Box style={{ width: '100%', borderRadius: '24px', overflow: 'hidden' }}>
-            <Skeleton variant="card" height={300} width="100%" />
-          </Box>
-        </Container>
-      </section>
-    );
-  }
+  if (loading && (!items || items.length === 0)) return null;
 
   if (!items || items.length === 0) return null;
 

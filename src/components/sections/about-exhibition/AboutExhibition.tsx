@@ -37,31 +37,7 @@ export function AboutExhibition({
   const currentLang = (lang as Lang) || 'en';
   const t = aboutTranslations[currentLang];
 
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.inner}>
-          <div className={styles.left}>
-            <Skeleton variant="title" width="60%" height={38} />
-            <Stack gap="xs" mt="md">
-              <Skeleton variant="text" width="100%" height={14} />
-              <Skeleton variant="text" width="95%" height={14} />
-              <Skeleton variant="text" width="80%" height={14} />
-            </Stack>
-            <div className={styles.actions} style={{ marginTop: '2.5rem', display: 'flex', gap: '1.25rem' }}>
-              <Skeleton variant="button" width={140} height={46} />
-              <Skeleton variant="button" width={140} height={46} />
-            </div>
-          </div>
-          <div className={styles.right}>
-            <Skeleton variant="image" height={320} width="100%" radius="24px" />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-   if (!title && !description) return null;
+  if (!title && !description && !loading) return null;
 
   return (
     <section className={styles.section}>

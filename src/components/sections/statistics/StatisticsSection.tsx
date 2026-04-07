@@ -96,17 +96,7 @@ export function StatisticsSection({
     label: s.key || s.label
   })) : [];
 
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.mobileGrid}>
-          {Array.from({ length: 9 }).map((_, i) => (
-            <Skeleton key={i} variant="card" height={80} />
-          ))}
-        </div>
-      </section>
-    );
-  }
+  if (loading && stats.length === 0) return null;
 
   return (
     <section className={styles.section}>
