@@ -111,3 +111,22 @@ export const bookAStandTranslations = {
     success: 'تم إرسال طلب حجز الجناح الخاص بك بنجاح! سنتواصل معك قريباً.',
   },
 } as const;
+
+export const pageHeroTranslations = {
+  en: {
+    visitors: { title: 'OUR', accent: 'VISITORS' },
+    about: { title: 'About', accent: 'TEXPO LAND' },
+    contact: { title: 'CONTACT', accent: 'US' },
+    bookStand: { title: 'BOOK A', accent: 'STAND' },
+    becomeSponsor: { title: 'BECOME', accent: 'A SPONSOR' },
+    texpo2025: { title: 'TEXPO', accent: '2025' },
+  },
+  ar: {
+    visitors: { title: 'زوارنا', accent: '' },
+    about: { title: 'عن أرض', accent: 'تكسبو' },
+    contact: { title: 'اتصل', accent: 'بنا' },
+    bookStand: { title: 'احجز', accent: 'جناحاً' },
+    becomeSponsor: { title: 'كن', accent: 'راعياً' },
+    texpo2025: { title: 'تكسبو', accent: '2025' },
+  },
+} as const;

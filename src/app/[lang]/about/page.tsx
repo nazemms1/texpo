@@ -6,11 +6,14 @@ import { WhyTexpoSection } from '@/src/components/sections/why-texpo/WhyTexpoSec
 import { WhySyriaSection } from '@/src/components/sections/why-syria/WhySyriaSection';
 import { useApi } from '@/src/hooks/useApi';
 import { aboutService } from '@/src/lib/api';
+import { pageHeroTranslations, type Lang } from '@/src/lib/i18n';
 import { useParams } from 'next/navigation';
 
 export default function AboutPage() {
   const { lang } = useParams();
-  const { data, loading } = useApi(() => aboutService.getAboutUsData(), [], `about-${lang}`);
+  const currentLang = (lang as Lang) ?? 'en';
+  const t = pageHeroTranslations[currentLang].about;
+  const { data, loading } = useApi(() => aboutService.getAboutUsData(), [], `about-${currentLang}`);
 
   const aboutSection = data?.find(s => s.key === 'about-section');
   const whyTexpo = data?.find(s => s.key === 'why-to-be-here');
@@ -19,8 +22,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        title="About"
-        titleAccent="TEXPO LAND"
+        title={t.title}
+        titleAccent={t.accent}
       />
       <div className="withLinesBg">
         <AboutExhibition 

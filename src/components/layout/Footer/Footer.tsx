@@ -25,7 +25,7 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={styles.main}>
         <img
-          src="/logos/Logo-footers.svg"
+          src="/logos/texpo.svg"
           alt="TEXPO"
           className={styles.logo}
         />

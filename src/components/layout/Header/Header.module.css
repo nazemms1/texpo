@@ -6,10 +6,19 @@
   z-index: 100;
   background: linear-gradient(90deg, rgba(18, 24, 19, 0.3) 0%, rgba(2, 8, 6, 0.3) 100%);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid #E5E7EB;
-  transition: background 0.35s ease, box-shadow 0.35s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
   height: 95px;
 }
+
+.header.scrolled,
+.header.menuOpen {
+  background: #060b1a;
+  height: 80px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* No media query here, moving it down */
 
 
 .inner {
@@ -140,31 +149,61 @@
   border: none;
   color: #fff;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.5rem;
+  z-index: 101;
 }
 
 .mobileMenu {
+  position: fixed;
+  top: 95px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem 1.5rem;
-  gap: 0.25rem;
-  background: rgba(5, 10, 28, 0.97);
-  backdrop-filter: blur(16px);
+  padding: 2rem;
+  background: #060b1a;
+  z-index: 99;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobileLink {
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.75);
+  font-family: 'URWGeometricArabic-SemiBold', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  padding: 0.65rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  transition: color 0.2s ease;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
 }
 
-.mobileLink:hover,
+.mobileLink:active,
 .mobileLink.active {
+  color: #1a7aff;
+  padding-inline-start: 1rem;
+}
+
+.mobileFooter {
+  margin-top: auto;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.mobileLangBtn {
+  width: 100%;
+  max-width: 280px;
+  height: 56px;
+  background: #0060A8;
+  border: none;
+  border-radius: 12px;
   color: #fff;
+  font-family: 'URWGeometricArabic-SemiBold', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 96, 168, 0.3);
 }
 
 @media (max-width: 1280px) {
@@ -174,11 +213,26 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    background: #060b1a !important;
+    backdrop-filter: none !important;
+    height: 80px;
+  }
+
+  .logoImage {
+    height: 38px;
+  }
+
   .desktopNav {
     display: none;
   }
 
   .menuToggle {
     display: block;
+  }
+
+  .mobileMenu {
+    top: 80px;
+    background: #060b1a;
   }
 }

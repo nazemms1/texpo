@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useParams } from 'next/navigation';
 import { NAV_ITEMS } from '@/src/lib/constants';
 import { headerTranslations, type Lang } from '@/src/lib/i18n';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import styles from './Header.module.css';
 
 interface NavMenuProps {
@@ -44,6 +45,9 @@ export function NavMenu({ mobile = false, open = false, onClose }: NavMenuProps)
                 </Link>
               );
             })}
+            <div className={styles.mobileFooter}>
+              <LanguageSwitcher mobile />
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>

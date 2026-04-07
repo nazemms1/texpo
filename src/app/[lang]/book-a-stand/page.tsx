@@ -5,11 +5,14 @@ import { StandMapCarousel } from '@/src/components/sections/book-a-stand/StandMa
 import { BookAStandSection } from '@/src/components/sections/book-a-stand/BookAStandSection';
 import { useApi } from '@/src/hooks/useApi';
 import { bookStandService } from '@/src/lib/api';
+import { pageHeroTranslations, type Lang } from '@/src/lib/i18n';
 import { useParams } from 'next/navigation';
 
 export default function BookAStandPage() {
   const { lang } = useParams();
-  const { data, loading } = useApi(() => bookStandService.getStandData(), [], `book-a-stand-${lang}`);
+  const currentLang = (lang as Lang) ?? 'en';
+  const t = pageHeroTranslations[currentLang].bookStand;
+  const { data, loading } = useApi(() => bookStandService.getStandData(), [], `book-a-stand-${currentLang}`);
 
   const standInfo = (data as any)?.data;
   const formData = (data as any)?.formData;
@@ -21,7 +24,7 @@ export default function BookAStandPage() {
 
   return (
     <>
-      <PageHero title="BOOK A" titleAccent="STAND" />
+      <PageHero title={t.title} titleAccent={t.accent} />
       <StandMapCarousel 
         images={images} 
         title={standInfo?.title || "Exhibition Stand Maps"} 

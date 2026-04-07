@@ -7,7 +7,11 @@ import { headerTranslations, type Lang } from '@/src/lib/i18n';
 import { IconChevronDown } from '@tabler/icons-react';
 import styles from './Header.module.css';
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  mobile?: boolean;
+}
+
+export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
@@ -30,9 +34,21 @@ export function LanguageSwitcher() {
   }, []);
 
   function handleSwitch() {
-    const newPath = pathname.replace(`/${lang}`, `/${nextLang}`);
+    // Current path is something like /en/about
+    // We want /ar/about
+    const segments = pathname.split('/');
+    segments[1] = nextLang; 
+    const newPath = segments.join('/');
     router.push(newPath);
     setIsOpen(false);
+  }
+
+  if (mobile) {
+    return (
+      <button className={styles.mobileLangBtn} onClick={handleSwitch}>
+        <span>{nextLabel}</span>
+      </button>
+    );
   }
 
   return (

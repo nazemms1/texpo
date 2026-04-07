@@ -14,7 +14,7 @@ export function Header() {
 
   return (
     <motion.header
-      className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}
+      className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}

@@ -50,6 +50,12 @@ export function HeroSection({
                 aria-hidden="true"
               />
             ) : null}
+            <img
+              src="/images/background-hero.svg"
+              alt=""
+              className={styles.bgSvgOverlay}
+              aria-hidden="true"
+            />
           </>
         )}
       </div>
