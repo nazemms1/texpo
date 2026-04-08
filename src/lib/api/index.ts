@@ -9,4 +9,7 @@ export { sponsorsService } from './services/sponsorsService';
 export { texpoPageService } from './services/texpoPageService';
 export { visitorsService } from './services/visitorsService';
 export { staticDataService } from './services/staticDataService';
+export { sponsorPageService } from './services/sponsorPageService';
+export type { SponsorType } from './services/staticDataService';
+export type { SponsorPageSection } from './services/sponsorPageService';
 export { default as apiClient } from './client';

@@ -64,16 +64,6 @@ export interface BookStandPayload {
   sector: string;
 }
 
-export interface BecomeSponsorPayload {
-  fullName: string;
-  companyName: string;
-  sector: string;
-  country: string;
-  sponsorshipCategory: string;
-  phone: string;
-  email: string;
-  message: string;
-}
 
 export interface VisitorInfoApiItem {
   id: string;

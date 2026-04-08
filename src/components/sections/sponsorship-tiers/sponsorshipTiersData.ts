@@ -10,8 +10,8 @@ export const SPONSORSHIP_TIER_ICON_SRC: Record<SponsorTierVariant, string> = {
 export type SponsorTierDefinition = {
   variant: SponsorTierVariant;
   title: string;
-  subtitle: string;
-  features: readonly string[];
+  subtitle?: string;
+  features?: readonly string[];
   ctaLabel: string;
   badge?: string;
   iconSrc: string;

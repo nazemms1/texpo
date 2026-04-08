@@ -1,7 +1,9 @@
 import client from '../client';
-import type { ApiResponse, BecomeSponsorPayload } from '@/src/types/api';
+import type { ApiResponse } from '@/src/types/api';
 
 export const becomeSponsorService = {
-  submit: (payload: BecomeSponsorPayload) =>
-    client.post<never, ApiResponse<null>>('/api/become-sponsor', payload),
+  submit: (formData: FormData) =>
+    client.post<never, ApiResponse<null>>('/api/requests/become-sponsor', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
 };

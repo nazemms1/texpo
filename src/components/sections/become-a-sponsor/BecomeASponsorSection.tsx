@@ -1,35 +1,31 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { IconMail, IconPhone, IconMapPin } from "@tabler/icons-react";
 import { fadeInUp } from "@/src/lib/animations";
 import { TwoPanelFormSection } from "@/src/components/sections/shared/TwoPanelFormSection";
 import { useMutation } from "@/src/hooks/useMutation";
 import { becomeSponsorService } from "@/src/lib/api";
-import type { BecomeSponsorPayload } from "@/src/types/api";
+import type { SponsorType } from "@/src/lib/api";
 
 const sponsorContactInfo = [
-  { Icon: IconMail,   label: "Email Us", value: "info@texpo-exhibition.com" },
-  { Icon: IconPhone,  label: "Call Us",  value: "0949333200" },
-  { Icon: IconMapPin, label: "Office",   value: "Damascus, Syria - Exhibition City" },
+  { Icon: IconMail, label: "Email Us", value: "info@texpo-exhibition.com" },
+  { Icon: IconPhone, label: "Call Us", value: "0949333200" },
+  { Icon: IconMapPin, label: "Office", value: "Damascus, Syria - Exhibition City" },
 ];
 
-export function BecomeASponsorSection() {
+interface BecomeASponsorSectionProps {
+  sponsorTypes?: SponsorType[];
+}
+
+export function BecomeASponsorSection({ sponsorTypes }: BecomeASponsorSectionProps) {
   const { submit, loading, error, success } = useMutation(becomeSponsorService.submit);
+  const [logoFileName, setLogoFileName] = useState<string>("");
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
-    const fd = new FormData(e.currentTarget);
-    const payload: BecomeSponsorPayload = {
-      fullName:             fd.get("fullName")             as string,
-      companyName:          fd.get("companyName")          as string,
-      sector:               fd.get("sector")               as string,
-      country:              fd.get("country")              as string,
-      sponsorshipCategory:  fd.get("sponsorshipCategory")  as string,
-      phone:                fd.get("phone")                as string,
-      email:                fd.get("email")                as string,
-      message:              fd.get("message")              as string,
-    };
-    submit(payload);
+    const formData = new FormData(e.currentTarget);
+    submit(formData);
   }
 
   return (
@@ -63,11 +59,11 @@ export function BecomeASponsorSection() {
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Company Name</span>
               <input
-                name="companyName"
+                name="company_name"
                 className={styles.input}
                 type="text"
                 placeholder="Tech Global Inc."
-                 required
+                required
               />
             </motion.label>
           </div>
@@ -85,11 +81,11 @@ export function BecomeASponsorSection() {
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Country / City</span>
               <input
-                name="country"
+                name="country_city"
                 className={styles.input}
                 type="text"
                 placeholder="London, UK"
-                   required
+                required
               />
             </motion.label>
           </div>
@@ -103,16 +99,20 @@ export function BecomeASponsorSection() {
               <span className={styles.fieldLabel}>Sponsorship Categories</span>
               <span className={styles.selectWrap}>
                 <select
-                  name="sponsorshipCategory"
+                  name="sponsor_type_id"
                   className={`${styles.input} ${styles.selectField}`}
                   defaultValue=""
-                     required
+                  required
                 >
-                  <option value="" disabled>Diamond (Main Sponsor)</option>
-                  <option value="platinum">Platinum</option>
-                  <option value="gold">Gold</option>
-                  <option value="silver">Silver</option>
-                  <option value="other">Other / Custom</option>
+                  <option value="" disabled>Select a sponsorship category</option>
+                  {sponsorTypes && sponsorTypes.length > 0
+                    ? sponsorTypes.map((type) => (
+                      <option key={type.id} value={type.id}>
+                        {type.name}
+                      </option>
+                    ))
+                    : null
+                  }
                 </select>
               </span>
             </motion.label>
@@ -122,11 +122,11 @@ export function BecomeASponsorSection() {
             <motion.label className={styles.field} variants={fadeInUp}>
               <span className={styles.fieldLabel}>Phone Number</span>
               <input
-                name="phone"
+                name="phone_number"
                 className={styles.input}
                 type="tel"
                 placeholder="+1 234 567 890"
-                   required
+                required
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
@@ -136,10 +136,26 @@ export function BecomeASponsorSection() {
                 className={styles.input}
                 type="email"
                 placeholder="john@company.com"
-                   required
+                required
               />
             </motion.label>
           </div>
+
+          <motion.div className={styles.field} variants={fadeInUp}>
+            <span className={styles.fieldLabel}>Company Logo</span>
+            <div className={styles.fileInputWrap}>
+              <span className={`${styles.fileInputLabel}${logoFileName ? ` ${styles.hasFile}` : ''}`}>
+                {logoFileName || "Upload your company logo (PNG, JPG, SVG)"}
+              </span>
+              <input
+                name="logo"
+                type="file"
+                required
+                accept="image/png,image/jpeg,image/svg+xml,image/webp"
+                onChange={(e) => setLogoFileName(e.target.files?.[0]?.name ?? "")}
+              />
+            </div>
+          </motion.div>
 
           <motion.label className={styles.field} variants={fadeInUp}>
             <span className={styles.fieldLabel}>Message</span>

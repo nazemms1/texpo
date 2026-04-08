@@ -92,7 +92,7 @@ export function WhyTexpoSection({
               >
                 <div className={styles.iconWrap}>
                   {image && image.length > 25 ? (
-                    <img src={image} alt="" className={styles.cardImg} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                    <img src={image} alt="" className={styles.cardImg} style={{ width: '50%', height: '50%', objectFit: 'contain' }} />
                   ) : (
                     <Icon size={28} />
                   )}
