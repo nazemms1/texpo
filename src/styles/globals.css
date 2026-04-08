@@ -64,13 +64,8 @@ html {
 
 body {
   background-color: #ffffff;
-  background-image:
-    /* url('/images/lines.png'), */
-    url('/images/background.png');
-  background-repeat: no-repeat, no-repeat;
-  background-position: bottom center, center;
-  background-size: 100% auto, auto;
-  background-attachment: fixed, scroll;
+ 
+   background-attachment: fixed, scroll;
   color: var(--text-primary);
   font-family: var(--font-geist-sans, "Inter", system-ui, sans-serif);
   line-height: 1.6;

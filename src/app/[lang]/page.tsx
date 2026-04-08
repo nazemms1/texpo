@@ -11,7 +11,7 @@ import { MapSection } from "@/src/components/sections/map/MapSection";
 import { useApi } from "@/src/hooks/useApi";
 import { homeService } from "@/src/lib/api";
 import { useParams } from "next/navigation";
-
+ 
 export default function HomePage() {
   const { lang } = useParams();
   const { data: sections, loading } = useApi(() => homeService.getHomeData(), [], `home-${lang}`);
@@ -39,7 +39,11 @@ export default function HomePage() {
         image={aboutData?.media}
         loading={loading}
       />
-      <StatisticsSection 
+<div style={{ 
+  backgroundImage: "url('/images/background.png')", 
+  backgroundRepeat: 'no-repeat',
+   backgroundPosition: 'top left'
+}}>  <StatisticsSection 
         items={statsData?.['meta-data']}
         loading={loading}
       />
@@ -59,6 +63,8 @@ export default function HomePage() {
         items={sponsorsSection?.['meta-data']}
         loading={loading}
       />
+
+   </div>
       <ExhibitorsSectorsSection 
         title={sectorsSection?.title}
         description={sectorsSection?.description}
