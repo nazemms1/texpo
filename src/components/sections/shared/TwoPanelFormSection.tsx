@@ -119,7 +119,7 @@ export function TwoPanelFormSection({
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false }}
             >
               {renderFormFields(styles)}
 
