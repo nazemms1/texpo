@@ -169,5 +169,5 @@ export function BecomeASponsorSection({ sponsorTypes }: BecomeASponsorSectionPro
         </>
       )}
     />
-  );
+  );  
 }
