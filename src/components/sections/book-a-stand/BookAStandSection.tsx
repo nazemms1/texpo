@@ -8,7 +8,7 @@ import { useMutation } from '@/src/hooks/useMutation';
 import { useApi } from '@/src/hooks/useApi';
 import { bookStandService, staticDataService } from '@/src/lib/api';
 import type { BookStandPayload } from '@/src/types/api';
-import { Skeleton } from '@/src/components/ui/Skeleton/Skeleton';
+
 import { useParams } from 'next/navigation';
 import { bookAStandTranslations, Lang } from '@/src/lib/i18n';
 

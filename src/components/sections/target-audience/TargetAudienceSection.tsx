@@ -22,7 +22,7 @@ const audiences = [
 ];
 
 import { getImageUrl } from '@/src/lib/helpers';
-import { Skeleton } from '@mantine/core';
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
 
 export function TargetAudienceSection({ 
   title, 

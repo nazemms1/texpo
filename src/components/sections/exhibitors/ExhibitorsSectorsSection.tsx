@@ -10,7 +10,7 @@ import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
 import { SectorCard } from "./SectorCard";
 import styles from "./ExhibitorsSectorsSection.module.css";
 import { getImageUrl } from "@/src/lib/helpers";
-import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+
 
 const SECTORS = [
   {

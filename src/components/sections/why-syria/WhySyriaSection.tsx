@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { staggerContainer, fadeInLeft, fadeInRight, fadeInUp } from '@/src/lib/animations';
 import styles from './WhySyriaSection.module.css';
-import { Skeleton, Stack } from '@mantine/core';
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+import { Stack } from "@mantine/core";
 import { getImageUrl } from '@/src/lib/helpers';
 
 const points = [
@@ -49,39 +50,11 @@ export function WhySyriaSection({
   items?: { title: string; description: string; image: any }[];
   loading?: boolean;
 }) {
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.inner}>
-          <div className={styles.mapCol}>
-            <Skeleton bg="gray.3" height={400} width="100%" radius="24px" animate />
-          </div>
-          <div className={styles.contentCol}>
-            <Skeleton bg="gray.3" height={40} width="40%" radius="xl" mb="md" animate />
-            <Skeleton bg="gray.3" height={20} radius="xl" mb="sm" animate />
-            <Skeleton bg="gray.3" height={20} radius="xl" mb="xl" animate />
-            <Stack gap="lg">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className={styles.point}>
-                  <Skeleton bg="gray.3" height={40} circle animate />
-                  <div style={{ flex: 1 }}>
-                    <Skeleton bg="gray.3" height={15} width="60%" radius="xl" mb="sm" animate />
-                    <Skeleton bg="gray.3" height={10} radius="xl" animate />
-                  </div>
-                </div>
-              ))}
-            </Stack>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (!items || items.length === 0) return null;
-
   const displayTitle = title || "WHY SYRIA?";
   const displayIntro = description || "";
   const displayImage = getImageUrl(image) || "/images/syria.svg";
+
+  if (!items || items.length === 0) return null;
 
   const displayPoints = items.map((item, idx) => {
     const fallbackIcons = ['/Icons/Icon-one.svg', '/Icons/Icon-two.svg', '/Icons/Icon-three.svg', '/Icons/Icon-four.svg', '/Icons/Icon-five.svg'];

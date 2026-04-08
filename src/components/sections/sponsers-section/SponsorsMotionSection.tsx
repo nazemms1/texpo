@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+
 import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
 import { staggerContainer, fadeInUp } from "@/src/lib/animations";
 import { Container } from "@/src/components/layout/Container";
@@ -84,13 +84,6 @@ export function SponsorsMotionSection({
           )} */}
 
           <div className={styles.scrollWrapper}>
-            {loading ? (
-              <div className={styles.grid}>
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <Skeleton key={i} variant="card" height={140} />
-                ))}
-              </div>
-            ) : (
               <motion.div
                 className={styles.grid}
                 variants={staggerContainer}
@@ -110,7 +103,6 @@ export function SponsorsMotionSection({
                   </motion.div>
                 ))}
               </motion.div>
-            )}
           </div>
         </div>
       </Container>

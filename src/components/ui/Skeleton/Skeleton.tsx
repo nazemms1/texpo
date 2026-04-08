@@ -33,12 +33,5 @@ export function Skeleton({ variant, className = '', ...props }: SkeletonProps) {
     defaults.radius = '24px';
   }
 
-  return (
-    <MantineSkeleton
-      animate
-      className={`${styles.skeleton} ${variantClass} ${className}`}
-      {...defaults}
-      {...props}
-    />
-  );
+  return null;
 }

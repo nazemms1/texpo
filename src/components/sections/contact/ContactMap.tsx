@@ -1,19 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Skeleton } from '@mantine/core';
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
 import styles from './ContactMap.module.css';
 
 export function ContactMap({ lan, lag, loading }: { lan?: string | null; lag?: string | null; loading?: boolean }) {
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.mapWrap}>
-          <Skeleton bg="gray.3" height={450} width="100%" radius="md" animate />
-        </div>
-      </section>
-    );
-  }
+
 
   const latitude = lan || "33.4069";
   const longitude = lag || "36.4246";

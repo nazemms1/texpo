@@ -12,7 +12,7 @@ import { ArrowCircle, ButtonPair } from "@/src/components/ui/Button/AnimatedButt
 import { useParams } from "next/navigation";
 import { aboutTranslations, Lang } from "@/src/lib/i18n";
 import { Stack } from "@mantine/core";
-import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+
 import { getImageUrl } from "@/src/lib/helpers";
 import styles from "./AboutExhibition.module.css";
 

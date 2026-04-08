@@ -6,7 +6,7 @@ import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
 import styles from "./OrganizingCompanySection.module.css";
 import { getImageUrl } from "@/src/lib/helpers";
 import { Stack } from "@mantine/core";
-import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+
 
 interface OrganizingCompanySectionProps {
   title?: string | null;
@@ -30,8 +30,8 @@ export function OrganizingCompanySection({
     : [];
 
   const finalTitle = title 
-    ? `${title.trim()} "${companyName || 'EVENTA'}"?` 
-    : `WHO IS THE ORGANIZING COMPANY "${companyName || 'EVENTA'}"?`;
+    ? `${title.trim()} ${companyName ? `"${companyName.trim()}"` : ''}`
+    : `WHO IS THE ORGANIZING COMPANY ${companyName ? `"${companyName.trim()}"` : '"EVENTA"'}`;
 
   return (
     <section className={styles.section}>

@@ -8,7 +8,7 @@ import {
   IconBuildingSkyscraper,
 } from "@tabler/icons-react";
 import styles from "./WhyTexpoSection.module.css";
-import { Skeleton } from "@mantine/core";
+
 import { getImageUrl } from "@/src/lib/helpers";
 
 const cards = [
@@ -49,30 +49,9 @@ export function WhyTexpoSection({
   items?: { title: string; description: string; image: any }[];
   loading?: boolean;
 }) {
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.inner}>
-          <Skeleton bg="gray.3" height={40} width="60%" radius="xl" mx="auto" mb="xl" animate />
-          <div className={styles.grid}>
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className={styles.card}>
-                <Skeleton bg="gray.3" height={60} width={60} radius="xl" mb="md" animate />
-                <Skeleton bg="gray.3" height={25} width="80%" radius="xl" mb="sm" animate />
-                <Skeleton bg="gray.3" height={15} radius="xl" mb="xs" animate />
-                <Skeleton bg="gray.3" height={15} radius="xl" mb="xs" animate />
-                <Skeleton bg="gray.3" height={15} width="60%" radius="xl" animate />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const displayTitle = title || "WHY YOU SHOULD BE PART OF TEXPO LAND | 2ND EDITION?";
 
   if (!items || items.length === 0) return null;
-
-  const displayTitle = title || "WHY YOU SHOULD BE PART OF TEXPO LAND | 2ND EDITION?";
 
   const displayCards = items.map((item, idx) => {
     const IconsSequence = [IconChartBar, IconUsers, IconUsers, IconBuildingSkyscraper];

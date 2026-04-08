@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { fadeInUp } from '@/src/lib/animations';
 import styles from './MapSection.module.css';
 import { getImageUrl } from '@/src/lib/helpers';
-import { Skeleton } from '@/src/components/ui/Skeleton/Skeleton';
+
 
 export function MapSection({ 
   title, 
@@ -15,17 +15,6 @@ export function MapSection({
   image?: any; 
   loading?: boolean;
 }) {
-  if (loading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.inner}>
-          <Skeleton variant="card" height={380} width="100%" radius="32px" />
-          <Skeleton variant="title" width="40%" mx="auto" mt="xl" />
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className={styles.section}>
       <div className={styles.inner}>

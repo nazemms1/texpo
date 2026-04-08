@@ -11,11 +11,18 @@
   height: 95px;
 }
 
-.header.scrolled,
+.header.scrolled {
+  background: rgba(6, 11, 26, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  height: 80px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .header.menuOpen {
   background: #060b1a;
   height: 80px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* No media query here, moving it down */
@@ -214,8 +221,8 @@
 
 @media (max-width: 768px) {
   .header {
-    background: #060b1a !important;
-    backdrop-filter: none !important;
+    background: rgba(6, 11, 26, 0.4);
+    backdrop-filter: blur(10px);
     height: 80px;
   }
 

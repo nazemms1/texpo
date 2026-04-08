@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { getImageUrl } from '@/src/lib/helpers';
-import { Skeleton } from '@mantine/core';
+
 import styles from './ContactHeroCard.module.css';
 
 export function ContactHeroCard({ image, loading }: { image?: any; loading?: boolean }) {
@@ -10,7 +10,7 @@ export function ContactHeroCard({ image, loading }: { image?: any; loading?: boo
     return (
       <section className={styles.section}>
         <div className={styles.card}>
-          <Skeleton bg="gray.3" height="100%" width="100%" radius="24px" animate />
+
         </div>
       </section>
     );

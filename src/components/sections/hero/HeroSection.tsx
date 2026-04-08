@@ -9,6 +9,7 @@ import { ButtonPair } from "@/src/components/ui/Button/AnimatedButton";
 
 import { useParams } from "next/navigation";
 import { heroTranslations, Lang } from "@/src/lib/i18n";
+import { Loader, Center } from "@mantine/core";
 
 export function HeroSection({
   title,
@@ -31,7 +32,22 @@ export function HeroSection({
   return (
     <section className={styles.hero}>
       <div className={styles.bg}>
-        {!loading && (
+        {loading ? (
+          <Center h="100vh" w="100%" style={{ background: '#fff' }}>
+            <div className={styles.premiumSpecs}>
+              <motion.div
+                className={styles.sleekSpinner}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+              />
+               <motion.div
+                className={styles.spinnerPulse}
+                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+          </Center>
+        ) : (
           <>
             {isVideo ? (
               <video

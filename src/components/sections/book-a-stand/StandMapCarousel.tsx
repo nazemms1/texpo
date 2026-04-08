@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './StandMapCarousel.module.css';
 
-import { Skeleton } from '@mantine/core';
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
 
 interface StandMapCarouselProps {
   images: { src: string; alt: string }[];

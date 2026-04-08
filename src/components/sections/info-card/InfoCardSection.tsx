@@ -2,7 +2,7 @@ import { Container } from "@/src/components/layout/Container";
 import { InfoCard } from "@/src/components/ui/InfoCard/InfoCard";
 import styles from "./InfoCardSection.module.css";
 import { Stack, Box } from "@mantine/core";
-import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+
 import { getImageUrl } from "@/src/lib/helpers";
 
 interface InfoCardItem {
