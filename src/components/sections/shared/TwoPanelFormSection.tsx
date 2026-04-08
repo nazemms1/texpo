@@ -40,7 +40,7 @@ export function TwoPanelFormSection({
   terms,
   renderFormFields,
   submitLabel = 'Submit Request',
-  logoSrc = '/logos/Logo-footers.svg',
+  logoSrc = '/logos/texpo.svg',
   logoAlt = 'TEXPO',
   onSubmit,
   isSubmitting = false,
