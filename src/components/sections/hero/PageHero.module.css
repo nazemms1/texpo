@@ -14,7 +14,7 @@
   background: linear-gradient(
     to bottom,
     transparent 50%,
-    rgba(255, 255, 255, 0.6) 80%,
+    rgba(255, 255, 255, 0.6) 97%,
     #ffffff 100%
   );
   pointer-events: none;
@@ -71,11 +71,11 @@
 }
 
 .titlePrimary {
-  color: #030a1e;
+  color: #133854;
 }
 
 .titleAccent {
   
-  color: #42BEB3;
+  color: #0060A8;
 }
 

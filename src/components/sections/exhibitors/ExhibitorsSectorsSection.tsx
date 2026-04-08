@@ -9,6 +9,8 @@ import { Container } from "@/src/components/layout/Container";
 import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
 import { SectorCard } from "./SectorCard";
 import styles from "./ExhibitorsSectorsSection.module.css";
+import { getImageUrl } from "@/src/lib/helpers";
+
 
 const SECTORS = [
   {
@@ -35,15 +37,34 @@ const SECTORS = [
 
 function getLoopDistance(index: number, current: number, total: number) {
   const raw = index - current;
-   return ((((raw + total / 2) % total) + total) % total) - total / 2;
+  return ((((raw + total / 2) % total) + total) % total) - total / 2;
 }
 
-export function ExhibitorsSectorsSection() {
-  const total = SECTORS.length;
+interface ExhibitorSectorItem {
+  title?: string;
+  media?: any;
+  image?: any;
+}
+
+interface ExhibitorsSectorsSectionProps {
+  title?: string | null;
+  description?: string | null;
+  items?: ExhibitorSectorItem[];
+  loading?: boolean;
+}
+
+export function ExhibitorsSectorsSection({ 
+  title, 
+  description, 
+  items, 
+  loading 
+}: ExhibitorsSectorsSectionProps) {
+  const displayItems = (items && items.length > 0) ? items : SECTORS;
+  const total = displayItems.length;
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [embla, setEmbla] = useState<EmblaCarouselType | null>(null);
   const [offsets, setOffsets] = useState<number[]>(
-    SECTORS.map((_, i) => (i === 0 ? 0 : i)),
+    displayItems.map((_, i) => (i === 0 ? 0 : i)),
   );
 
   const visualActiveIndex = offsets.reduce((bestIdx, value, idx, arr) => {
@@ -55,11 +76,10 @@ export function ExhibitorsSectorsSection() {
 
     const updateArc = () => {
       const scrollProgress = embla.scrollProgress();
- 
       const current = ((scrollProgress * total) % total + total) % total;
 
       setOffsets(
-        SECTORS.map((_, i) => getLoopDistance(i, current, total)),
+        displayItems.map((_, i) => getLoopDistance(i, current, total)),
       );
       setActiveIndex(embla.selectedScrollSnap());
     };
@@ -76,7 +96,13 @@ export function ExhibitorsSectorsSection() {
       embla.off("reInit", updateArc);
       embla.off("settle", updateArc);
     };
-  }, [embla, total]);
+  }, [embla, total, displayItems]);
+
+  if (loading && !items) return null;
+
+  const cleanDescription = description 
+    ? description.split('including:')[0] + 'including:' 
+    : "The TEXPO Land exhibition features a wide range of companies and institutions from various technological and digital transformation sectors, showcasing advanced solutions, products, and services across a variety of fields, including:";
 
   return (
     <section className={styles.section}>
@@ -84,24 +110,21 @@ export function ExhibitorsSectorsSection() {
         <div className={styles.inner}>
           <header className={styles.header}>
             <SectionTitle
-              title="EXHIBITORS AND SECTORS PARTICIPATING IN TEXPO LAND | 2ND EDITION"
+              title={title || "EXHIBITORS AND SECTORS PARTICIPATING IN TEXPO LAND | 2ND EDITION"}
               align="center"
             />
             <p className={styles.subtitle}>
-              The TEXPO Land exhibition features a wide range of companies and
-              institutions from various technological and digital transformation
-              sectors, showcasing advanced solutions, products, and services
-              across a variety of fields, including:
+              {cleanDescription}
             </p>
           </header>
 
           <div className={styles.carouselContainer}>
-             <div className={styles.stage3D}>
-              {SECTORS.map((sector, index) => (
+            <div className={styles.stage3D}>
+                {displayItems.map((sector: any, index) => (
                 <SectorCard
-                  key={sector.title}
-                  title={sector.title}
-                  image={sector.image}
+                  key={index}
+                  title={sector.title || ""}
+                  image={getImageUrl(sector.media || sector.image) || ""}
                   offset={offsets[index] ?? 0}
                   isActive={index === visualActiveIndex}
                   total={total}
@@ -109,7 +132,7 @@ export function ExhibitorsSectorsSection() {
               ))}
             </div>
 
-             <div className={styles.interactionLayer}>
+            <div className={styles.interactionLayer}>
               <Carousel
                 className={styles.carousel}
                 slideSize="100%"
@@ -124,8 +147,8 @@ export function ExhibitorsSectorsSection() {
                 getEmblaApi={setEmbla}
                 onSlideChange={setActiveIndex}
               >
-                {SECTORS.map((sector) => (
-                  <Carousel.Slide key={sector.title}>
+                {displayItems.map((sector, index) => (
+                  <Carousel.Slide key={index}>
                     <div className={styles.invisibleSlide} />
                   </Carousel.Slide>
                 ))}
@@ -134,13 +157,13 @@ export function ExhibitorsSectorsSection() {
           </div>
 
           <div className={styles.dots}>
-            {SECTORS.map((_, i) => (
+            {displayItems.map((_, i) => (
               <button
                 key={i}
                 className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ""}`}
                 onClick={() => {
                   setActiveIndex(i);
-                  setOffsets(SECTORS.map((_, idx) => getLoopDistance(idx, i, total)));
+                  setOffsets(displayItems.map((_, idx) => getLoopDistance(idx, i, total)));
                   embla?.scrollTo(i, true);
                 }}
                 aria-label={`Go to sector ${i + 1}`}

@@ -4,113 +4,121 @@ import { motion } from 'framer-motion';
 import { IconMail, IconPhone, IconMapPin } from '@tabler/icons-react';
 import { fadeInUp } from '@/src/lib/animations';
 import { TwoPanelFormSection } from '@/src/components/sections/shared/TwoPanelFormSection';
+import { useMutation } from '@/src/hooks/useMutation';
+import { useApi } from '@/src/hooks/useApi';
+import { bookStandService, staticDataService } from '@/src/lib/api';
+import type { BookStandPayload } from '@/src/types/api';
 
-const COUNTRIES = [
-  'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Argentina', 'Armenia', 'Australia',
-  'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Belarus', 'Belgium', 'Bolivia', 'Bosnia and Herzegovina',
-  'Brazil', 'Bulgaria', 'Cambodia', 'Cameroon', 'Canada', 'Chile', 'China', 'Colombia', 'Croatia',
-  'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Ecuador', 'Egypt', 'Estonia', 'Ethiopia',
-  'Finland', 'France', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Hungary', 'India', 'Indonesia',
-  'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya',
-  'Kuwait', 'Latvia', 'Lebanon', 'Libya', 'Lithuania', 'Luxembourg', 'Malaysia', 'Malta',
-  'Mexico', 'Moldova', 'Monaco', 'Morocco', 'Netherlands', 'New Zealand', 'Nigeria', 'Norway',
-  'Oman', 'Pakistan', 'Palestine', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar',
-  'Romania', 'Russia', 'Saudi Arabia', 'Serbia', 'Singapore', 'Slovakia', 'Slovenia',
-  'South Africa', 'South Korea', 'Spain', 'Sudan', 'Sweden', 'Switzerland', 'Syria',
-  'Thailand', 'Tunisia', 'Turkey', 'Ukraine', 'United Arab Emirates', 'United Kingdom',
-  'United States', 'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Yemen',
-];
+import { useParams } from 'next/navigation';
+import { bookAStandTranslations, Lang } from '@/src/lib/i18n';
 
-const SECTORS = [
-  'Technology & IT',
-  'Artificial Intelligence & Robotics',
-  'Energy & Renewables',
-  'Manufacturing & Industry',
-  'Healthcare & Pharmaceuticals',
-  'Agriculture & Food',
-  'Finance & Banking',
-  'Education & Training',
-  'Retail & E-Commerce',
-  'Logistics & Supply Chain',
-  'Construction & Real Estate',
-  'Tourism & Hospitality',
-  'Media & Entertainment',
-  'Telecommunications',
-  'Defense & Security',
-  'Government & Public Sector',
-  'Non-Profit & NGOs',
-  'Other',
-];
+interface BookAStandSectionProps {
+  title?: string;
+  subtitle?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  description?: string;
+  loading?: boolean;
+}
 
-const standContactInfo = [
-  {
-    Icon: IconMail,
-    label: 'Email Us',
-    value: 'info@texpo-exhibition.com',
-  }, 
+export function BookAStandSection({
+  title,
+  subtitle,
+  email,
+  phone,
+  address,
+  description,
+  loading: parentLoading
+}: BookAStandSectionProps) {
+  const { lang } = useParams();
+  const currentLang = (lang as Lang) || 'en';
+  const t = bookAStandTranslations[currentLang];
+
+  const { data: sectors, loading: sectorsLoading } = useApi(() => staticDataService.getSectors(), [], `sectors-${currentLang}`);
+  const { data: countries, loading: countriesLoading } = useApi(() => staticDataService.getCountries(), [], `countries-${currentLang}`);
   
-  {
-    Icon: IconPhone,
-    label: 'Call Us',
-    value: '0949333200',
-  },
-  {
-    Icon: IconMapPin,
-    label: 'Office',
-    value: 'Damascus, Syria - Exhibition City',
-  },
-];
+  const { submit, loading: submitting, error, success } = useMutation(bookStandService.submit);
 
-export function BookAStandSection() {
+  const isLoading = parentLoading || sectorsLoading || countriesLoading;
+
+  const standContactInfo = [
+    {
+      Icon: IconMail,
+      label: currentLang === 'ar' ? 'راسلنا' : 'Email Us',
+      value: email || 'info@texpo-exhibition.com',
+    },
+    {
+      Icon: IconPhone,
+      label: currentLang === 'ar' ? 'اتصل بنا' : 'Call Us',
+      value: phone || '0949333200',
+    },
+    {
+      Icon: IconMapPin,
+      label: currentLang === 'ar' ? 'المكتب' : 'Office',
+      value: address || 'Damascus, Syria - Exhibition City',
+    },
+  ];
+
+  const terms = description?.split('\n\n').filter(Boolean) || (currentLang === 'ar' ? [
+    'بإرسال هذا النموذج، فإنك توافق على جمع ومعالجة بياناتك الشخصية لغرض التعامل مع استفسار حجز الجناح الخاص بك ومتابعة التواصل.',
+    'أؤكد أن عمري 21 عاماً أو أكثر، وأنني قرأت ووافقت على الشروط والأحكام وسياسة الخصوصية. قد تتم مشاركة معلوماتك مع مزودي الخدمة المتعاقدين والشركاء الرسميين فقط عند الحاجة لتقديم خدمات الفعالية وتنسيق ترتيبات الجناح.',
+  ] : [
+    'By submitting this form, you consent to the collection and processing of your personal data for the purpose of handling your stand booking enquiry and follow-up communication.',
+    'I confirm that I am 21 years of age or older, and that I have read and agreed to the Terms and Conditions and the Privacy Policy. Your information may be shared with contracted service providers and official partners only when needed to deliver event services and coordinate stand arrangements.',
+  ]);
+
+  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    const fd = new FormData(e.currentTarget);
+    const payload: BookStandPayload = {
+      first_name:           fd.get('first_name')           as string,
+      last_name:            fd.get('last_name')            as string,
+      job_title:            fd.get('job_title')            as string,
+      company_name:         fd.get('company_name')         as string,
+      company_website:      fd.get('company_website')      as string,
+      work_email:           fd.get('work_email')           as string,
+      phone:                fd.get('phone')                as string,
+      country_of_residence: fd.get('country_of_residence') as string,
+      sector:               fd.get('sector')               as string,
+    };
+    submit(payload);
+  }
+
+  if (!t) return null;
+
   return (
     <TwoPanelFormSection
-      title="BOOK A STAND"
-      subtitle="Reserve your exhibition stand at TEXPO and connect with thousands of industry leaders, investors, and innovators."
+      title={title || t.title}
+      subtitle={subtitle || t.subtitle}
       contactItems={standContactInfo}
-      submitLabel="Book My Stand"
-      terms={[
-        'By submitting this form, you consent to the collection and processing of your personal data for the purpose of handling your stand booking enquiry and follow-up communication.',
-        'I confirm that I am 21 years of age or older, and that I have read and agreed to the Terms and Conditions and the Privacy Policy. Your information may be shared with contracted service providers and official partners only when needed to deliver event services and coordinate stand arrangements.',
-      ]}
+      submitLabel={t.submit}
+      onSubmit={handleSubmit}
+      isSubmitting={submitting}
+      loading={isLoading}
+      submitSuccess={success}
+      submitError={error}
+      successMessage={t.success}
+      terms={terms}
       renderFormFields={(styles) => (
         <>
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>First Name</span>
+              <span className={styles.fieldLabel}>{t.fields.firstName}</span>
               <input
+                name="first_name"
                 className={styles.input}
                 type="text"
-                placeholder="John"
+                placeholder={t.placeholders.firstName}
                 required
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Last Name</span>
+              <span className={styles.fieldLabel}>{t.fields.lastName}</span>
               <input
+                name="last_name"
                 className={styles.input}
                 type="text"
-                placeholder="Doe"
-                required
-              />
-            </motion.label>
-          </div>
-
-          <div className={styles.row}>
-            <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Job Title</span>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Chief Executive Officer"
-                required
-              />
-            </motion.label>
-            <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Company Name</span>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Tech Global Inc."
+                placeholder={t.placeholders.lastName}
                 required
               />
             </motion.label>
@@ -118,20 +126,45 @@ export function BookAStandSection() {
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Company Website</span>
+              <span className={styles.fieldLabel}>{t.fields.jobTitle}</span>
               <input
+                name="job_title"
+                className={styles.input}
+                type="text"
+                placeholder={t.placeholders.jobTitle}
+                required
+              />
+            </motion.label>
+            <motion.label className={styles.field} variants={fadeInUp}>
+              <span className={styles.fieldLabel}>{t.fields.companyName}</span>
+              <input
+                name="company_name"
+                className={styles.input}
+                type="text"
+                placeholder={t.placeholders.companyName}
+                required
+              />
+            </motion.label>
+          </div>
+
+          <div className={styles.row}>
+            <motion.label className={styles.field} variants={fadeInUp}>
+              <span className={styles.fieldLabel}>{t.fields.companyWebsite}</span>
+              <input
+                name="company_website"
                 className={styles.input}
                 type="url"
-                placeholder="https://www.yourcompany.com"
+                placeholder={t.placeholders.companyWebsite}
                 required
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Work Email Address</span>
+              <span className={styles.fieldLabel}>{t.fields.workEmail}</span>
               <input
+                name="work_email"
                 className={styles.input}
                 type="email"
-                placeholder="john@company.com"
+                placeholder={t.placeholders.workEmail}
                 required
               />
             </motion.label>
@@ -139,24 +172,26 @@ export function BookAStandSection() {
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Mobile Phone</span>
+              <span className={styles.fieldLabel}>{t.fields.phone}</span>
               <input
+                name="phone"
                 className={styles.input}
                 type="tel"
-                placeholder="+1 234 567 890"
+                placeholder={t.placeholders.phone}
                 required
               />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Country of Residence</span>
+              <span className={styles.fieldLabel}>{t.fields.country}</span>
               <span className={styles.selectWrap}>
                 <select
+                  name="country_of_residence"
                   className={`${styles.input} ${styles.selectField}`}
                   defaultValue=""
                   required
                 >
-                  <option value="" disabled>Select your country</option>
-                  {COUNTRIES.map((country) => (
+                  <option value="" disabled>{t.placeholders.selectCountry}</option>
+                  {(countries || []).map((country) => (
                     <option key={country} value={country}>{country}</option>
                   ))}
                 </select>
@@ -170,15 +205,16 @@ export function BookAStandSection() {
               variants={fadeInUp}
               style={{ gridColumn: '1 / -1' }}
             >
-              <span className={styles.fieldLabel}>What sector are you in?</span>
+              <span className={styles.fieldLabel}>{t.fields.sector}</span>
               <span className={styles.selectWrap}>
                 <select
+                  name="sector"
                   className={`${styles.input} ${styles.selectField}`}
                   defaultValue=""
                   required
                 >
-                  <option value="" disabled>Select your sector</option>
-                  {SECTORS.map((sector) => (
+                  <option value="" disabled>{t.placeholders.selectSector}</option>
+                  {(sectors || []).map((sector) => (
                     <option key={sector} value={sector}>{sector}</option>
                   ))}
                 </select>

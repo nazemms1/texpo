@@ -58,9 +58,9 @@
 }
 
 .badgeText {
-  font-family: "URWGeometricArabic-Bold", "URW Geometric", sans-serif;
-  font-weight: 700;
-  font-size: calc(var(--card-w) * 0.064); /* 16px on 250px tile */
+  font-family: 'URWGeometricArabic-Bold', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;  
   line-height: 1;
   color: var(--badge-text);
   text-transform: none;

@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import { staggerContainer, fadeInLeft, fadeInRight, fadeInUp } from '@/src/lib/animations';
 import styles from './WhySyriaSection.module.css';
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+import { Stack } from "@mantine/core";
+import { getImageUrl } from '@/src/lib/helpers';
 
 const points = [
   {
@@ -31,48 +34,75 @@ const points = [
     body: 'Through trade agreements and partnerships with neighboring countries, Syria has become a key connector between Middle Eastern markets, facilitating trade and investment flows within the region.',
   },
 ];
-export function WhySyriaSection() {
+
+
+
+export function WhySyriaSection({ 
+  title, 
+  description, 
+  image, 
+  items,
+  loading
+}: { 
+  title?: string; 
+  description?: string; 
+  image?: any; 
+  items?: { title: string; description: string; image: any }[];
+  loading?: boolean;
+}) {
+  const displayTitle = title || "WHY SYRIA?";
+  const displayIntro = description || "";
+  const displayImage = getImageUrl(image) || "/images/syria.svg";
+
+  if (!items || items.length === 0) return null;
+
+  const displayPoints = items.map((item, idx) => {
+    const fallbackIcons = ['/Icons/Icon-one.svg', '/Icons/Icon-two.svg', '/Icons/Icon-three.svg', '/Icons/Icon-four.svg', '/Icons/Icon-five.svg'];
+    const itemImageUrl = getImageUrl(item.image);
+    return {
+      title: item.title,
+      body: item.description,
+      icon: itemImageUrl && itemImageUrl.length > 25 ? itemImageUrl : fallbackIcons[idx % fallbackIcons.length],
+    };
+  });
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-         <motion.div
+        <motion.div
           className={styles.mapCol}
           variants={fadeInLeft}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
         >
           <img
-            src="/images/syria.svg"
+            src={displayImage}
             alt="Map of Syria"
             className={styles.mapImage}
           />
         </motion.div>
 
-         <motion.div
+        <motion.div
           className={styles.contentCol}
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           <motion.h2 className={styles.title} variants={fadeInRight}>
-            WHY SYRIA?
+            {displayTitle}
           </motion.h2>
 
           <motion.p className={styles.intro} variants={fadeInUp}>
-            Syria today represents a strategic turning point in the region, witnessing unprecedented
-            economic openness and digital transformation, making it an attractive destination for
-            investors. With the rising demand for technology across all sectors, the Syrian market is
-            filled with promising opportunities for growth and investment in various technological
-            fields.
+            {displayIntro}
           </motion.p>
 
           <div className={styles.points}>
-            {points.map(({ icon, title, body }) => (
-              <motion.div key={title} className={styles.point} variants={fadeInUp}>
-                   <img src={icon} alt=""   />
-                 
+            {displayPoints.map(({ icon, title, body }, idx) => (
+              <motion.div key={`${title}-${idx}`} className={styles.point} variants={fadeInUp}>
+                <img src={icon} alt="" />
+
                 <div>
                   <h3 className={styles.pointTitle}>{title}</h3>
                   <p className={styles.pointBody}>{body}</p>

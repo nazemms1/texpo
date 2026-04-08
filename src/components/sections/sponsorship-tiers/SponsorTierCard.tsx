@@ -38,30 +38,32 @@ export function SponsorTierCard({ tier, ctaHref }: SponsorTierCardProps) {
       </div>
 
       <h3 className={styles.title}>{title}</h3>
-      <p className={styles.subtitle}>{subtitle}</p>
+      {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
 
-      <ul className={styles.features}>
-        {features.map((text) => (
-          <li key={text} className={styles.feature}>
-            {variant === 'diamond' ? (
-              <IconRosetteDiscountCheck
-                className={`${styles.check} ${styles.checkSeal}`}
-                size={22}
-                stroke={1.85}
-                aria-hidden
-              />
-            ) : (
-              <IconCircleCheck
-                className={styles.check}
-                size={20}
-                stroke={1.85}
-                aria-hidden
-              />
-            )}
-            <span>{text}</span>
-          </li>
-        ))}
-      </ul>
+      {features && features.length > 0 && (
+        <ul className={styles.features}>
+          {features.map((text) => (
+            <li key={text} className={styles.feature}>
+              {variant === 'diamond' ? (
+                <IconRosetteDiscountCheck
+                  className={`${styles.check} ${styles.checkSeal}`}
+                  size={22}
+                  stroke={1.85}
+                  aria-hidden
+                />
+              ) : (
+                <IconCircleCheck
+                  className={styles.check}
+                  size={20}
+                  stroke={1.85}
+                  aria-hidden
+                />
+              )}
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <a href={ctaHref} className={styles.cta}>
         {ctaLabel}

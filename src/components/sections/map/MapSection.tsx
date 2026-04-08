@@ -1,11 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { fadeInUp } from '@/src/lib/animations';
 import styles from './MapSection.module.css';
+import { getImageUrl } from '@/src/lib/helpers';
 
-export function MapSection() {
+
+export function MapSection({ 
+  title, 
+  image, 
+  loading 
+}: { 
+  title?: string | null; 
+  image?: any; 
+  loading?: boolean;
+}) {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
@@ -14,24 +23,21 @@ export function MapSection() {
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
         >
-          <Image
-            src="/images/Map.svg"
-            alt="Participating Countries Map"
-            width={1200}
-            height={600}
+          <img
+            src={getImageUrl(image) || "/images/Map.svg"}
+            alt={title || "Participating Countries Map"}
             className={styles.map}
-            priority
           />
           <motion.h2
             className={styles.title}
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
           >
-            PARTICIPATING COUNTRIES AT TEXPO LAND | 2ND EDITION
+            {title || "PARTICIPATING COUNTRIES AT TEXPO LAND | 2ND EDITION"}
           </motion.h2>
         </motion.div>
       </div>

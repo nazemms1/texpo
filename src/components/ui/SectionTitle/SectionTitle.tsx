@@ -24,7 +24,7 @@ export function SectionTitle({
       variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: false, amount: 0.3 }}
       className={`${styles.root} ${styles[align]} ${light ? styles.light : ""}`}
     >
       {label && <span className={styles.label}>{label}</span>}

@@ -5,8 +5,8 @@ import { fadeInUp, staggerContainer } from "@/src/lib/animations";
 import styles from "./PageHero.module.css";
 import Icon from "../../../assets/Icons/Icon_arrwo.svg";
 interface PageHeroProps {
-  title: string;
-  titleAccent?: string;
+  title?: string | null;
+  titleAccent?: string | null;
 }
 
 export function PageHero({ title, titleAccent }: PageHeroProps) {

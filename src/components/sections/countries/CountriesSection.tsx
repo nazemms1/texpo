@@ -29,7 +29,7 @@ export function CountriesSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
         >
           {countries.map((country) => (
             <motion.div key={country} className={styles.chip} variants={fadeInUp}>

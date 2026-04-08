@@ -5,13 +5,15 @@
   width: 66px;
   height: 226px;
  
-  background: linear-gradient(180deg, #42BEB3 0%, #32558D 100%);
+  background: linear-gradient(180deg, #0060A8 0%, #002068 100%);
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   align-items: center;
   justify-content: center;
+}
+
+:global([dir='rtl']) .bar {
+  border-radius: 0 40px 40px 0;
 }
 
 .horizontal {
@@ -35,4 +37,19 @@
 
 .iconBtn:hover {
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  .bar {
+    width: 48px;
+    height: 160px;
+    gap: 6px;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+  }
+
+  .iconBtn {
+    width: 28px;
+    height: 28px;
+  }
 }

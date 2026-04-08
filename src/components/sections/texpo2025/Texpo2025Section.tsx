@@ -5,15 +5,17 @@ import { staggerContainer, fadeInUp, scaleIn } from '@/src/lib/animations';
 import { SectionTitle } from '@/src/components/ui/SectionTitle/SectionTitle';
 import { IconCalendar, IconMapPin, IconUsers, IconStar } from '@tabler/icons-react';
 import styles from './Texpo2025Section.module.css';
+import { useApi } from '@/src/hooks/useApi';
+import { texpoPageService } from '@/src/lib/api';
 
-const highlights = [
+const DEFAULT_HIGHLIGHTS = [
   { Icon: IconCalendar, label: 'Dates', value: 'TBA — 2025' },
   { Icon: IconMapPin, label: 'Venue', value: 'Exhibition City, Placeholder' },
   { Icon: IconUsers, label: 'Expected Visitors', value: '200,000+' },
   { Icon: IconStar, label: 'Featured Exhibitors', value: '500+' },
 ];
 
-const themes = [
+const DEFAULT_THEMES = [
   'Artificial Intelligence & Machine Learning',
   'Sustainable Energy & Clean Tech',
   'Space Exploration & Aerospace',
@@ -24,14 +26,31 @@ const themes = [
   'Cybersecurity & Digital Privacy',
 ];
 
+import { Skeleton } from "@/src/components/ui/Skeleton/Skeleton";
+
 export function Texpo2025Section() {
+  const { data, loading } = useApi(() => texpoPageService.getTexpoPageData());
+
+  if (!data) return null;
+
+  const icons = [IconCalendar, IconMapPin, IconUsers, IconStar];
+  const highlights = data.statistics?.map((s, i) => ({
+    Icon: icons[i % icons.length],
+    label: s.key,
+    value: s.value,
+  })) || [];
+
+  const themes = data.items?.map(item => (typeof item === 'string' ? item : item.title)) || [];
+  const title = data.title || '';
+  const description = data.description || '';
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
    
         <SectionTitle
           label="Edition Highlights"
-          title="TEXPO 2025 AT A GLANCE"
+          title={title}
           align="center"
           light
         />
@@ -41,7 +60,7 @@ export function Texpo2025Section() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
         >
           {highlights.map(({ Icon, label, value }) => (
             <motion.div key={label} className={styles.highlightCard} variants={scaleIn}>
@@ -56,7 +75,7 @@ export function Texpo2025Section() {
           <SectionTitle
             label="Focus Areas"
             title="EXHIBITION THEMES"
-            subtitle="TEXPO 2025 will spotlight the technologies and industries driving the next era of human progress."
+            subtitle={description}
             align="center"
             light
           />
@@ -66,10 +85,10 @@ export function Texpo2025Section() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
           >
-            {themes.map((theme) => (
-              <motion.div key={theme} className={styles.themeChip} variants={fadeInUp}>
+            {themes.map((theme, i) => (
+              <motion.div key={`${theme}-${i}`} className={styles.themeChip} variants={fadeInUp}>
                 {theme}
               </motion.div>
             ))}

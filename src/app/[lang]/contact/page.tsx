@@ -1,19 +1,23 @@
-import type { Metadata } from "next";
+'use client';
+
 import { PageHero } from "@/src/components/sections/hero/PageHero";
 import { ContactHeroCard } from "@/src/components/sections/contact/ContactHeroCard";
 import { ContactMap } from "@/src/components/sections/contact/ContactMap";
 import { ContactSection } from "@/src/components/sections/contact/ContactSection";
-
-export const metadata: Metadata = {
-  title: "Contact Us — TEXPO",
-  description:
-    "Get in touch with the TEXPO team for sponsorships, media, or general enquiries.",
-};
+import { useApi } from "@/src/hooks/useApi";
+import { contactService } from "@/src/lib/api";
+import { pageHeroTranslations, type Lang } from "@/src/lib/i18n";
+import { useParams } from "next/navigation";
 
 export default function ContactPage() {
+  const { lang } = useParams();
+  const currentLang = (lang as Lang) ?? 'en';
+  const t = pageHeroTranslations[currentLang].contact;
+  const { data, loading } = useApi(() => contactService.getContactInfo(), [], `contact-${currentLang}`);
+
   return (
     <>
-      <PageHero title="CONTACT" titleAccent="US" />
+      <PageHero title={t.title} titleAccent={t.accent} />
       <div
         className="withLinesBg"
         style={{
@@ -22,10 +26,10 @@ export default function ContactPage() {
           paddingBottom: "4rem",
         }}
       >
-        <ContactHeroCard />
+        <ContactHeroCard image={data?.data?.image} loading={loading} />
       </div>
-      <ContactMap />
-      <ContactSection />
+      <ContactMap lan={data?.data?.lan} lag={data?.data?.lag} loading={loading} />
+      <ContactSection formData={data?.formData} loading={loading} />
     </>
   );
 }

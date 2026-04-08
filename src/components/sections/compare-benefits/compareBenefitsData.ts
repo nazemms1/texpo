@@ -91,3 +91,51 @@ export const compareBenefitsDefaultDataset: CompareBenefitsDataset<BenefitProper
     labels: BENEFIT_PROPERTY_LABELS,
     byTier: compareBenefitsByTier,
   };
+
+function snakeToCamel(str: string): string {
+  return str.replace(/_([a-z])/g, (_, letter: string) => letter.toUpperCase());
+}
+
+/**
+ * Transforms the API `benefits-section` meta-data into a CompareBenefitsDataset.
+ * Returns null if no rows provided.
+ */
+export function mapApiBenefitsToDataset(
+  benefitRows: Array<{
+    sponsor_type: { id: number; name: string; color: string };
+    key: string;
+    name: string;
+    value_type: string;
+    value: string | boolean | null;
+  }>
+): CompareBenefitsDataset<BenefitPropertyId> | null {
+  if (!benefitRows || benefitRows.length === 0) return null;
+
+  const labelsFromApi: Partial<Record<BenefitPropertyId, string>> = {};
+  const propertyOrderFromApi: BenefitPropertyId[] = [];
+
+  const byTier: Record<TierId, Partial<Record<BenefitPropertyId, BenefitCellValue>>> = {
+    Silver: {}, Gold: {}, Platinum: {}, Diamond: {},
+  };
+
+  for (const item of benefitRows) {
+    const tierName = item.sponsor_type.name as TierId;
+    const propKey = snakeToCamel(item.key) as BenefitPropertyId;
+    if (!byTier[tierName]) continue;
+
+    if (!labelsFromApi[propKey]) {
+      labelsFromApi[propKey] = item.name;
+      propertyOrderFromApi.push(propKey);
+    }
+
+    byTier[tierName][propKey] = item.value;
+  }
+
+  if (propertyOrderFromApi.length === 0) return null;
+
+  return {
+    propertyOrder: propertyOrderFromApi,
+    labels: labelsFromApi as Record<BenefitPropertyId, string>,
+    byTier,
+  };
+}

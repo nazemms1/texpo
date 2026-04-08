@@ -5,26 +5,36 @@
   align-items: center;
  }
 
- 
+
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/background-hero.svg');
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
 .bg {
   position: absolute;
   inset: 0;
 }
 
-.bg::after {
-  content: '';
+
+.bgSvgOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    rgba(255, 255, 255, 0.6) 80%,
-    #ffffff 100%
-  );
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   pointer-events: none;
+  z-index: 1;  
 }
 
-.bgImage {
+.bgImage,
+.bgVideo {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -33,17 +43,21 @@
   object-position: center 20%;
 }
 
+.bgVideo {
+  opacity: 1;
+}
+
 .particleGrid {
   position: absolute;
   inset: 0;
 }
 
- 
- .content {
+
+.content {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   width: 100%;
- 
+
   margin: 0 auto;
   padding: 0 220px;
   min-height: 100vh;
@@ -52,12 +66,13 @@
 }
 
 .textBlock {
-  max-width: 900px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding-top: 10rem;
   padding-bottom: 4rem;
+  min-height: 400px;
 }
 
 .eyebrow {
@@ -66,7 +81,7 @@
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color:#FFFFFF;
+  color: #FFFFFF;
 }
 
 .heading {
@@ -78,6 +93,8 @@
   color: #fff;
   margin: 0;
   text-transform: uppercase;
+  max-width: 100%;
+  text-align: start;
 }
 
 .accent {
@@ -88,11 +105,13 @@
 }
 
 .description {
-  font-size: 1rem;
+  font-family: 'URWGeometricArabic-Medium', sans-serif;
+  font-size: 20px;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.65);
-  max-width: 460px;
+  color: #FFFFFF;
+  max-width: 600px;
   margin: 0;
+  text-align: start;
 }
 
 .actions {
@@ -117,6 +136,32 @@
   display: none;
 }
 
+.premiumSpecs {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sleekSpinner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1.5px solid rgba(0, 96, 168, 0.05);
+  border-top: 1.5px solid #0060A8;
+  border-radius: 50%;
+}
+
+.spinnerPulse {
+  width: 25px;
+  height: 25px;
+  background-color: #0060A8;
+  border-radius: 50%;
+  filter: blur(8px);
+}
+
 @media (max-width: 1280px) {
   .content {
     padding: 0 2rem;
@@ -125,11 +170,27 @@
 
 @media (max-width: 768px) {
   .textBlock {
-    padding-top: 8rem;
-    padding-bottom: 10rem;
+    padding-top: 7rem;
+    padding-bottom: 2rem;
+    gap: 1rem;
+    min-height: auto;
+  }
+
+  .heading {
+    font-size: 42px;
+    line-height: 1.2;
+  }
+
+  .description {
+    font-size: 16px;
+    line-height: 1.6;
   }
 
   .socialBar {
-    display: none;
+    top: 50%;
+  }
+
+  .actions {
+    gap: 0.75rem;
   }
 }

@@ -1,29 +1,51 @@
-import type { Metadata } from 'next';
+'use client';
+
 import { AboutExhibition } from '@/src/components/sections/about-exhibition/AboutExhibition';
-import { VisionSection } from '@/src/components/sections/vision/VisionSection';
-import { StatisticsSection } from '@/src/components/sections/statistics/StatisticsSection';
-import { MessageSection } from '@/src/components/sections/message/MessageSection';
 import { PageHero } from '@/src/components/sections/hero/PageHero';
 import { WhyTexpoSection } from '@/src/components/sections/why-texpo/WhyTexpoSection';
 import { WhySyriaSection } from '@/src/components/sections/why-syria/WhySyriaSection';
-
-export const metadata: Metadata = {
-  title: 'About — TEXPO',
-  description: 'Learn about the TEXPO technology exhibition, our mission, vision, and leadership.',
-};
+import { useApi } from '@/src/hooks/useApi';
+import { aboutService } from '@/src/lib/api';
+import { pageHeroTranslations, type Lang } from '@/src/lib/i18n';
+import { useParams } from 'next/navigation';
 
 export default function AboutPage() {
+  const { lang } = useParams();
+  const currentLang = (lang as Lang) ?? 'en';
+  const t = pageHeroTranslations[currentLang].about;
+  const { data, loading } = useApi(() => aboutService.getAboutUsData(), [], `about-${currentLang}`);
+
+  const aboutSection = data?.find(s => s.key === 'about-section');
+  const whyTexpo = data?.find(s => s.key === 'why-to-be-here');
+  const whySyria = data?.find(s => s.key === 'why-syria');
+
   return (
     <>
       <PageHero
-        title="About"
-        titleAccent="TEXPO LAND"
+        title={t.title}
+        titleAccent={t.accent}
       />
       <div className="withLinesBg">
-        <AboutExhibition variant="about" />
+        <AboutExhibition 
+          variant="about" 
+          title={aboutSection?.title}
+          description={aboutSection?.description}
+          image={aboutSection?.image}
+          loading={loading}
+        />
       </div>
-      <WhyTexpoSection />
-      <WhySyriaSection />
+      <WhyTexpoSection 
+        title={whyTexpo?.title}
+        items={whyTexpo?.items}
+        loading={loading}
+      />
+      <WhySyriaSection 
+        title={whySyria?.title}
+        description={whySyria?.description}
+        image={whySyria?.image}
+        items={whySyria?.items}
+        loading={loading}
+      />
     </>
   );
 }

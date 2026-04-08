@@ -1,34 +1,91 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useParams, useRouter } from 'next/navigation';
 import { headerTranslations, type Lang } from '@/src/lib/i18n';
+import { IconChevronDown } from '@tabler/icons-react';
 import styles from './Header.module.css';
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  mobile?: boolean;
+}
+
+export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
   const lang = (params?.lang as Lang) ?? 'en';
   const nextLang: Lang = lang === 'en' ? 'ar' : 'en';
-  const label = headerTranslations[lang].switchTo;
+  const currentLabel = headerTranslations[lang].label;
+  const nextLabel = headerTranslations[lang].switchTo;
+  
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   function handleSwitch() {
-    // Replace /en/... with /ar/... or vice versa
-    const newPath = pathname.replace(`/${lang}`, `/${nextLang}`);
+    // Current path is something like /en/about
+    // We want /ar/about
+    const segments = pathname.split('/');
+    segments[1] = nextLang; 
+    const newPath = segments.join('/');
     router.push(newPath);
+    setIsOpen(false);
+  }
+
+  if (mobile) {
+    return (
+      <button className={styles.mobileLangBtn} onClick={handleSwitch}>
+        <span>{nextLabel}</span>
+      </button>
+    );
   }
 
   return (
-    <motion.button
-      className={styles.langBtn}
-      onClick={handleSwitch}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.96 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      aria-label="Switch language"
-    >
-      <span>{label}</span>
-    </motion.button>
+    <div className={styles.langWrapper} ref={dropdownRef}>
+      <motion.button
+        className={styles.langBtn}
+        onClick={() => setIsOpen(!isOpen)}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        aria-expanded={isOpen}
+        aria-label="Toggle language menu"
+      >
+        <span>{currentLabel}</span>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          style={{ display: 'flex' }}
+        >
+          <IconChevronDown size={18} stroke={2.5} />
+        </motion.span>
+      </motion.button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className={styles.dropdown}
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            <button className={styles.dropdownItem} onClick={handleSwitch}>
+              {nextLabel}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

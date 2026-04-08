@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from '@/src/lib/animations';
 import { CompareBenefitsTable } from './CompareBenefitsTable';
-import { compareBenefitsDefaultDataset } from './compareBenefitsData';
 import {
   compareBenefitsDatasetToAlignedRows,
   type CompareBenefitsDataset,
@@ -31,6 +30,7 @@ export {
   BENEFIT_PROPERTY_ORDER,
   compareBenefitsByTier,
   compareBenefitsDefaultDataset,
+  mapApiBenefitsToDataset,
 } from './compareBenefitsData';
 
 export type { BenefitPropertyId } from './compareBenefitsData';
@@ -46,8 +46,10 @@ export interface CompareBenefitsSectionProps {
 
 export function CompareBenefitsSection({
   id,
-  dataset = compareBenefitsDefaultDataset,
+  dataset,
 }: CompareBenefitsSectionProps) {
+  if (!dataset) return null;
+
   const tableRows = compareBenefitsDatasetToAlignedRows(dataset);
 
   return (
@@ -57,7 +59,7 @@ export function CompareBenefitsSection({
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: false, amount: 0.25 }}
         >
           <motion.h2 className={styles.title} variants={fadeInUp}>
             Compare benefits

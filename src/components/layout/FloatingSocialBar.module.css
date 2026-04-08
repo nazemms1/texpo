@@ -1,0 +1,20 @@
+.socialBar {
+  position: fixed;
+  right: 0;
+  top: 30%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+[dir='rtl'] .socialBar {
+  right: auto;
+  left: 0;
+}
+
+@media (max-width: 768px) {
+  .socialBar {
+    display: none;
+  }
+}

@@ -37,7 +37,7 @@ export function MessageSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: false, amount: 0.25 }}
         >
           {messages.map((m) => (
             <motion.div key={m.role} className={styles.card} variants={fadeInUp}>
