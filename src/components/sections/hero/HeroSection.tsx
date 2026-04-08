@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeInLeft, fadeInUp, staggerContainer } from "@/src/lib/animations";
 import { ButtonPair } from "@/src/components/ui/Button/AnimatedButton";
@@ -29,6 +29,20 @@ export function HeroSection({
   const isVideo = media?.mime_type?.startsWith("video");
   const mediaUrl = getImageUrl(media);
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const loadedSrcRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !isVideo || !mediaUrl) return;
+ 
+    if (loadedSrcRef.current !== mediaUrl) {
+      loadedSrcRef.current = mediaUrl;
+      video.src = mediaUrl;
+      video.load();
+    }
+  }, [isVideo, mediaUrl]);
+
   return (
     <section className={styles.hero}>
       <div className={styles.bg}>
@@ -51,11 +65,12 @@ export function HeroSection({
           <>
             {isVideo ? (
               <video
-                src={mediaUrl}
+                ref={videoRef}
                 autoPlay
                 muted
                 loop
                 playsInline
+                preload="auto"
                 className={styles.bgVideo}
               />
             ) : mediaUrl ? (
