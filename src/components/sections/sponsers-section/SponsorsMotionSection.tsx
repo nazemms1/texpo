@@ -11,8 +11,6 @@ import { sponsorsService } from "@/src/lib/api";
 import type { SponsorApiItem } from "@/src/types/api";
 import styles from "./SponsorsMotionSection.module.css";
 
-import { getImageUrl } from "@/src/lib/helpers";
-
 const SPONSOR_LOGO_SRC = "/sponsors/logosponser.png";
 
 const FALLBACK_SPONSORS: SponsorApiItem[] = [
@@ -22,18 +20,6 @@ const FALLBACK_SPONSORS: SponsorApiItem[] = [
   { id: "platinum",     type: { title: "Platinum",    color: "#002068" }, image: SPONSOR_LOGO_SRC },
   { id: "gold-1",       type: { title: "Gold",        color: "#2c2a26" }, image: SPONSOR_LOGO_SRC },
 ];
-
-function getSponsorColor(type: string): string {
-  const t = type.toLowerCase();
-  if (t.includes('advertising')) return '#8B5CF6';
-  if (t.includes('technical')) return '#0060A8';
-  if (t.includes('platinum')) return '#E5E7EB';
-  if (t.includes('gold')) return '#F59E0B';
-  if (t.includes('silver')) return '#9CA3AF';
-  if (t.includes('bronze')) return '#CD7F32';
-  if (t.includes('government')) return '#1E3A5F';
-  return '#42BEB3'; // default
-}
 
 interface SponsorsMotionSectionProps {
   title?: string | null;
@@ -56,14 +42,15 @@ export function SponsorsMotionSection({
   const sponsorsData = Array.isArray(rawData) ? rawData : [];
 
   const sponsors: SponsorApiItem[] = sponsorsData.map((s: any, i: number) => {
-    if (s.sponser_type) {
+    if (s.sponsor_type) {
       return {
         id: `dyn-${i}`,
         type: {
-          title: s.sponser_type.charAt(0).toUpperCase() + s.sponser_type.slice(1),
-          color: getSponsorColor(s.sponser_type)
+          title: s.sponsor_type.name,
+          color: s.sponsor_type.color
         },
-        image: getImageUrl(s.media)
+        image: s.logo?.url || SPONSOR_LOGO_SRC,
+        name: s.company_name
       };
     }
     return s;

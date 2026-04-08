@@ -21,7 +21,7 @@ export default function HomePage() {
   const statsData = sections?.find(s => s.key === 'statistics');
   const visionData = sections?.find(s => s.key === 'vision');
   const organizersData = sections?.find(s => s.key === 'organizing-company');
-  const sponsorsSection = sections?.find(s => s.key === 'sponsers');
+  const sponsorsSection = sections?.find(s => s.key === 'sponsors');
   const mapSection = sections?.find(s => s.key === 'map');
   const sectorsSection = sections?.find(s => s.key === 'exhibitor-sector');
 
