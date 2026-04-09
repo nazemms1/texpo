@@ -86,12 +86,12 @@ export function TwoPanelFormSection({
           </div>
 
           {description && (
-            <div className={styles.descriptionWrapper} style={{ marginTop: 'auto', marginBottom: '1.5rem' }}>
+            <div className={styles.descriptionWrapper} style={{ marginBottom: '1.5rem' }}>
               <p className={styles.description}>{description}</p>
             </div>
           )}
 
-          <div className={styles.termsWrapper} style={{ marginTop: description ? '0' : 'auto' }}>
+          <div className={styles.termsWrapper}>
             {terms.map((text, index) => (
               <p key={index} className={styles.termsText}>
                 {text}

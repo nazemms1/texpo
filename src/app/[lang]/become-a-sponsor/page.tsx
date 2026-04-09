@@ -40,6 +40,7 @@ export default function BecomeSponsorPage() {
 
   const typesSection = sectionsArr?.find((s: any) => s.key === 'types-section');
   const infoCardSection = sectionsArr?.find((s: any) => s.key === 'card-list-section');
+  const formSection = sectionsArr?.find((s: any) => s.key === 'form-section');
 
   return (
     <>
@@ -63,7 +64,12 @@ export default function BecomeSponsorPage() {
         <CompareBenefitsSection dataset={benefitsDataset} />
         <WhyTexpoSection />
         <InfoCardSection items={infoCardSection?.['meta-data']} loading={loading} />
-        <BecomeASponsorSection sponsorTypes={sponsorTypes as any} />
+        <BecomeASponsorSection 
+          sponsorTypes={sponsorTypes as any} 
+          title={formSection?.title}
+          description={formSection?.description}
+          metaData={formSection?.['meta-data']}
+        />
       </div>
     </>
   );

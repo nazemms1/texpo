@@ -58,7 +58,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .contactItem {
@@ -97,7 +97,6 @@
 }
 
 .termsWrapper {
-  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;

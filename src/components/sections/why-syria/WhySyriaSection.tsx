@@ -101,7 +101,9 @@ export function WhySyriaSection({
           <div className={styles.points}>
             {displayPoints.map(({ icon, title, body }, idx) => (
               <motion.div key={`${title}-${idx}`} className={styles.point} variants={fadeInUp}>
-                <img src={icon} alt="" />
+                <div className={styles.iconWrap}>
+                  <img src={icon} alt="" />
+                </div>
 
                 <div>
                   <h3 className={styles.pointTitle}>{title}</h3>

@@ -49,7 +49,7 @@ export function WhyTexpoSection({
   items?: { title: string; description: string; image: any }[];
   loading?: boolean;
 }) {
-  const displayTitle = title || "WHY YOU SHOULD BE PART OF TEXPO LAND | 2ND EDITION?";
+  const displayTitle = title || "";
 
   if (!items || items.length === 0) return null;
 

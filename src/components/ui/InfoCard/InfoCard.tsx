@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Box, Stack, Text, Title } from "@mantine/core";
 import styles from "./InfoCard.module.css";
 
@@ -13,20 +12,33 @@ type InfoCardProps = {
 };
 
 export function InfoCard({
-  title,
-  description,
+  title = "",
+  description = "",
   imageUrl,
   priority = false,
   className = "",
 }: InfoCardProps) {
+  const safeTitle = title || "";
+  const titleParts = safeTitle.trim().split(/\s+/);
+  const firstPart = titleParts[0] || "";
+  const restPart = titleParts.slice(1).join(" ");
+
   return (
     <Box className={`${styles.infoCard} ${className}`} pos="relative">
-      <Image
-        src={imageUrl}
-        alt={title}
-        fill
-        priority={priority}
-        style={{ objectFit: "cover" }}
+      <img
+        src={imageUrl || "/logos/texpo.svg"}
+        alt={safeTitle}
+        style={{ 
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover" 
+        }}
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = "/logos/texpo.svg";
+        }}
       />
 
       <Box
@@ -50,19 +62,20 @@ export function InfoCard({
         <Box className={styles.titleContainer}>
           <Box className={styles.titleTopRow}>
             <Title order={2} m={0} c="white" fw={700} className={styles.titlePart}>
-              {title.split(' ')[0]}
+              {firstPart}
             </Title>
-            <Box
-              h={4}
-              // w={2}
-              bg="rgba(255, 255, 255, 0.9)"
-              className={styles.line}
-              m={0}
-            />
+            {firstPart && (
+              <Box
+                h={4}
+                bg="rgba(255, 255, 255, 0.9)"
+                className={styles.line}
+                m={0}
+              />
+            )}
           </Box>
-          {title.split(' ').length > 1 && (
+          {restPart && (
             <Title order={2} m={0} c="white" fw={700} className={styles.titlePart}>
-              {title.split(' ').slice(1).join(' ')}
+              {restPart}
             </Title>
           )}
         </Box>

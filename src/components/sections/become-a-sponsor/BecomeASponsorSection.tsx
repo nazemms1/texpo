@@ -9,19 +9,37 @@ import { useMutation } from "@/src/hooks/useMutation";
 import { becomeSponsorService } from "@/src/lib/api";
 import type { SponsorType } from "@/src/lib/api";
 
-const sponsorContactInfo = [
-  { Icon: IconMail, label: "Email Us", value: "info@texpo-exhibition.com" },
-  { Icon: IconPhone, label: "Call Us", value: "0949333200" },
-  { Icon: IconMapPin, label: "Office", value: "Damascus, Syria - Exhibition City" },
-];
-
 interface BecomeASponsorSectionProps {
   sponsorTypes?: SponsorType[];
+  title?: string | null;
+  description?: string | null;
+  metaData?: {
+    title?: string;
+    subtitle?: string;
+    email?: string;
+    phone?: string;
+    address?: string;
+    description?: string;
+  } | null;
 }
 
-export function BecomeASponsorSection({ sponsorTypes }: BecomeASponsorSectionProps) {
+export function BecomeASponsorSection({ 
+  sponsorTypes, 
+  title, 
+  description,
+  metaData
+}: BecomeASponsorSectionProps) {
   const { submit, loading, error, success } = useMutation(becomeSponsorService.submit);
   const [logoFileName, setLogoFileName] = useState<string>("");
+
+  const finalTitle = metaData?.title || title || "";
+  const finalSubtitle = metaData?.subtitle || description || "";
+  
+  const contactItems = [
+    { Icon: IconMail, label: "Email Us", value: metaData?.email || "info@texpo-exhibition.com" },
+    { Icon: IconPhone, label: "Call Us", value: metaData?.phone || "0949333200" },
+    { Icon: IconMapPin, label: "Office", value: metaData?.address || "Damascus, Syria - Exhibition City" },
+  ];
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     const formData = new FormData(e.currentTarget);
@@ -31,19 +49,16 @@ export function BecomeASponsorSection({ sponsorTypes }: BecomeASponsorSectionPro
   return (
     <TwoPanelFormSection
       id="sponsor-enquiry"
-      title="BECOME A SPONSOR"
-      subtitle="Submit your interest and our partnership team will contact you with a tailored sponsorship proposal within 24 hours."
-      contactItems={sponsorContactInfo}
+      title={finalTitle}
+      subtitle={finalSubtitle}
+      contactItems={contactItems}
       onSubmit={handleSubmit}
       isSubmitting={loading}
       submitSuccess={success}
       submitError={error}
       successMessage="Thank you! Our partnership team will contact you within 24 hours."
-      terms={[
-        "By registering for TEXPO Land, you consent to the collection and processing of your personal data for the purpose of facilitating your participation in the event. Your information may also be used to send event-related updates and notifications, as well as to share relevant news, offers, and marketing communications from the exhibition and its official partners, in accordance with your selected preferences.",
-        "I confirm that I am 21 years of age or older, and that I have read and agreed to the Terms and Conditions and the Privacy Policy. I understand that my personal data will be processed in accordance with the Privacy Policy and, where necessary, shared with contracted service providers, exhibitors, sponsors, and partners for the purpose of delivering event services, facilitating my participation, and managing follow-ups or communications related to this event",
-        "Your information may be shared with contracted service providers and official partners only when needed to deliver event services and coordinate sponsorship packages"
-      ]}
+      description={metaData?.description || undefined}
+      terms={[]}
       renderFormFields={(styles) => (
         <>
           <div className={styles.row}>

@@ -61,16 +61,18 @@
 
 .iconWrap {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(0, 180, 200, 0.1);
-  border: 1px solid rgba(0, 180, 200, 0.25);
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #00b4c8;
-  margin-top: 2px;
+}
+
+.iconWrap img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .pointTitle {
