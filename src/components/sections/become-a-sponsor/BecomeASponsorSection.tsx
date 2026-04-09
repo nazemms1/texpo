@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { IconMail, IconPhone, IconMapPin } from "@tabler/icons-react";
 import { fadeInUp } from "@/src/lib/animations";
@@ -31,6 +31,10 @@ export function BecomeASponsorSection({
 }: BecomeASponsorSectionProps) {
   const { submit, loading, error, success } = useMutation(becomeSponsorService.submit);
   const [logoFileName, setLogoFileName] = useState<string>("");
+
+  useEffect(() => {
+    if (success) setLogoFileName("");
+  }, [success]);
 
   const finalTitle = metaData?.title || title || "";
   const finalSubtitle = metaData?.subtitle || description || "";

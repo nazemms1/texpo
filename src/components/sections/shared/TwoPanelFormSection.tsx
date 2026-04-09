@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInLeft, fadeInRight, fadeInUp, staggerContainer } from '@/src/lib/animations';
 import styles from './TwoPanelFormSection.module.css';
@@ -49,6 +50,12 @@ export function TwoPanelFormSection({
   submitError = null,
   successMessage = 'Your request has been submitted successfully!',
 }: TwoPanelFormSectionProps) {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (submitSuccess) formRef.current?.reset();
+  }, [submitSuccess]);
+
   return (
     <section id={id} className={styles.section}>
       <div className={styles.inner}>
@@ -108,6 +115,7 @@ export function TwoPanelFormSection({
           viewport={{ once: true, amount: 0.1 }}
         >
           <form
+            ref={formRef}
             className={styles.form}
             onSubmit={(e) => {
               e.preventDefault();
