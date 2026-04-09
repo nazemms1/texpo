@@ -130,3 +130,83 @@ export const pageHeroTranslations = {
     texpo2025: { title: 'تكسبو', accent: '2025' },
   },
 } as const;
+
+export const sponsorshipTiersTranslations = {
+  en: {
+    exclusive: 'EXCLUSIVE',
+    secureSponsorship: 'Secure sponsorship',
+    selectTier: 'Select tier',
+  },
+  ar: {
+    exclusive: 'حصري',
+    secureSponsorship: 'احجز الرعاية',
+    selectTier: 'اختر الفئة',
+  },
+} as const;
+
+export const becomeASponsorFormTranslations = {
+  en: {
+    emailUs: 'Email Us',
+    callUs: 'Call Us',
+    office: 'Office',
+    submitRequest: 'Submit Request',
+    submitting: 'Submitting…',
+    successMessage: 'Thank you! Our partnership team will contact you within 24 hours.',
+    fields: {
+      fullName: 'Full Name',
+      companyName: 'Company Name',
+      businessSector: 'Business Sector',
+      countryCity: 'Country / City',
+      sponsorshipCategories: 'Sponsorship Categories',
+      phoneNumber: 'Phone Number',
+      emailAddress: 'Email Address',
+      companyLogo: 'Company Logo',
+      address: 'Address',
+      message: 'Message',
+    },
+    placeholders: {
+      fullName: 'John Doe',
+      companyName: 'Tech Global Inc.',
+      businessSector: 'AI & Robotics',
+      countryCity: 'London, UK',
+      selectCategory: 'Select a sponsorship category',
+      phoneNumber: '+1 234 567 890',
+      emailAddress: 'john@company.com',
+      logoUpload: 'Upload your company logo (PNG, JPG, SVG)',
+      address: 'Address',
+      message: 'Tell us what you want to achieve as a sponsor at TEXPO LAND.',
+    },
+  },
+  ar: {
+    emailUs: 'راسلنا عبر البريد',
+    callUs: 'اتصل بنا',
+    office: 'المكتب',
+    submitRequest: 'إرسال الطلب',
+    submitting: 'جاري الإرسال…',
+    successMessage: 'شكراً لك! سيتواصل معك فريق الشراكات لدينا خلال 24 ساعة.',
+    fields: {
+      fullName: 'الاسم الكامل',
+      companyName: 'اسم الشركة',
+      businessSector: 'قطاع الأعمال',
+      countryCity: 'البلد / المدينة',
+      sponsorshipCategories: 'فئات الرعاية',
+      phoneNumber: 'رقم الهاتف',
+      emailAddress: 'البريد الإلكتروني',
+      companyLogo: 'شعار الشركة',
+      address: 'العنوان',
+      message: 'الرسالة',
+    },
+    placeholders: {
+      fullName: 'الاسم الكامل',
+      companyName: 'اسم الشركة',
+      businessSector: 'الذكاء الاصطناعي والروبوتات',
+      countryCity: 'دمشق، سوريا',
+      selectCategory: 'اختر فئة الرعاية',
+      phoneNumber: '+963 9xx xxx xxx',
+      emailAddress: 'john@company.com',
+      logoUpload: 'ارفع شعار شركتك (PNG, JPG, SVG)',
+      address: 'العنوان',
+      message: 'أخبرنا ما الذي تريد تحقيقه كراعٍ في معرض تكسبو.',
+    },
+  },
+} as const;

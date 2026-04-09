@@ -6,13 +6,19 @@ import { IconMail, IconPhone, IconMapPin } from '@tabler/icons-react';
 import { TwoPanelFormSection } from '@/src/components/sections/shared/TwoPanelFormSection';
 import { useMutation } from '@/src/hooks/useMutation';
 import { contactService } from '@/src/lib/api';
+import { useParams } from 'next/navigation';
+import { becomeASponsorFormTranslations, type Lang } from '@/src/lib/i18n';
 import type { ContactFormPayload, ContactUsApiData } from '@/src/types/api';
 
 export function ContactSection({ formData, loading }: { formData?: ContactUsApiData['formData'], loading?: boolean }) {
+  const { lang } = useParams();
+  const currentLang = (lang as Lang) || 'en';
+  const t = becomeASponsorFormTranslations[currentLang];
+
   const contactInfo = [
-    { Icon: IconMail,    label: 'Email Us', value: formData?.email || 'info@texpo-exhibition.com' },
-    { Icon: IconPhone,   label: 'Call Us',  value: formData?.phone || '0949333200' },
-    { Icon: IconMapPin,  label: 'Office',   value: formData?.address || 'Damascus, Syria - Exhibition City' },
+    { Icon: IconMail,    label: t.emailUs, value: formData?.email || 'info@texpo-exhibition.com' },
+    { Icon: IconPhone,   label: t.callUs,  value: formData?.phone || '0949333200' },
+    { Icon: IconMapPin,  label: t.office,   value: formData?.address || 'Damascus, Syria - Exhibition City' },
   ];
 
   const { submit, loading: isSubmitting, error, success } = useMutation(contactService.submit);
@@ -45,48 +51,49 @@ export function ContactSection({ formData, loading }: { formData?: ContactUsApiD
       submitError={error}
       terms={[
                ]}
+      submitLabel={t.submitRequest}
       renderFormFields={(styles) => (
         <>
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Full Name</span>
-              <input name="fullName" className={styles.input} type="text" placeholder="John Doe" />
+              <span className={styles.fieldLabel}>{t.fields.fullName}</span>
+              <input name="fullName" className={styles.input} type="text" placeholder={t.placeholders.fullName} />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Company Name</span>
-              <input name="companyName" className={styles.input} type="text" placeholder="Tech Global Inc." required />
+              <span className={styles.fieldLabel}>{t.fields.companyName}</span>
+              <input name="companyName" className={styles.input} type="text" placeholder={t.placeholders.companyName} required />
             </motion.label>
           </div>
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Business Sector</span>
-              <input name="sector" className={styles.input} type="text" placeholder="AI & Robotics" required />
+              <span className={styles.fieldLabel}>{t.fields.businessSector}</span>
+              <input name="sector" className={styles.input} type="text" placeholder={t.placeholders.businessSector} required />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Country / City</span>
-              <input name="country" className={styles.input} type="text" placeholder="London, UK" />
+              <span className={styles.fieldLabel}>{t.fields.countryCity}</span>
+              <input name="country" className={styles.input} type="text" placeholder={t.placeholders.countryCity} />
             </motion.label>
           </div>
 
           <motion.label className={styles.field} variants={fadeInUp}>
-            <span className={styles.fieldLabel}>Address</span>
-            <input name="address" className={styles.input} type="text" placeholder="Address" />
+            <span className={styles.fieldLabel}>{t.fields.address}</span>
+            <input name="address" className={styles.input} type="text" placeholder={t.placeholders.address} />
           </motion.label>
 
           <div className={styles.row}>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Phone Number</span>
-              <input name="phone" className={styles.input} type="tel" placeholder="+1 234 567 890" required />
+              <span className={styles.fieldLabel}>{t.fields.phoneNumber}</span>
+              <input name="phone" className={styles.input} type="tel" placeholder={t.placeholders.phoneNumber} required />
             </motion.label>
             <motion.label className={styles.field} variants={fadeInUp}>
-              <span className={styles.fieldLabel}>Email Address</span>
-              <input name="email" className={styles.input} type="email" placeholder="john@company.com" required />
+              <span className={styles.fieldLabel}>{t.fields.emailAddress}</span>
+              <input name="email" className={styles.input} type="email" placeholder={t.placeholders.emailAddress} required />
             </motion.label>
           </div>
 
           <motion.label className={styles.field} variants={fadeInUp}>
-            <span className={styles.fieldLabel}>Message</span>
+            <span className={styles.fieldLabel}>{t.fields.message}</span>
             <textarea name="message" className={`${styles.input} ${styles.textarea}`} rows={4} placeholder="How can we help your brand excel at TEXPO LAND?" />
           </motion.label>
         </>
