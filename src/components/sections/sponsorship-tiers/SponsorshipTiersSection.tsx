@@ -15,7 +15,7 @@ interface ApiTierItem {
   id: number;
   name: string;
   color: string;
-  items: string[];
+  items: Array<{ item: string }> | string[];
 }
 
 export interface SponsorshipTiersSectionProps {
@@ -31,10 +31,15 @@ const VALID_VARIANTS: SponsorTierVariant[] = ['silver', 'gold', 'platinum', 'dia
 function apiItemToTierDefinition(item: ApiTierItem): SponsorTierDefinition | null {
   const variant = item.name.toLowerCase() as SponsorTierVariant;
   if (!VALID_VARIANTS.includes(variant)) return null;
+
+  const features = item.items?.map((i: any) => 
+    typeof i === 'string' ? i : i?.item
+  ).filter(Boolean);
+
   return {
     variant,
     title: item.name.toUpperCase(),
-    features: item.items.length > 0 ? item.items : undefined,
+    features: features && features.length > 0 ? features : undefined,
     ctaLabel: variant === 'diamond' ? 'Secure sponsorship' : 'Select tier',
     badge: variant === 'diamond' ? 'EXCLUSIVE' : undefined,
     iconSrc: SPONSORSHIP_TIER_ICON_SRC[variant],

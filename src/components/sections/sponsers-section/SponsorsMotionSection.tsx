@@ -6,8 +6,6 @@ import { SectionTitle } from "@/src/components/ui/SectionTitle/SectionTitle";
 import { staggerContainer, fadeInUp } from "@/src/lib/animations";
 import { Container } from "@/src/components/layout/Container";
 import { SponsorCard } from "./SponsorCard";
-import { useApi } from "@/src/hooks/useApi";
-import { sponsorsService } from "@/src/lib/api";
 import type { SponsorApiItem } from "@/src/types/api";
 import styles from "./SponsorsMotionSection.module.css";
 
@@ -30,15 +28,9 @@ interface SponsorsMotionSectionProps {
 export function SponsorsMotionSection({ 
   title, 
   items, 
-  loading: parentLoading 
+  loading = false 
 }: SponsorsMotionSectionProps) {
-  const { data, loading: apiLoading } = useApi(() => {
-    if (items) return Promise.resolve({ data: items } as any);
-    return sponsorsService.getSponsors();
-  });
-
-  const loading = parentLoading ?? apiLoading;
-  const rawData = items ?? (data as any) ?? FALLBACK_SPONSORS;
+  const rawData = items ?? FALLBACK_SPONSORS;
   const sponsorsData = Array.isArray(rawData) ? rawData : [];
 
   const sponsors: SponsorApiItem[] = sponsorsData.map((s: any, i: number) => {
