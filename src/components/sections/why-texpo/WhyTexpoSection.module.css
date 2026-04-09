@@ -53,8 +53,8 @@
 }
 
 .card:hover {
-  border-color: rgba(0, 180, 200, 0.4);
-  box-shadow: 0 8px 32px rgba(0, 180, 200, 0.08);
+  border-color: rgba(0, 32, 104, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 32, 104, 0.1);
 }
 
 .iconWrap {
@@ -62,11 +62,11 @@
   height: 56px;
   border-radius: 9999px;
   background: #002068;
-  border: 1px solid #42BEB333;
+  border: 1px solid rgba(0, 32, 104, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #00b4c8;
+  color: #ffffff;
   flex-shrink: 0;
 }
 

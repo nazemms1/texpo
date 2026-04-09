@@ -24,7 +24,7 @@
 .body {
   font-family: 'URWGeometricArabic-Regular', sans-serif;
   font-size: 1.125rem;
-   
+  line-height: 1.6;
   color: #555960;
   margin: 0;
 }
@@ -52,12 +52,12 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1.5px solid rgba(100, 160, 255, 0.2);
+  border: 1.5px solid rgba(0, 32, 104, 0.1);
 }
 
 .ringMid {
   inset: 15%;
-  border-color: rgba(167, 139, 250, 0.2);
+  border-color: rgba(0, 32, 104, 0.15);
   border-style: dashed;
 }
 
@@ -66,9 +66,9 @@
   inset: 35%;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%,
-      rgba(60, 120, 255, 0.35),
-      rgba(20, 40, 120, 0.5));
-  border: 1px solid rgba(100, 160, 255, 0.35);
+      rgba(0, 32, 104, 0.4),
+      rgba(0, 32, 104, 0.7));
+  border: 1px solid rgba(0, 32, 104, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,14 +89,27 @@
 
 .orbitDot {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: rgba(100, 180, 255, 0.85);
+  background: #002068;
   top: 50%;
   left: 50%;
   transform: rotate(var(--deg)) translateX(calc(clamp(280px, 38vw, 440px) * 0.46)) translateY(-50%);
-  box-shadow: 0 0 8px rgba(100, 180, 255, 0.6);
+  box-shadow: 0 0 12px rgba(0, 32, 104, 0.4);
+}
+
+.bgImage {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  border-radius: 32px;
+  box-shadow: 0 40px 80px -20px rgba(0, 32, 104, 0.2);
+  transition: transform 0.5s ease;
+}
+
+.bgImage:hover {
+  transform: scale(1.02);
 }
 
 .lines {

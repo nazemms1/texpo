@@ -10,12 +10,14 @@ interface StandMapCarouselProps {
   images: { src: string; alt: string }[];
   title?: string;
   loading?: boolean;
+  isModal?: boolean;
 }
 
 export function StandMapCarousel({
   images = [],
-  title = 'Exhibition Stand Maps',
-  loading
+  title = '',
+  loading,
+  isModal = false
 }: StandMapCarouselProps) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -28,8 +30,8 @@ export function StandMapCarousel({
 
   if (loading) {
     return (
-      <section className={styles.section}>
-        <div className={styles.inner}>
+      <section className={`${styles.section} ${isModal ? styles.modalSection : ''}`}>
+        <div className={`${styles.inner} ${isModal ? styles.modalInner : ''}`}>
           <Skeleton bg="gray.3" height={40} width="60%" radius="xl" mx="auto" mb="xl" animate />
           <div className={styles.carouselWrapper}>
              <Skeleton bg="gray.3" height={500} width="100%" radius="xl" animate />
@@ -74,8 +76,8 @@ export function StandMapCarousel({
   if (!images || images.length === 0) return null;
 
   return (
-    <section className={styles.section}>
-      <div className={styles.inner}>
+    <section className={`${styles.section} ${isModal ? styles.modalSection : ''}`}>
+      <div className={`${styles.inner} ${isModal ? styles.modalInner : ''}`}>
         <h2 className={styles.title}>{title}</h2>
 
         <div className={styles.carouselWrapper}>

@@ -100,7 +100,7 @@ export function ArrowCircle({
             cx="40"
             cy="40"
             r="39"
-            stroke="#42BEB3"
+            stroke="#002068"
             strokeWidth="1"
             strokeDasharray="12 12"
           />
@@ -128,26 +128,45 @@ export function ArrowCircle({
 }
 
 interface ButtonPairProps {
-  pillHref: string;
-  arrowHref: string;
+  pillHref?: string;
+  arrowHref?: string;
+  onClick?: () => void;
   variant?: 'primary' | 'outline' | 'ghost';
   size?: 'md' | 'lg';
   children: React.ReactNode;
 }
 
-export function ButtonPair({ pillHref, arrowHref, variant = 'primary', size = 'md', children }: ButtonPairProps) {
+export function ButtonPair({ 
+  pillHref, 
+  arrowHref, 
+  onClick, 
+  variant = 'primary', 
+  size = 'md', 
+  children 
+}: ButtonPairProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', cursor: (onClick || pillHref || arrowHref) ? 'pointer' : 'default' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
     >
-      <PillButton href={pillHref} variant={variant} size={size} isGroupHovered={hovered}>
+      <PillButton 
+        href={pillHref} 
+        variant={variant} 
+        size={size} 
+        isGroupHovered={hovered}
+      >
         {children}
       </PillButton>
-      <ArrowCircle href={arrowHref} variant={variant} size={size} isGroupHovered={hovered} />
+      <ArrowCircle 
+        href={arrowHref} 
+        variant={variant} 
+        size={size} 
+        isGroupHovered={hovered} 
+      />
     </div>
   );
 }

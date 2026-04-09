@@ -14,6 +14,8 @@ import { aboutTranslations, Lang } from "@/src/lib/i18n";
 import { Stack } from "@mantine/core";
 
 import { getImageUrl } from "@/src/lib/helpers";
+import { useDisclosure } from "@mantine/hooks";
+import { MapModal } from "../book-a-stand/MapModal";
 import styles from "./AboutExhibition.module.css";
 
 interface AboutExhibitionProps {
@@ -38,6 +40,7 @@ export function AboutExhibition({
   const { lang } = useParams();
   const currentLang = (lang as Lang) || 'en';
   const t = aboutTranslations[currentLang];
+  const [opened, { open, close }] = useDisclosure(false);
 
   if (!title && !description && !loading) return null;
 
@@ -64,7 +67,7 @@ export function AboutExhibition({
           {!hideButtons && (
             <motion.div className={styles.actions} variants={fadeInUp}>
               {variant === "about" && <ArrowCircle href={youtubeUrl || "#"} variant="dashed" />}
-              <ButtonPair pillHref="#" arrowHref="#" variant="primary">
+              <ButtonPair onClick={open} variant="primary">
                  {t.viewMap}
               </ButtonPair>
               {variant === "home" && (
@@ -91,6 +94,8 @@ export function AboutExhibition({
           />
         </motion.div>
       </div>
+
+      <MapModal opened={opened} onClose={close} />
     </section>
   );
 }
