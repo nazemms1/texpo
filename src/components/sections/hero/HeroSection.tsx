@@ -125,22 +125,15 @@ export function HeroSection({
 
               <motion.div className={styles.actions} variants={fadeInUp}>
                 <ButtonPair
-                  pillHref="/book-a-stand"
-                  arrowHref="/about"
+                  pillHref="/become-a-sponsor"
+                  arrowHref="/become-a-sponsor"
                   variant="primary"
                   size="lg"
                 >
                   {t.discoverMore}
                 </ButtonPair>
 
-                <ButtonPair
-                  pillHref="/become-a-sponsor"
-                  arrowHref="/become-a-sponsor"
-                  variant="outline"
-                  size="lg"
-                >
-                  {t.becomeSponsor}
-                </ButtonPair>
+               
               </motion.div>
             </>
           )}
