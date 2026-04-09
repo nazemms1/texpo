@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         hostname: 'backtexpo.ultrawares.com',
       },
     ],
+    dangerouslyAllowSVG: true,
   },
 };
 
