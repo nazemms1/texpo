@@ -87,7 +87,7 @@
 .heading {
   font-family: 'Nulshock', sans-serif;
   font-weight: 700;
-  font-size: 80px;
+  font-size: 70px;
   line-height: 96px;
   letter-spacing: 0;
   color: #fff;
@@ -106,9 +106,9 @@
 
 .description {
   font-family: 'URWGeometricArabic-Medium', sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.75;
-  color: #FFFFFF;
+  color: #FFFFFF; 
   max-width: 600px;
   margin: 0;
   text-align: start;

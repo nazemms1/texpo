@@ -102,14 +102,15 @@ export function HeroSection({
             <>
               {title && (
                 <motion.h1 className={styles.heading} variants={fadeInLeft}>
-                  {title.split("Future Being").map((part, index) => (
+                  {title.split(/(Future Being)/i).map((part, index, array) => (
                     <React.Fragment key={index}>
-                      {part}
-                      {index === 0 && (
+                      {/  Being/i.test(part) ? (
                         <>
-                          <span className={styles.accent}> </span>
+                          <span className={styles.accent}>{part}</span>
                           <br />
                         </>
+                      ) : (
+                        part
                       )}
                     </React.Fragment>
                   ))}
