@@ -66,6 +66,7 @@ export function SectorCard({ title, image, offset, isActive, total }: SectorCard
           src={image}
           alt={title.replace("\n", " ")}
           fill
+          unoptimized={true}
           sizes="(max-width: 768px) 82vw, 400px"
           className={styles.cardImage}
           priority={isActive}
