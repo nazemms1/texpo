@@ -25,12 +25,20 @@ export default function BookAStandPage() {
   return (
     <>
       <PageHero title={t.title} titleAccent={t.accent} />
-      <StandMapCarousel 
+          <div className="withLinesBg">
+  <StandMapCarousel 
         images={images} 
         title={standInfo?.title || "Exhibition Stand Maps"} 
         loading={loading}
       />
-      <BookAStandSection 
+      </div>
+     <div
+     style={{
+        backgroundImage: "url('/images/background.png')",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left'
+      }}>
+       <BookAStandSection 
         title={formData?.title}
         subtitle={formData?.subtitle}
         email={formData?.email}
@@ -39,6 +47,7 @@ export default function BookAStandPage() {
         description={formData?.description}
         loading={loading}
       />
+     </div>
     </>
   );
 }

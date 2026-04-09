@@ -26,26 +26,32 @@ export default function AboutPage() {
         titleAccent={t.accent}
       />
       <div className="withLinesBg">
-        <AboutExhibition 
-          variant="about" 
+        <AboutExhibition
+          variant="about"
           title={aboutSection?.title}
           description={aboutSection?.description}
           image={aboutSection?.image}
           loading={loading}
         />
       </div>
-      <WhyTexpoSection 
-        title={whyTexpo?.title}
-        items={whyTexpo?.items}
-        loading={loading}
-      />
-      <WhySyriaSection 
-        title={whySyria?.title}
-        description={whySyria?.description}
-        image={whySyria?.image}
-        items={whySyria?.items}
-        loading={loading}
-      />
+      <div style={{
+        backgroundImage: "url('/images/background.png')",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left'
+      }}>
+        <WhyTexpoSection
+          title={whyTexpo?.title}
+          items={whyTexpo?.items}
+          loading={loading}
+        />
+        <WhySyriaSection
+          title={whySyria?.title}
+          description={whySyria?.description}
+          image={whySyria?.image}
+          items={whySyria?.items}
+          loading={loading}
+        />
+      </div>
     </>
   );
 }

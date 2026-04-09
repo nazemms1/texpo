@@ -26,7 +26,12 @@ export default function Texpo2025Page() {
       <div className="withLinesBg">
         <StatisticsSection items={stats} loading={loading} />
       </div>
-       <AboutExhibition
+    <div style={{
+        backgroundImage: "url('/images/background.png')",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left'
+      }}>
+         <AboutExhibition
         variant="about"
         hideButtons={true}
         title={data?.title}
@@ -35,6 +40,7 @@ export default function Texpo2025Page() {
         loading={loading}
       />
       <InfoCardSection items={data?.items} loading={loading} />
+    </div>
     </>
   );
 }

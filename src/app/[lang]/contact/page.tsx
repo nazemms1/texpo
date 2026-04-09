@@ -28,8 +28,15 @@ export default function ContactPage() {
       >
         <ContactHeroCard image={data?.data?.image} loading={loading} />
       </div>
-      <ContactMap lan={data?.data?.lan} lag={data?.data?.lag} loading={loading} />
+      <div
+      style={{
+        backgroundImage: "url('/images/background.png')",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left'
+      }}>
+        <ContactMap lan={data?.data?.lan} lag={data?.data?.lag} loading={loading} />
       <ContactSection formData={data?.formData} loading={loading} />
+      </div>
     </>
   );
 }

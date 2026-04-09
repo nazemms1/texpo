@@ -46,17 +46,25 @@ export default function BecomeSponsorPage() {
       <div className={styles.heroWrap}>
         <PageHero title={t.title} titleAccent={t.accent} />
       </div>
+      <div className="withLinesBg">
 
-      <SponsorshipTiersSection
-        id="become-sponsor-intro"
-        apiItems={typesSection?.['meta-data']}
-        title={typesSection?.title}
-        description={typesSection?.description}
-      />
-      <CompareBenefitsSection dataset={benefitsDataset} />
-      <WhyTexpoSection />
-      <InfoCardSection items={infoCardSection?.['meta-data']} loading={loading} />
-      <BecomeASponsorSection sponsorTypes={sponsorTypes as any} />
+        <SponsorshipTiersSection
+          id="become-sponsor-intro"
+          apiItems={typesSection?.['meta-data']}
+          title={typesSection?.title}
+          description={typesSection?.description}
+        />
+      </div>
+      <div style={{
+        backgroundImage: "url('/images/background.png')",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left'
+      }}>
+        <CompareBenefitsSection dataset={benefitsDataset} />
+        <WhyTexpoSection />
+        <InfoCardSection items={infoCardSection?.['meta-data']} loading={loading} />
+        <BecomeASponsorSection sponsorTypes={sponsorTypes as any} />
+      </div>
     </>
   );
 }
