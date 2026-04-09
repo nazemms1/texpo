@@ -9,12 +9,14 @@ import { SponsorsMotionSection } from "@/src/components/sections/sponsers-sectio
 import { InfoCardSection } from "@/src/components/sections/info-card/InfoCardSection";
 import { MapSection } from "@/src/components/sections/map/MapSection";
 import { useApi } from "@/src/hooks/useApi";
-import { homeService } from "@/src/lib/api";
+import { homeService, publicDataService } from "@/src/lib/api";
 import { useParams } from "next/navigation";
 
 export default function HomePage() {
   const { lang } = useParams();
   const { data: sections, loading } = useApi(() => homeService.getHomeData(), [], `home-${lang}`);
+  const { data: publicData } = useApi(() => publicDataService.getPublicData(), [], 'public-data');
+  const youtubeUrl = publicData?.find(item => item.key === 'youtube_url')?.value;
 
   const heroData = sections?.find(s => s.key === 'hero-section');
   const aboutData = sections?.find(s => s.key === 'about-section');
@@ -43,6 +45,7 @@ export default function HomePage() {
           description={aboutData?.description}
           image={aboutData?.media}
           loading={loading}
+          youtubeUrl={youtubeUrl}
         />
       </div>
       <div style={{

@@ -34,11 +34,11 @@ export const headerTranslations = {
 export const heroTranslations = {
   en: {
     discoverMore: 'Book a Stand',
-    // becomeSponsor: 'Become A Sponsor',
+    becomeSponsor: 'Become A Sponsor',
   },
   ar: {
-    discoverMore: 'كن راعياً',
-    // becomeSponsor: 'كن راعياً',
+    discoverMore: 'احجز منصة عرض',
+    becomeSponsor: 'كن راعياً',
   },
 } as const;
 

@@ -23,6 +23,7 @@ interface AboutExhibitionProps {
   description?: string | null;
   image?: any;
   loading?: boolean;
+  youtubeUrl?: string | null;
 }
 
 export function AboutExhibition({
@@ -32,6 +33,7 @@ export function AboutExhibition({
   description,
   image,
   loading,
+  youtubeUrl,
 }: AboutExhibitionProps) {
   const { lang } = useParams();
   const currentLang = (lang as Lang) || 'en';
@@ -61,12 +63,12 @@ export function AboutExhibition({
 
           {!hideButtons && (
             <motion.div className={styles.actions} variants={fadeInUp}>
-              {variant === "about" && <ArrowCircle href="#" variant="dashed" />}
+              {variant === "about" && <ArrowCircle href={youtubeUrl || "#"} variant="dashed" />}
               <ButtonPair pillHref="#" arrowHref="#" variant="primary">
                  {t.viewMap}
               </ButtonPair>
               {variant === "home" && (
-                <ButtonPair pillHref="#" arrowHref="#" variant="outline">
+                <ButtonPair pillHref={youtubeUrl || "#"} arrowHref={youtubeUrl || "#"} variant="outline">
                    {t.watch}
                 </ButtonPair>
               )}
