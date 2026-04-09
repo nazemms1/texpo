@@ -37,7 +37,7 @@ export function MapSection({
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
           >
-            {title || "PARTICIPATING COUNTRIES AT TEXPO LAND | 2ND EDITION"}
+            {title || "  COUNTRIES AT TEXPO LAND | 2ND EDITION"}
           </motion.h2>
         </motion.div>
       </div>
