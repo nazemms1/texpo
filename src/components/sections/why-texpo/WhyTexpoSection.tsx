@@ -25,20 +25,21 @@ export function WhyTexpoSection({
 }) {
   const [embla, setEmbla] = useState<EmblaCarouselType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const displayTitle = title || "WHY TEXPO?";
 
   useEffect(() => {
-    if (!embla) return;
+    if (!embla || isPaused) return;
 
     const intervalId = setInterval(() => {
       embla.scrollNext();
-    }, 1000);
+    }, 1500);
 
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [embla]);
+  }, [embla, isPaused]);
 
   if (!items || items.length === 0) return null;
 
@@ -65,7 +66,11 @@ export function WhyTexpoSection({
           {displayTitle}
         </motion.h2>
 
-        <div className={styles.carouselWrapper}>
+        <div 
+          className={styles.carouselWrapper}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <Carousel
             className={styles.carousel}
             slideSize={{ base: "100%", sm: "50%", md: "33.333333%", lg: "459px" }}
@@ -74,7 +79,7 @@ export function WhyTexpoSection({
 
             withControls={false}
             withIndicators={false}
-            emblaOptions={{ duration: 20 }}
+            emblaOptions={{ duration: 20, loop: true }}
             getEmblaApi={setEmbla}
             onSlideChange={setActiveIndex}
           >
@@ -89,7 +94,13 @@ export function WhyTexpoSection({
                     )}
                   </div>
                   <h3 className={styles.cardTitle}>{title}</h3>
-                  <p className={styles.cardBody}>{body}</p>
+                  <div className={styles.cardBody}>
+                    {body.split('.').filter(s => s.trim()).map((segment, index, array) => (
+                      <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.5rem' : 0 }}>
+                        {segment.trim()}.
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Carousel.Slide>
             ))}

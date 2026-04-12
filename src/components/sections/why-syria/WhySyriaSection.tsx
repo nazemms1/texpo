@@ -94,9 +94,13 @@ export function WhySyriaSection({
             {displayTitle}
           </motion.h2>
 
-          <motion.p className={styles.intro} variants={fadeInUp}>
-            {displayIntro}
-          </motion.p>
+          <motion.div className={styles.intro} variants={fadeInUp}>
+            {displayIntro.split('.').filter(s => s.trim()).map((segment, index, array) => (
+              <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.75rem' : 0 }}>
+                {segment.trim()}.
+              </span>
+            ))}
+          </motion.div>
 
           <div className={styles.points}>
             {displayPoints.map(({ icon, title, body }, idx) => (
@@ -107,7 +111,13 @@ export function WhySyriaSection({
 
                 <div>
                   <h3 className={styles.pointTitle}>{title}</h3>
-                  <p className={styles.pointBody}>{body}</p>
+                  <div className={styles.pointBody}>
+                    {body.split('.').filter(s => s.trim()).map((segment, index, array) => (
+                      <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.5rem' : 0 }}>
+                        {segment.trim()}.
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             ))}

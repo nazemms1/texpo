@@ -62,7 +62,13 @@ export function VisionSection() {
               </div>
               <div>
                 <h3 className={styles.pillarTitle}>{title}</h3>
-                <p className={styles.pillarBody}>{body}</p>
+                <div className={styles.pillarBody}>
+                  {body.split('.').filter(s => s.trim()).map((segment, index, array) => (
+                    <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.5rem' : 0 }}>
+                      {segment.trim()}.
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}

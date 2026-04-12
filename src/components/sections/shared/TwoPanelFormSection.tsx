@@ -76,7 +76,15 @@ export function TwoPanelFormSection({
           />
 
           <h2 className={styles.title}>{title}</h2>
-          <p className={styles.subtitle}>{subtitle}</p>
+          {subtitle && (
+            <div className={styles.subtitle}>
+              {subtitle.split('.').filter(s => s.trim()).map((segment, index, array) => (
+                <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.75rem' : 0 }}>
+                  {segment.trim()}.
+                </span>
+              ))}
+            </div>
+          )}
 
           <div className={styles.contactList}>
             {contactItems.map(({ Icon, label, value }) => (
@@ -94,7 +102,13 @@ export function TwoPanelFormSection({
 
           {description && (
             <div className={styles.descriptionWrapper} style={{ marginBottom: '1.5rem' }}>
-              <p className={styles.description}>{description}</p>
+              <div className={styles.description}>
+                {description.split('.').filter(s => s.trim()).map((segment, index, array) => (
+                  <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.75rem' : 0 }}>
+                    {segment.trim()}.
+                  </span>
+                ))}
+              </div>
             </div>
           )}
 

@@ -71,12 +71,14 @@ export function ExhibitorsSectorsSection({
     return Math.abs(value) < Math.abs(arr[bestIdx] ?? Infinity) ? idx : bestIdx;
   }, 0);
 
+  const [isPaused, setIsPaused] = useState(false);
+
   useEffect(() => {
-    if (!embla) return;
+    if (!embla || isPaused) return;
 
     const interval = setInterval(() => {
       embla.scrollNext();
-    }, 1500);
+    }, 3000);
 
     const updateArc = () => {
       const scrollProgress = embla.scrollProgress();
@@ -101,7 +103,7 @@ export function ExhibitorsSectorsSection({
       embla.off("reInit", updateArc);
       embla.off("settle", updateArc);
     };
-  }, [embla, total, displayItems]);
+  }, [embla, total, displayItems, isPaused]);
 
   if (loading && !items) return null;
 
@@ -123,7 +125,11 @@ export function ExhibitorsSectorsSection({
             </p>
           </header>
 
-          <div className={styles.carouselContainer}>
+          <div 
+            className={styles.carouselContainer}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <div className={styles.stage3D}>
               {displayItems.map((sector: any, index) => (
                 <SectorCard

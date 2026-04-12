@@ -29,7 +29,15 @@ export function SectionTitle({
     >
       {label && <span className={styles.label}>{label}</span>}
       <h2 className={styles.title}>{title}</h2>
-      {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+      {subtitle && (
+        <div className={styles.subtitle}>
+          {subtitle.split('.').filter(s => s.trim()).map((segment, index, array) => (
+            <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.75rem' : 0 }}>
+              {segment.trim()}.
+            </span>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 }
