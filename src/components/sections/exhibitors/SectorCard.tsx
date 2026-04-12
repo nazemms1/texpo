@@ -16,20 +16,30 @@ export function SectorCard({ title, image, offset, isActive, total }: SectorCard
   const lines = title.split("\n");
   const abs = Math.abs(offset);
   
-   const angle = (offset / total) * Math.PI; 
+  // Adjusted Spacing: Bringing them closer as requested (Reduced angleStep)
+  const angleStep = 0.58; 
+  const angle = offset * angleStep;
   
-  const translateX = Math.sin(angle) * 520; 
+  // Radius and 3D positioning
+  const radius = 580; 
+  const translateX = Math.sin(angle) * radius; 
   const translateZ = (Math.cos(angle) - 1) * 350;
-  const archFactor = Math.abs(offset / (total/2));
-  const translateY = Math.pow(archFactor, 1.3) * 180;
+  
+  // Vertical arc depth
+  const archFactor = Math.abs(offset / 2.2);
+  const translateY = Math.pow(Math.min(archFactor, 1.5), 1.2) * 100;
   
   const rotateY = -Math.sin(angle) * 35;
-  const rotateZ = (offset / total) * 35;
-  const scale = 1 - abs * 0.12;
+  const rotateZ = offset * 4.5;
+  const scale = 1 - Math.min(abs * 0.1, 0.35);
   
-   const opacity = isActive ? 1 : Math.max(0.4, 1 - abs * 0.25);
+  // Visibility Logic: Still showing only 5 cards for clarity
+  let opacity = 0;
+  if (abs <= 2.2) {
+    opacity = isActive ? 1 : Math.max(0, 1 - abs * 0.4);
+  }
   
-   const blur = abs > 1.2 ? `blur(${Math.min(5, (abs - 1.2) * 6)}px)` : "blur(0px)";
+  const blur = abs > 1.2 ? `blur(${Math.min(4, (abs - 1.2) * 4)}px)` : "blur(0px)";
 
   return (
     <motion.article
@@ -44,11 +54,13 @@ export function SectorCard({ title, image, offset, isActive, total }: SectorCard
         scale,
         opacity,
         filter: blur,
-        zIndex: Math.round((5 - abs) * 10),
+        zIndex: Math.round((20 - abs) * 10),
+        pointerEvents: abs > 2.2 ? "none" : "auto",
+        visibility: abs > 2.8 ? "hidden" : "visible" as any
       }}
       transition={{
-        duration: 0.35,
-        ease: [0.22, 0.61, 0.36, 1],
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1],
         zIndex: { duration: 0 }
       }}
       style={{

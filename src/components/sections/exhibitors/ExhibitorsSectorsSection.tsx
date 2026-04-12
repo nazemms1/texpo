@@ -53,11 +53,11 @@ interface ExhibitorsSectorsSectionProps {
   loading?: boolean;
 }
 
-export function ExhibitorsSectorsSection({ 
-  title, 
-  description, 
-  items, 
-  loading 
+export function ExhibitorsSectorsSection({
+  title,
+  description,
+  items,
+  loading
 }: ExhibitorsSectorsSectionProps) {
   const displayItems = (items && items.length > 0) ? items : SECTORS;
   const total = displayItems.length;
@@ -73,6 +73,10 @@ export function ExhibitorsSectorsSection({
 
   useEffect(() => {
     if (!embla) return;
+
+    const interval = setInterval(() => {
+      embla.scrollNext();
+    }, 1500);
 
     const updateArc = () => {
       const scrollProgress = embla.scrollProgress();
@@ -91,6 +95,7 @@ export function ExhibitorsSectorsSection({
     embla.on("settle", updateArc);
 
     return () => {
+      if (interval) clearInterval(interval);
       embla.off("scroll", updateArc);
       embla.off("select", updateArc);
       embla.off("reInit", updateArc);
@@ -100,8 +105,8 @@ export function ExhibitorsSectorsSection({
 
   if (loading && !items) return null;
 
-  const cleanDescription = description 
-    ? description.split('including:')[0] + 'including:' 
+  const cleanDescription = description
+    ? description.split('including:')[0] + 'including:'
     : "The TEXPO Land exhibition features a wide range of companies and institutions from various technological and digital transformation sectors, showcasing advanced solutions, products, and services across a variety of fields, including:";
 
   return (
@@ -120,7 +125,7 @@ export function ExhibitorsSectorsSection({
 
           <div className={styles.carouselContainer}>
             <div className={styles.stage3D}>
-                {displayItems.map((sector: any, index) => (
+              {displayItems.map((sector: any, index) => (
                 <SectorCard
                   key={index}
                   title={sector.title || ""}
@@ -142,7 +147,7 @@ export function ExhibitorsSectorsSection({
                   align: "center",
                   loop: true,
                   skipSnaps: false,
-                  duration: 15,
+                  duration: 25,
                 }}
                 getEmblaApi={setEmbla}
                 onSlideChange={setActiveIndex}
@@ -163,8 +168,7 @@ export function ExhibitorsSectorsSection({
                 className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ""}`}
                 onClick={() => {
                   setActiveIndex(i);
-                  setOffsets(displayItems.map((_, idx) => getLoopDistance(idx, i, total)));
-                  embla?.scrollTo(i, true);
+                  embla?.scrollTo(i);
                 }}
                 aria-label={`Go to sector ${i + 1}`}
               />
