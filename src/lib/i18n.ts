@@ -174,7 +174,7 @@ export const becomeASponsorFormTranslations = {
       emailAddress: 'john@company.com',
       logoUpload: 'Upload your company logo (PNG, JPG, SVG)',
       address: 'Address',
-      message: 'Tell us what you want to achieve as a sponsor at TEXPO LAND.',
+      message: 'How can we help your brand excel at TEXPO LAND?',
     },
   },
   ar: {
@@ -206,7 +206,7 @@ export const becomeASponsorFormTranslations = {
       emailAddress: 'john@company.com',
       logoUpload: 'ارفع شعار شركتك (PNG, JPG, SVG)',
       address: 'العنوان',
-      message: 'أخبرنا ما الذي تريد تحقيقه كراعٍ في معرض تكسبو.',
+      message: 'كيف يمكننا مساعدة علامتك التجارية على التألق في أرض تكسبو؟',
     },
   },
 } as const;

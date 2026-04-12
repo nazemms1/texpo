@@ -94,7 +94,7 @@ export function ContactSection({ formData, loading }: { formData?: ContactUsApiD
 
           <motion.label className={styles.field} variants={fadeInUp}>
             <span className={styles.fieldLabel}>{t.fields.message}</span>
-            <textarea name="message" className={`${styles.input} ${styles.textarea}`} rows={4} placeholder="How can we help your brand excel at TEXPO LAND?" />
+            <textarea name="message" className={`${styles.input} ${styles.textarea}`} rows={4} placeholder={t.placeholders.message} />
           </motion.label>
         </>
       )}

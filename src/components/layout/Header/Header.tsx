@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname, useParams } from 'next/navigation';
 import { useNavbar } from '@/src/hooks/useNavbar';
 import { NavMenu } from './NavMenu';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -11,6 +12,8 @@ import styles from './Header.module.css';
 
 export function Header() {
   const { scrolled, menuOpen, setMenuOpen } = useNavbar();
+  const params = useParams();
+  const lang = (params?.lang as string) || 'en';
 
   return (
     <motion.header
@@ -21,7 +24,7 @@ export function Header() {
     >
       <div className={styles.inner}>
   
-        <Link href="/" className={styles.logo}>
+        <Link href={`/${lang}`} className={styles.logo}>
           <Image
             src="/logos/logo-header.svg"
             alt="TEXPO logo"

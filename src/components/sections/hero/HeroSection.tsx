@@ -125,8 +125,8 @@ export function HeroSection({
 
               <motion.div className={styles.actions} variants={fadeInUp}>
                 <ButtonPair
-                  pillHref="/book-a-stand"
-                  arrowHref="/about"
+                  pillHref={`/${currentLang}/book-a-stand`}
+                  arrowHref={`/${currentLang}/about`}
                   variant="primary"
                   size="lg"
                 >
@@ -134,8 +134,8 @@ export function HeroSection({
                 </ButtonPair>
 
                 <ButtonPair
-                  pillHref="/become-a-sponsor"
-                  arrowHref="/become-a-sponsor"
+                  pillHref={`/${currentLang}/become-a-sponsor`}
+                  arrowHref={`/${currentLang}/become-a-sponsor`}
                   variant="outline"
                   size="lg"
                 >
