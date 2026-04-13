@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useNavbar } from '@/src/hooks/useNavbar';
 import { NavMenu } from './NavMenu';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -38,6 +38,9 @@ export function Header() {
      
         <div className={styles.desktopNav}>
           <NavMenu />
+          <Link href={`/${lang}/visitors`} className={styles.registerBtn}>
+            {lang === 'ar' ? 'تسجيل زائر' : 'Register Visitor'}
+          </Link>
           <LanguageSwitcher />
         </div>
 

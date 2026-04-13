@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useParams, useRouter } from 'next/navigation';
-import { headerTranslations, type Lang } from '@/src/lib/i18n';
-import { IconChevronDown } from '@tabler/icons-react';
+import { type Lang } from '@/src/lib/i18n';
+import { IconWorld } from '@tabler/icons-react';
 import styles from './Header.module.css';
 
 interface LanguageSwitcherProps {
@@ -16,76 +16,70 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   const params = useParams();
   const router = useRouter();
   const lang = (params?.lang as Lang) ?? 'en';
-  const nextLang: Lang = lang === 'en' ? 'ar' : 'en';
-  const currentLabel = headerTranslations[lang].label;
-  const nextLabel = headerTranslations[lang].switchTo;
-  
+  const targetLang: Lang = lang === 'en' ? 'ar' : 'en';
+  const targetLabel = lang === 'en' ? 'العربية' : 'English';
+
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  function openWithTimer() {
+    setIsOpen(true);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setIsOpen(false), 1000);
+  }
 
-  function handleSwitch() {
-    // Current path is something like /en/about
-    // We want /ar/about
+  function switchLanguage() {
+    if (timerRef.current) clearTimeout(timerRef.current);
     const segments = pathname.split('/');
-    segments[1] = nextLang; 
-    const newPath = segments.join('/');
-    router.push(newPath);
+    segments[1] = targetLang;
+    router.push(segments.join('/'));
     setIsOpen(false);
   }
 
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
+
   if (mobile) {
     return (
-      <button className={styles.mobileLangBtn} onClick={handleSwitch}>
-        <span>{nextLabel}</span>
+      <button
+        className={styles.mobileLangBtn}
+        onClick={switchLanguage}
+      >
+        <span>{targetLabel}</span>
       </button>
     );
   }
 
   return (
-    <div className={styles.langWrapper} ref={dropdownRef}>
-      <motion.button
-        className={styles.langBtn}
-        onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        aria-expanded={isOpen}
-        aria-label="Toggle language menu"
+    <div className={styles.langWrapper}>
+      <motion.div
+        className={styles.langPill}
+        layout
+        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
       >
-        <span>{currentLabel}</span>
-        <motion.span
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          style={{ display: 'flex' }}
-        >
-          <IconChevronDown size={18} stroke={2.5} />
-        </motion.span>
-      </motion.button>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.button
+              className={styles.langChoice}
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: 'auto' }}
+              exit={{ opacity: 0, width: 0 }}
+              transition={{ duration: 0.2, ease: 'easeInOut' }}
+              style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
+              onClick={switchLanguage}
+            >
+              {targetLabel}
+            </motion.button>
+          )}
+        </AnimatePresence>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className={styles.dropdown}
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-          >
-            <button className={styles.dropdownItem} onClick={handleSwitch}>
-              {nextLabel}
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <button
+          className={styles.langGlobeBtn}
+          onClick={openWithTimer}
+          aria-label="Switch language"
+        >
+          <IconWorld size={20} stroke={1.6} />
+        </button>
+      </motion.div>
     </div>
   );
 }

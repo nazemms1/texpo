@@ -7,6 +7,7 @@
  
   margin: 0 auto;
   border-radius: 20px;
+  /* margin-bottom: 10px; */
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -72,14 +73,18 @@
 .descriptionWrapper {
   position: relative;
   z-index: 1;
+  /* max-height: 8rem; */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .description {
   font-family: 'URWGeometricArabic', sans-serif;
   font-size: 0.9rem;
-  line-height: 1.7;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 }
 
 .contactList {
@@ -139,7 +144,7 @@
 
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.45);
-  line-height: 1.6;
+  line-height: 0.5;
   margin: 0;
 }
 

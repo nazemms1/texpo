@@ -5,7 +5,7 @@
   right: 0;
   z-index: 100;
   background: linear-gradient(90deg, rgba(18, 24, 19, 0.3) 0%, rgba(2, 8, 6, 0.3) 100%);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(3px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   height: 95px;
@@ -94,56 +94,78 @@
   position: relative;
 }
 
-.langBtn {
+.registerBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  width: 133px;
   height: 52px;
-  padding: 8px 20px;
+  padding: 8px 24px;
   border-radius: 999px;
   background: #0060A8;
-  border: none;
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
   white-space: nowrap;
 }
 
-.langBtn:hover {
-  background: #0060A8;
+.registerBtn:hover {
+  background: #005090;
 }
 
-.dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: 100%;
-  background: #0060A8;
-  border-radius: 16px;
+/* Inline expanding language pill */
+.langPill {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  white-space: nowrap;
 }
 
-.dropdownItem {
-  width: 100%;
-  padding: 0.75rem 1rem;
+.langOptions {
+  display: flex;
+  align-items: center;
+}
+
+.langChoice {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0 0.75rem;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+
+.langChoice:hover {
+  color: #fff;
+}
+
+
+.langGlobeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   background: none;
   border: none;
   color: #fff;
-  font-size: 1rem;
-  font-weight: 500;
   cursor: pointer;
-  text-align: center;
-  transition: background 0.2s ease;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
 }
 
-.dropdownItem:hover {
-  background: rgba(255, 255, 255, 0.1);
+.langGlobeBtn:hover {
+  opacity: 0.8;
 }
 
 .menuToggle {
@@ -208,6 +230,7 @@
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 96, 168, 0.3);
 }
+
 
 @media (max-width: 1280px) {
   .inner {
