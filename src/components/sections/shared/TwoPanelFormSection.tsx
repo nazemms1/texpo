@@ -66,6 +66,7 @@ export function TwoPanelFormSection({
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
+          <div className={styles.decorativeCircle} />
           <img
             src={logoSrc}
             alt={logoAlt}

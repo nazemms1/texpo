@@ -49,8 +49,7 @@ export function ContactSection({ formData, loading }: { formData?: ContactUsApiD
       loading={loading}
       submitSuccess={success}
       submitError={error}
-      terms={[
-               ]}
+      terms={[]}
       submitLabel={t.submitRequest}
       renderFormFields={(styles) => (
         <>
