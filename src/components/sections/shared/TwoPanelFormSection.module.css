@@ -252,14 +252,14 @@
   gap: 1rem;
   padding: 0.85rem 1.4rem;
   border-radius: 9999px;
-  background: #f4f6f8;
+ 
   border: 1px solid transparent;
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .fileInputWrap:focus-within {
-  border-color: #42beb3;
+  border-color: #23518d;
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(66, 190, 179, 0.08);
 }
@@ -299,13 +299,37 @@
   width: 18px;
   height: 18px;
   margin-top: 2px;
-  accent-color: #0060A8;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #f4f6f8;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.checkboxInput:checked {
+  background: #0060A8;
+  border-color: #0060A8;
+}
+
+.checkboxInput:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-left: none;
+  transform: translate(-50%, -60%) rotate(45deg);
 }
 
 .checkboxText {
   font-size: 0.78rem;
-  color: #4a5568;
+  color: #9ea2aa;
   line-height: 1.5;
 }
 
