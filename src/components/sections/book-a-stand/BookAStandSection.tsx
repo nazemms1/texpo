@@ -80,6 +80,7 @@ export function BookAStandSection({
       phone:                fd.get('phone')                as string,
       country_of_residence: fd.get('country_of_residence') as string,
       sector:               fd.get('sector')               as string,
+      booth_number:         fd.get('booth_number')         as string || undefined,
     };
     submit(payload);
   }
@@ -221,6 +222,16 @@ export function BookAStandSection({
               </span>
             </motion.label>
           </div>
+
+          <motion.label className={styles.field} variants={fadeInUp}>
+            <span className={styles.fieldLabel}>{t.fields.boothNumber}</span>
+            <input
+              name="booth_number"
+              className={styles.input}
+              type="text"
+              placeholder={t.placeholders.boothNumber}
+            />
+          </motion.label>
         </>
       )}
     />

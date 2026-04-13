@@ -95,6 +95,11 @@ export function ContactSection({ formData, loading }: { formData?: ContactUsApiD
             <span className={styles.fieldLabel}>{t.fields.message}</span>
             <textarea name="message" className={`${styles.input} ${styles.textarea}`} rows={4} placeholder={t.placeholders.message} />
           </motion.label>
+
+          <motion.label className={styles.checkboxField} variants={fadeInUp}>
+            <input name="terms" type="checkbox" className={styles.checkboxInput} required />
+            <span className={styles.checkboxText}>{t.termsCheckbox}</span>
+          </motion.label>
         </>
       )}
     />

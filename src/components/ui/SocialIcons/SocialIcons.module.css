@@ -3,8 +3,9 @@
   flex-direction: column;
   gap: 10px;
   width: 66px;
-  height: 226px;
- 
+  min-height: 226px;
+  height: auto;
+  padding: 1.25rem 0;
   background: linear-gradient(180deg, #0060A8 0%, #002068 100%);
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
@@ -42,7 +43,8 @@
 @media (max-width: 768px) {
   .bar {
     width: 48px;
-    height: 160px;
+    min-height: 160px;
+    height: auto;
     gap: 6px;
     border-top-left-radius: 28px;
     border-bottom-left-radius: 28px;

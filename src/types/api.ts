@@ -62,6 +62,7 @@ export interface BookStandPayload {
   phone: string;
   country_of_residence: string;
   sector: string;
+  booth_number?: string;
 }
 
 

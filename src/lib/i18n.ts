@@ -67,6 +67,7 @@ export const bookAStandTranslations = {
       phone: 'Mobile Phone',
       country: 'Country of Residence',
       sector: 'What sector are you in?',
+      boothNumber: 'Booth Number',
     },
     placeholders: {
       firstName: 'John',
@@ -78,6 +79,7 @@ export const bookAStandTranslations = {
       phone: '+1 234 567 890',
       selectCountry: 'Select your country',
       selectSector: 'Select your sector',
+      boothNumber: 'e.g. A-101',
     },
     submit: 'Book My Stand',
     success: "Your stand booking request has been submitted! We'll be in touch shortly.",
@@ -95,6 +97,7 @@ export const bookAStandTranslations = {
       phone: 'رقم الهاتف المحمول',
       country: 'بلد الإقامة',
       sector: 'ما هو قطاع عملك؟',
+      boothNumber: 'رقم الجناح',
     },
     placeholders: {
       firstName: 'الاسم',
@@ -106,6 +109,7 @@ export const bookAStandTranslations = {
       phone: '+963 9xx xxx xxx',
       selectCountry: 'اختر البلد',
       selectSector: 'اختر القطاع',
+      boothNumber: 'مثال: أ-101',
     },
     submit: 'احجز جناحي الآن',
     success: 'تم إرسال طلب حجز الجناح الخاص بك بنجاح! سنتواصل معك قريباً.',
@@ -152,6 +156,7 @@ export const becomeASponsorFormTranslations = {
     submitRequest: 'Submit Request',
     submitting: 'Submitting…',
     successMessage: 'Thank you! Our partnership team will contact you within 24 hours.',
+    termsCheckbox: 'I have read and agree to the Terms and Conditions and Privacy Policy.',
     fields: {
       fullName: 'Full Name',
       companyName: 'Company Name',
@@ -184,6 +189,7 @@ export const becomeASponsorFormTranslations = {
     submitRequest: 'إرسال الطلب',
     submitting: 'جاري الإرسال…',
     successMessage: 'شكراً لك! سيتواصل معك فريق الشراكات لدينا خلال 24 ساعة.',
+    termsCheckbox: 'لقد قرأت ووافقت على الشروط والأحكام وسياسة الخصوصية.',
     fields: {
       fullName: 'الاسم الكامل',
       companyName: 'اسم الشركة',

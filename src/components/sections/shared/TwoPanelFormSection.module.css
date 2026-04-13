@@ -287,6 +287,33 @@
   color: #222;
 }
 
+.checkboxField {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #0060A8;
+  cursor: pointer;
+}
+
+.checkboxText {
+  font-size: 0.78rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.checkboxText a {
+  color: #0060A8;
+  text-decoration: underline;
+}
+
 .submitWrap {
   margin-top: 0.5rem;
   width: 100%;
@@ -302,14 +329,13 @@
   font-weight: 700;
   border: none;
   cursor: pointer;
-  box-shadow: 0 8px 16px rgba(66, 190, 179, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .submitBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(66, 190, 179, 0.35);
-  background: #39a9a0;
+  box-shadow: 0 10px 24px rgba(31, 31, 31, 0.35);
+ 
 }
 
 .submitBtn:active {

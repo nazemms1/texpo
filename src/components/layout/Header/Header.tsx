@@ -26,7 +26,7 @@ export function Header() {
   
         <Link href={`/${lang}`} className={styles.logo}>
           <Image
-            src="/logos/logo-header.svg"
+            src="/images/logo-header2.svg"
             alt="TEXPO logo"
             width={160}
             height={40}
@@ -38,10 +38,11 @@ export function Header() {
      
         <div className={styles.desktopNav}>
           <NavMenu />
+                <LanguageSwitcher />
           <Link href={`/${lang}/visitors`} className={styles.registerBtn}>
             {lang === 'ar' ? 'تسجيل زائر' : 'Register Visitor'}
           </Link>
-          <LanguageSwitcher />
+  
         </div>
 
       

@@ -115,8 +115,7 @@
   background: #005090;
 }
 
-/* Inline expanding language pill */
-.langPill {
+ .langPill {
   display: flex;
   align-items: center;
   height: 52px;
@@ -149,23 +148,57 @@
 }
 
 
+.langCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-width: 40px;
+  padding: 0 10px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #EEEEEE;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background 0.15s ease;
+}
+
+.langCircle:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.langCircleActive {
+  background: #0060A8;
+  color: #fff;
+}
+
+.langCircleActive:hover {
+  background: #005090;
+}
+
 .langGlobeBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  padding: 11px;
   border-radius: 50%;
-  background: none;
+  background: #EEEEEE;
   border: none;
-  color: #fff;
+  color: #666666;
   cursor: pointer;
   flex-shrink: 0;
-  transition: opacity 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
+  margin: 4px;
 }
 
 .langGlobeBtn:hover {
-  opacity: 0.8;
+  color: #32548E;
+  background: #EEEEEE;
 }
 
 .menuToggle {

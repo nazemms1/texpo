@@ -16,41 +16,64 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   const params = useParams();
   const router = useRouter();
   const lang = (params?.lang as Lang) ?? 'en';
-  const targetLang: Lang = lang === 'en' ? 'ar' : 'en';
-  const targetLabel = lang === 'en' ? 'العربية' : 'English';
+  
+  // اللغات المتاحة
+  const languages = [
+    { code: 'en' as Lang, label: 'EN' },
+    { code: 'ar' as Lang, label: 'عربي' }
+  ];
 
   const [isOpen, setIsOpen] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function openWithTimer() {
+  function handleMouseEnter() {
     setIsOpen(true);
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setIsOpen(false), 1000);
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
   }
 
-  function switchLanguage() {
-    if (timerRef.current) clearTimeout(timerRef.current);
+  function handleMouseLeave() {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    hoverTimerRef.current = setTimeout(() => setIsOpen(false), 300);
+  }
+
+  function switchLanguage(targetLang: Lang) {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    if (targetLang === lang) {
+      setIsOpen(false);
+      return;
+    }
     const segments = pathname.split('/');
     segments[1] = targetLang;
     router.push(segments.join('/'));
     setIsOpen(false);
   }
 
-  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
+  useEffect(() => () => { 
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current); 
+  }, []);
 
   if (mobile) {
     return (
-      <button
-        className={styles.mobileLangBtn}
-        onClick={switchLanguage}
-      >
-        <span>{targetLabel}</span>
-      </button>
+      <div className={styles.mobileLangContainer}>
+        {languages.map((lng) => (
+          <button
+            key={lng.code}
+            className={`${styles.mobileLangCircle} ${lang === lng.code ? styles.active : ''}`}
+            onClick={() => switchLanguage(lng.code)}
+          >
+            <span style={{ color: '#0066FF' }}>{lng.label}</span>
+          </button>
+        ))}
+      </div>
     );
   }
 
   return (
-    <div className={styles.langWrapper}>
+    <div 
+      className={styles.langWrapper}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <motion.div
         className={styles.langPill}
         layout
@@ -58,23 +81,26 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
       >
         <AnimatePresence>
           {isOpen && (
-            <motion.button
-              className={styles.langChoice}
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: 'auto' }}
-              exit={{ opacity: 0, width: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-              style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
-              onClick={switchLanguage}
-            >
-              {targetLabel}
-            </motion.button>
+            <>
+              {languages.map((lng) => (
+                <motion.button
+                  key={lng.code}
+                  className={`${styles.langCircle} ${lang === lng.code ? styles.langCircleActive : ''}`}
+                  initial={{ opacity: 0, scale: 0.6, width: 0 }}
+                  animate={{ opacity: 1, scale: 1, width: 'auto' }}
+                  exit={{ opacity: 0, scale: 0.6, width: 0 }}
+                  transition={{ duration: 0.2, ease: 'easeInOut' }}
+                  onClick={() => switchLanguage(lng.code)}
+                >
+                  {lng.label}
+                </motion.button>
+              ))}
+            </>
           )}
         </AnimatePresence>
 
         <button
           className={styles.langGlobeBtn}
-          onClick={openWithTimer}
           aria-label="Switch language"
         >
           <IconWorld size={20} stroke={1.6} />
