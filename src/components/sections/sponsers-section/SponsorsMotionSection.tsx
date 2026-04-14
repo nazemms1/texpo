@@ -83,7 +83,7 @@ export function SponsorsMotionSection({
                         whileInView="visible"
                         viewport={{ once: false, amount: 0.15 }}
                       >
-                        {sponsors.map((s: { id: Key | null | undefined; type: { title: string; color: string; }; image: string; name: string | undefined; }, index: number) => (
+                        {sponsors.map((s: SponsorApiItem, index: number) => (
                           <motion.div key={s.id} className={styles.card} variants={fadeInUp}>
                             <SponsorCard
                               badgeText={s.type.title}
