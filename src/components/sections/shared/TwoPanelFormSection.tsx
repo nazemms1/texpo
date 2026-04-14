@@ -78,12 +78,8 @@ export function TwoPanelFormSection({
 
           <h2 className={styles.title}>{title}</h2>
           {subtitle && (
-            <div className={styles.subtitle}>
-              {subtitle.split('.').filter(s => s.trim()).map((segment, index, array) => (
-                <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.75rem' : 0 }}>
-                  {segment.trim()}.
-                </span>
-              ))}
+            <div className={styles.subtitle} style={{ whiteSpace: 'pre-line' }}>
+              {subtitle}
             </div>
           )}
 
@@ -103,12 +99,8 @@ export function TwoPanelFormSection({
 
           {description && (
             <div className={styles.descriptionWrapper} style={{ marginBottom: '1.5rem' }}>
-              <div className={styles.description}>
-                {description.split('.').filter(s => s.trim()).map((segment, index, array) => (
-                  <span key={index} style={{ display: 'block', marginBottom: index < array.length - 1 ? '0.75rem' : 0 }}>
-                    {segment.trim()}.
-                  </span>
-                ))}
+              <div className={styles.description} style={{ whiteSpace: 'pre-line' }}>
+                {description}
               </div>
             </div>
           )}

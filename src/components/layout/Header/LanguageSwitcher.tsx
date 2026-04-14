@@ -17,7 +17,6 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   const router = useRouter();
   const lang = (params?.lang as Lang) ?? 'en';
   
-  // اللغات المتاحة
   const languages = [
     { code: 'en' as Lang, label: 'EN' },
     { code: 'ar' as Lang, label: 'عربي' }
@@ -27,11 +26,13 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function handleMouseEnter() {
+    if (mobile) return;
     setIsOpen(true);
     if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
   }
 
   function handleMouseLeave() {
+    if (mobile) return;
     if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
     hoverTimerRef.current = setTimeout(() => setIsOpen(false), 300);
   }
@@ -55,15 +56,25 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   if (mobile) {
     return (
       <div className={styles.mobileLangContainer}>
-        {languages.map((lng) => (
-          <button
-            key={lng.code}
-            className={`${styles.mobileLangCircle} ${lang === lng.code ? styles.active : ''}`}
-            onClick={() => switchLanguage(lng.code)}
-          >
-            <span style={{ color: '#0066FF' }}>{lng.label}</span>
-          </button>
-        ))}
+        <div className={styles.mobileLangTrack}>
+          <motion.div 
+            className={styles.mobileLangActiveIndicator}
+            initial={false}
+            animate={{
+              x: lang === 'en' ? '0%' : '100%',
+            }}
+            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+          />
+          {languages.map((lng) => (
+            <button
+              key={lng.code}
+              className={`${styles.mobileLangItem} ${lang === lng.code ? styles.active : ''}`}
+              onClick={() => switchLanguage(lng.code)}
+            >
+              {lng.label}
+            </button>
+          ))}
+        </div>
       </div>
     );
   }
@@ -81,7 +92,7 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
       >
         <AnimatePresence>
           {isOpen && (
-            <>
+            <div className={styles.langOptions}>
               {languages.map((lng) => (
                 <motion.button
                   key={lng.code}
@@ -95,13 +106,13 @@ export function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
                   {lng.label}
                 </motion.button>
               ))}
-            </>
+            </div>
           )}
         </AnimatePresence>
 
         <button
           className={styles.langGlobeBtn}
-          aria-label="Switch language"
+          onClick={() => setIsOpen(!isOpen)}
         >
           <IconWorld size={20} stroke={1.6} />
         </button>
