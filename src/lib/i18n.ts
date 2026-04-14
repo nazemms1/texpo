@@ -5,14 +5,14 @@ export const VALID_LANGS: Lang[] = ["en", "ar"];
 export const headerTranslations = {
   en: {
     nav: {
-      home: "Home",
-      about: "About",
+      home: "HOME",
+      about: "ABOUT",
 
       sponsor: "Become a Sponsor",
-      visitors: "Our Visitors",
-      texpo2025: "Texpo 2025",
+      visitors: "OUR VISITORS",
+      texpo2025: "TEXPO 2025",
 
-      contact: "Contact Us",
+      contact: "CONTACT US",
       bookStand: "Book a Stand",
     },
     label: "English",
