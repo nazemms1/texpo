@@ -6,6 +6,7 @@ import styles from "./SponsorCard.module.css";
 
 export interface SponsorCardProps {
   badgeText: string;
+  badgeIcon?: string;
   logoSrc: string;
   themeColor: string;  
   logoAlt?: string;
@@ -43,6 +44,7 @@ function getReadableTextColor(bgHex: string) {
 
 export function SponsorCard({
   badgeText,
+  badgeIcon,
   logoSrc,
   themeColor,
   logoAlt,
@@ -64,7 +66,19 @@ export function SponsorCard({
   return (
     <article className={styles.card} style={styleVars}>
       <div className={styles.badge} aria-label={`${badgeText} sponsor`}>
-        <span className={styles.badgeText}>{badgeText}</span>
+        {badgeIcon ? (
+          <div className={styles.badgeIconWrap}>
+            <Image 
+              src={badgeIcon} 
+              alt={badgeText} 
+              width={20} 
+              height={20} 
+              className={styles.badgeIcon}
+            />
+          </div>
+        ) : (
+          <span className={styles.badgeText}>{badgeText}</span>
+        )}
       </div>
 
       <div className={styles.logoWrap}>

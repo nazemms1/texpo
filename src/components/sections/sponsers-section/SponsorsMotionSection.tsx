@@ -43,7 +43,8 @@ export function SponsorsMotionSection({
         id: `dyn-${i}`,
         type: {
           title: s.sponsor_type.name,
-          color: s.sponsor_type.color
+          color: s.sponsor_type.color,
+          icon: s.sponsor_type.icon?.url
         },
         image: s.logo?.url || SPONSOR_LOGO_SRC,
         name: s.company_name
@@ -86,6 +87,7 @@ export function SponsorsMotionSection({
                           <motion.div key={s.id} className={styles.card} variants={fadeInUp}>
                             <SponsorCard
                               badgeText={s.type.title}
+                              badgeIcon={s.type.icon}
                               logoSrc={s.image}
                               themeColor={s.type.color}
                               logoAlt={`${s.type.title} sponsor logo`}
@@ -130,6 +132,7 @@ export function SponsorsMotionSection({
                 <motion.div key={s.id} className={styles.card} variants={fadeInUp}>
                   <SponsorCard
                     badgeText={s.type.title}
+                    badgeIcon={s.type.icon}
                     logoSrc={s.image}
                     themeColor={s.type.color}
                     logoAlt={`${s.type.title} sponsor logo`}

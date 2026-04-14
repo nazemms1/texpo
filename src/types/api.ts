@@ -30,6 +30,7 @@ export interface SponsorApiItem {
   type: {
     title: string;
     color: string;
+    icon?: string;
   };
   image: string;
   name?: string;
