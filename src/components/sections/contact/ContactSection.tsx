@@ -34,6 +34,7 @@ export function ContactSection({ formData, loading }: { formData?: ContactUsApiD
       phone_number:    fd.get('phone')       as string,
       email:           fd.get('email')       as string,
       message:         fd.get('message')     as string,
+      accept_term_conditions: fd.get('terms') === 'on' ? 1 : 0,
     };
     submit(payload);
   }

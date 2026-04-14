@@ -50,6 +50,7 @@ export interface ContactFormPayload {
   phone_number: string;
   email: string;
   message: string;
+  accept_term_conditions: 0 | 1;
 }
 
 export interface BookStandPayload {
@@ -63,6 +64,7 @@ export interface BookStandPayload {
   country_of_residence: string;
   sector: string;
   booth_number?: string;
+  accept_term_conditions: 0 | 1;
 }
 
 

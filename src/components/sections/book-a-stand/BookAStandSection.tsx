@@ -81,6 +81,7 @@ export function BookAStandSection({
       country_of_residence: fd.get('country_of_residence') as string,
       sector:               fd.get('sector')               as string,
       booth_number:         fd.get('booth_number')         as string || undefined,
+      accept_term_conditions: fd.get('terms') === 'on' ? 1 : 0,
     };
     submit(payload);
   }
@@ -231,6 +232,10 @@ export function BookAStandSection({
               type="text"
               placeholder={t.placeholders.boothNumber}
             />
+          </motion.label>
+          <motion.label className={styles.checkboxField} variants={fadeInUp}>
+            <input name="terms" type="checkbox" className={styles.checkboxInput} required />
+            <span className={styles.checkboxText}>{t.termsCheckbox}</span>
           </motion.label>
         </>
       )}

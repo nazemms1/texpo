@@ -83,6 +83,7 @@ export const bookAStandTranslations = {
     },
     submit: 'Book My Stand',
     success: "Your stand booking request has been submitted! We'll be in touch shortly.",
+    termsCheckbox: 'I have read and agree to the Terms and Conditions and Privacy Policy.',
   },
   ar: {
     title: 'احجز جناحاً',
@@ -113,6 +114,7 @@ export const bookAStandTranslations = {
     },
     submit: 'احجز جناحي الآن',
     success: 'تم إرسال طلب حجز الجناح الخاص بك بنجاح! سنتواصل معك قريباً.',
+    termsCheckbox: 'لقد قرأت ووافقت على الشروط والأحكام وسياسة الخصوصية.',
   },
 } as const;
 

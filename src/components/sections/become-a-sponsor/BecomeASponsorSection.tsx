@@ -54,6 +54,7 @@ export function BecomeASponsorSection({
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     const formData = new FormData(e.currentTarget);
+    formData.append('accept_term_conditions', formData.get('terms') === 'on' ? '1' : '0');
     submit(formData);
   }
 
@@ -192,6 +193,10 @@ export function BecomeASponsorSection({
               rows={4}
               placeholder={t.placeholders.message}
             />
+          </motion.label>
+          <motion.label className={styles.checkboxField} variants={fadeInUp}>
+            <input name="terms" type="checkbox" className={styles.checkboxInput} required />
+            <span className={styles.checkboxText}>{t.termsCheckbox}</span>
           </motion.label>
         </>
       )}
