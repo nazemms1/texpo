@@ -231,7 +231,7 @@ export const becomeASponsorFormTranslations = {
 
 export const sponsorsTranslations = {
   en: {
-    strategic_partners: "Strategic SPONSOR",
+    strategic_partners: "STRATEGIC SPONSOR",
     normal_sponsors: "SPONSORS",
   },
   ar: {
