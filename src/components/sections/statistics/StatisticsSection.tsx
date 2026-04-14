@@ -16,7 +16,7 @@ function parseValue(value: string): { num: number; suffix: string } {
   return { num: 0, suffix: value };
 }
 
-function CountUpValue({ value }: { value: string }) {
+export function CountUpValue({ value }: { value: string }) {
   const { num, suffix } = parseValue(value);
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
