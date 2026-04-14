@@ -25,15 +25,17 @@ export function InfoCardSection({ items, loading }: InfoCardSectionProps) {
   return (
     <section className={styles.section}>
       <Container size="full" className={styles.container}>
-        {items && Array.isArray(items) && items.map((item, index) => (
-          <div key={index} style={{ marginBottom: index < items.length - 1 ? '2rem' : 0, width: '100%' }}>
-            <InfoCard
-              title={item.title || ""}
-              description={item.description || ""}
-              imageUrl={getImageUrl(item.media || item.image || item)}
-            />
-          </div>
-        ))}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center', width: '100%', padding: '0 1rem' }}>
+          {items && Array.isArray(items) && items.map((item, index) => (
+            <div key={index} style={{ flex: '1 1 min(100%, 700px)', display: 'flex', justifyContent: 'center' }}>
+              <InfoCard
+                title={item.title || ""}
+                description={item.description || ""}
+                imageUrl={getImageUrl(item.media || item.image || item)}
+              />
+            </div>
+          ))}
+        </div>
       </Container>
     </section>
   );

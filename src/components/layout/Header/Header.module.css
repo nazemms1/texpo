@@ -155,12 +155,13 @@
   height: 40px;
   min-width: 40px;
   padding: 0 10px;
-  border-radius: 50px;
+  border-radius: 100px;
   background: rgba(255, 255, 255, 0.08);
   border: none;
   color: #EEEEEE;
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-size: 0.5rem;
+   font-family: 'Figtree', sans-serif;
+font-weight: 600;
   cursor: pointer;
   margin: 0 4px;
   white-space: nowrap;

@@ -63,10 +63,10 @@
 .subtitle {
   position: relative;
   z-index: 1;
-  font-family: 'URWGeometricArabic-Medium', sans-serif;
+  font-family: 'Figtree', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: #94a3b8;
+  color: #94A3B8;
   margin: 0 0 1rem;
 }
 
@@ -80,10 +80,10 @@
 }
 
 .description {
-  font-family: 'URWGeometricArabic', sans-serif;
+  font-family: 'Figtree', sans-serif;
   font-size: 0.9rem;
   line-height: 1.4;
-  color: rgba(255, 255, 255, 0.5);
+  color:#94A3B8;
   /* margin-bottom: 3rem; */
 }
 
@@ -140,11 +140,11 @@
 }
 
 .termsText {
-    font-family: 'URWGeometricArabic-Medium', sans-serif;
+    font-family: 'Figtree', sans-serif;
 
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.45);
-  line-height: 0.5;
+  /* font-size: 0.7rem; */
+  color:#94A3B8;
+  line-height: 1.2;
   margin: 0;
 }
 
