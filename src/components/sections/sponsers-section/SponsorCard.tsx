@@ -7,9 +7,10 @@ import styles from "./SponsorCard.module.css";
 export interface SponsorCardProps {
   badgeText: string;
   logoSrc: string;
-  themeColor: string; // badge + accents
+  themeColor: string;  
   logoAlt?: string;
   logoPriority?: boolean;
+companyName?:string;
 }
 
 function clampHex(hex: string) {
@@ -46,6 +47,7 @@ export function SponsorCard({
   themeColor,
   logoAlt,
   logoPriority,
+  companyName,
 }: SponsorCardProps) {
   const accentRgba = rgbaFromHex(themeColor, 0.4);
   const accentShadowRgba = rgbaFromHex(themeColor, 0.08);
@@ -69,7 +71,7 @@ export function SponsorCard({
         <Image
           className={styles.logo}
           src={logoSrc}
-          alt={logoAlt ?? badgeText}
+          alt={logoAlt || companyName || badgeText}
           fill
           sizes="(max-width: 768px) 45vw, 250px"
           loading={logoPriority ? "eager" : "lazy"}
@@ -77,7 +79,12 @@ export function SponsorCard({
           unoptimized
         />
       </div>
+
+      {companyName && (
+        <div className={styles.info}>
+          <h4 className={styles.companyName}>{companyName}</h4>
+        </div>
+      )}
     </article>
   );
 }
-

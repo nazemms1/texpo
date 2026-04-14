@@ -73,7 +73,7 @@
   top: var(--logo-inset);
   left: var(--logo-inset);
   right: var(--logo-inset);
-  bottom: var(--logo-inset);
+  bottom: calc(var(--logo-inset) + 2.4rem);
   z-index: 1;
 }
 
@@ -84,4 +84,25 @@
   user-select: none;
   pointer-events: none;
   -webkit-user-drag: none;
+}
+
+.info {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  padding: 0 1rem;
+}
+
+.companyName {
+  font-family: 'URWGeometricArabic-Bold', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #133854;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
