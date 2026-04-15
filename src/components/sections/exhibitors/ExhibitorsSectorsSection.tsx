@@ -78,7 +78,7 @@ export function ExhibitorsSectorsSection({
 
     const interval = setInterval(() => {
       embla.scrollNext();
-    }, 3000);
+    }, 1000);
 
     const updateArc = () => {
       const scrollProgress = embla.scrollProgress();

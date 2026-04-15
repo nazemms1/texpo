@@ -11,6 +11,7 @@ import { MapSection } from "@/src/components/sections/map/MapSection";
 import { useApi } from "@/src/hooks/useApi";
 import { homeService, publicDataService } from "@/src/lib/api";
 import { useParams } from "next/navigation";
+import { CountdownSection } from "@/src/components/sections/countdown/CountdownSection";
 
 export default function HomePage() {
   const { lang } = useParams();
@@ -19,6 +20,10 @@ export default function HomePage() {
   const youtubeUrl = publicData?.find(item => item.key === 'youtube_url')?.value;
 
   const heroData = sections?.find(s => s.key === 'hero-section');
+  const countdownSeconds: number | undefined = heroData?.['meta-data']?.countdown;
+  const targetDate = countdownSeconds != null
+    ? new Date(Date.now() + countdownSeconds * 1000).toISOString()
+    : "2027-05-05";
   const aboutData = sections?.find(s => s.key === 'about-section');
   const statsData = sections?.find(s => s.key === 'statistics');
   const visionData = sections?.find(s => s.key === 'vision');
@@ -35,6 +40,7 @@ export default function HomePage() {
         media={heroData?.media}
         loading={loading}
       />
+      <CountdownSection targetDate={targetDate} />
       <div style={{
         backgroundImage: "url('/images/lines.png')",
         backgroundRepeat: 'no-repeat',

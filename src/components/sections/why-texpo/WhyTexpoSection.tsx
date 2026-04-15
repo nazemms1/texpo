@@ -34,7 +34,7 @@ export function WhyTexpoSection({
 
     const intervalId = setInterval(() => {
       embla.scrollNext();
-    }, 1500);
+    }, 1000);
 
     return () => {
       if (intervalId) clearInterval(intervalId);

@@ -16,25 +16,21 @@ export function SectorCard({ title, image, offset, isActive, total }: SectorCard
   const lines = title.split("\n");
   const abs = Math.abs(offset);
   
-  // Adjusted Spacing: Bringing them closer as requested (Reduced angleStep)
-  const angleStep = 0.58; 
+   const angleStep = 0.58; 
   const angle = offset * angleStep;
   
-  // Radius and 3D positioning
-  const radius = 580; 
+   const radius = 580; 
   const translateX = Math.sin(angle) * radius; 
   const translateZ = (Math.cos(angle) - 1) * 350;
   
-  // Vertical arc depth
-  const archFactor = Math.abs(offset / 2.2);
+   const archFactor = Math.abs(offset / 2.2);
   const translateY = Math.pow(Math.min(archFactor, 1.5), 1.2) * 100;
   
   const rotateY = -Math.sin(angle) * 35;
   const rotateZ = offset * 4.5;
   const scale = 1 - Math.min(abs * 0.1, 0.35);
   
-  // Visibility Logic: Still showing only 5 cards for clarity
-  let opacity = 0;
+   let opacity = 0;
   if (abs <= 2.2) {
     opacity = isActive ? 1 : Math.max(0, 1 - abs * 0.4);
   }

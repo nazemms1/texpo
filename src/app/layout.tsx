@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '@/src/styles/theme';
+import { SmoothScroll } from '@/src/components/ui/SmoothScroll/SmoothScroll';
+import { CustomCursor } from '@/src/components/ui/Cursor/CustomCursor';
 import '@mantine/core/styles.css';
 import '@/src/styles/globals.css';
 
@@ -28,7 +30,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body suppressHydrationWarning>
         <MantineProvider theme={theme} defaultColorScheme="dark">
-          {children}
+          <SmoothScroll>
+            <CustomCursor />
+            {children}
+          </SmoothScroll>
         </MantineProvider>
       </body>
     </html>

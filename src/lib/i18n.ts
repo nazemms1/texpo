@@ -162,7 +162,7 @@ export const becomeASponsorFormTranslations = {
   en: {
     emailUs: "Email Us",
     callUs: "Call Us",
-    office: "Office",
+    office: "Location",
     submitRequest: "Submit Request",
     submitting: "Submitting…",
     successMessage:
@@ -197,7 +197,7 @@ export const becomeASponsorFormTranslations = {
   ar: {
     emailUs: "راسلنا عبر البريد",
     callUs: "اتصل بنا",
-    office: "المكتب",
+    office: "موقع",
     submitRequest: "إرسال الطلب",
     submitting: "جاري الإرسال…",
     successMessage: "شكراً لك! سيتواصل معك فريق الشراكات لدينا خلال 24 ساعة.",
