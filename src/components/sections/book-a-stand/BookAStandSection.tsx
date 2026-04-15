@@ -55,7 +55,7 @@ export function BookAStandSection({
     },
     {
       Icon: IconMapPin,
-      label: currentLang === 'ar' ? 'المكتب' : 'Office',
+      label: currentLang === 'ar' ? 'الموقع' : 'Location',
       value: address || 'Damascus, Syria - Exhibition City',
     },
   ];

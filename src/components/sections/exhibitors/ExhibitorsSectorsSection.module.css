@@ -25,6 +25,16 @@
  
 }
 
+.fillText {
+  width: 100%;
+  text-align: center;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #555960;
+  letter-spacing: 0.03em;
+  margin: 0.5rem 0 2rem;
+}
+
 .carouselContainer {
   position: relative;
   width: 100%;
@@ -50,11 +60,7 @@
   position: absolute;
   inset: 0;
   z-index: 200;
-  cursor: grab;
-}
-
-.interactionLayer:active {
-  cursor: grabbing;
+  cursor: default;
 }
 
 .carousel {

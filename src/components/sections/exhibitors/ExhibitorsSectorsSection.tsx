@@ -125,7 +125,9 @@ export function ExhibitorsSectorsSection({
             </p>
           </header>
 
-          <div 
+          <p className={styles.fillText}>At this time, technology will fill the space.</p>
+
+          <div
             className={styles.carouselContainer}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
@@ -154,6 +156,7 @@ export function ExhibitorsSectorsSection({
                   loop: true,
                   skipSnaps: false,
                   duration: 25,
+                  watchDrag: false,
                 }}
                 getEmblaApi={setEmbla}
                 onSlideChange={setActiveIndex}
