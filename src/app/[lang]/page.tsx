@@ -23,7 +23,7 @@ export default function HomePage() {
   const countdownSeconds: number | undefined = heroData?.['meta-data']?.countdown;
   const targetDate = countdownSeconds != null
     ? new Date(Date.now() + countdownSeconds * 1000).toISOString()
-    : "2027-05-05";
+    : null;
   const aboutData = sections?.find(s => s.key === 'about-section');
   const statsData = sections?.find(s => s.key === 'statistics');
   const visionData = sections?.find(s => s.key === 'vision');
@@ -40,7 +40,7 @@ export default function HomePage() {
         media={heroData?.media}
         loading={loading}
       />
-      <CountdownSection targetDate={targetDate} />
+      {targetDate && <CountdownSection targetDate={targetDate} />}
       <div style={{
         backgroundImage: "url('/images/lines.png')",
         backgroundRepeat: 'no-repeat',

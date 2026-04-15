@@ -14,7 +14,7 @@ interface TimeLeft {
 }
 
 interface CountdownSectionProps {
-  targetDate: string;
+  targetDate: string | null;
 }
 
 const translations = {
@@ -102,14 +102,10 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
   const currentLang = (lang as "en" | "ar") || "en";
   const t = translations[currentLang];
 
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
 
   useEffect(() => {
+    if (!targetDate) return;
     const calc = (): TimeLeft => {
       const diff = +new Date(targetDate) - +new Date();
       if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -124,6 +120,8 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
     const timer = setInterval(() => setTimeLeft(calc()), 1000);
     return () => clearInterval(timer);
   }, [targetDate]);
+
+  if (!targetDate || !timeLeft) return null;
 
   const units = [
     { label: t.days, value: timeLeft.days },
@@ -143,8 +141,7 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
       {/* Grid background */}
       <div className={styles.grid_bg} />
 
-      {/* Floating particles */}
-      {PARTICLES.map((p) => (
+       {PARTICLES.map((p) => (
         <span
           key={p.id}
           className={styles.particle}
@@ -159,8 +156,7 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
         />
       ))}
 
-      {/* Decorative arc */}
-      <svg className={styles.arcSvg} viewBox="0 0 1440 180" preserveAspectRatio="none">
+       <svg className={styles.arcSvg} viewBox="0 0 1440 180" preserveAspectRatio="none">
         <path
           d="M0,140 Q360,60 720,100 Q1080,140 1440,80"
           stroke="#0060A8"
@@ -196,8 +192,7 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
 
       <Container>
         <div className={styles.inner}>
-          {/* Title */}
-          <motion.h2
+           <motion.h2
             className={styles.heading}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -207,15 +202,13 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
             {t.timerTitle}
           </motion.h2>
 
-          {/* Countdown units */}
-          <div className={styles.countRow}>
+           <div className={styles.countRow}>
             {units.map((u, i) => (
               <TimeUnit key={u.label} value={u.value} label={u.label} index={i} />
             ))}
           </div>
 
-          {/* Date badge */}
-          <motion.div
+           <motion.div
             className={styles.dateBadge}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
