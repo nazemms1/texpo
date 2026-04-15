@@ -26,6 +26,7 @@ const translations = {
     eyebrow: "Mark your calendar",
     heading: "Countdown to the",
     headingAccent: "Event",
+    timerTitle: "At this time, technology will fill the space.",
   },
   ar: {
     days: "أيام",
@@ -35,6 +36,7 @@ const translations = {
     eyebrow: "سجّل الموعد",
     heading: "العد التنازلي نحو",
     headingAccent: "الحدث",
+    timerTitle: "في هذه اللحظة، ستملأ التقنية الفضاء.",
   },
 };
 
@@ -194,20 +196,7 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
 
       <Container>
         <div className={styles.inner}>
-          {/* Eyebrow */}
-          <motion.div
-            className={styles.eyebrow}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span />
-            {t.eyebrow}
-            <span />
-          </motion.div>
-
-          {/* Heading */}
+          {/* Title */}
           <motion.h2
             className={styles.heading}
             initial={{ opacity: 0, y: 30 }}
@@ -215,7 +204,7 @@ export function CountdownSection({ targetDate }: CountdownSectionProps) {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            {t.heading} <em>{t.headingAccent}</em>
+            {t.timerTitle}
           </motion.h2>
 
           {/* Countdown units */}

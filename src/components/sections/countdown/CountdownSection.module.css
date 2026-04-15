@@ -8,8 +8,7 @@
   align-items: center;
 }
 
-/* ── Ambient glow blobs ── */
-.section::before {
+ .section::before {
   content: "";
   position: absolute;
   top: -20%;
@@ -38,8 +37,7 @@
   to   { transform: scale(1.15) translate(3%, 3%); opacity: 1; }
 }
 
-/* ── Animated grid lines ── */
-.grid_bg {
+ .grid_bg {
   position: absolute;
   inset: 0;
   background-image:
@@ -49,8 +47,7 @@
   pointer-events: none;
 }
 
-/* ── Floating particles ── */
-.particle {
+ .particle {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
@@ -66,8 +63,7 @@
   100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
 }
 
-/* ── Decorative arc ── */
-.arcSvg {
+ .arcSvg {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -77,8 +73,7 @@
   pointer-events: none;
 }
 
-/* ── Inner wrapper ── */
-.inner {
+ .inner {
   position: relative;
   z-index: 2;
   display: flex;
@@ -87,8 +82,7 @@
   gap: 3.5rem;
 }
 
-/* ── Eyebrow label ── */
-.eyebrow {
+ .eyebrow {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -112,17 +106,21 @@
   background: linear-gradient(90deg, #0060A8, transparent);
 }
 
-/* ── Heading ── */
+ 
 .heading {
-  font-family: 'Nulshock', sans-serif;
-  font-weight: 700;
-  font-size: 2.5rem;
-  color: #ffffff;
-  letter-spacing: 0.08em;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.04em;
   text-align: center;
-  text-transform: uppercase;
-  line-height: 1.15;
-  text-shadow: 0 0 40px rgba(0, 96, 168, 0.4);
+  text-transform: none;
+  line-height: 1.6;
+  font-style: italic;
+  text-shadow: none;
+  margin: 0 0 2rem;
+  max-width: 540px;
+  align-self: center;
 }
 
 .heading em {
@@ -133,15 +131,23 @@
   background-clip: text;
 }
 
-/* ── Countdown row ── */
-.countRow {
+ 
+.timerTitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.03em;
+  text-align: center;
+  margin: 0 0 1.5rem;
+  font-style: italic;
+}
+
+ .countRow {
   display: flex;
   align-items: center;
   gap: 0;
 }
 
-/* ── Single time unit ── */
-.unit {
+ .unit {
   display: flex;
   flex-direction: column;
   align-items: center;
