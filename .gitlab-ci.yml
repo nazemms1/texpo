@@ -4,8 +4,7 @@ deploy_pharaon:
   stage: pharaon-prod
   only:
     - prod
-  when:
-    - manual
+  when: manual
   tags:
     - pharaon-prod
   script:
