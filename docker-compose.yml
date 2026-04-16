@@ -6,9 +6,9 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     ports:
-      - "8105:3000"
+      - "8001:3000"
     env_file:
-      - $envfile
+      - $envfile_prod
     restart: unless-stopped
     networks:
       texpo-net:
