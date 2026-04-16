@@ -3,7 +3,7 @@ stages:
 deploy_pharaon:
   stage: pharaon-prod
   only:
-    - dev
+    - prod
   when:
     - manual
   tags:
