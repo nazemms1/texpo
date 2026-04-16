@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://backtexpo.ultrawares.com',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 15_000,
   headers: {
     'Content-Type': 'application/json',

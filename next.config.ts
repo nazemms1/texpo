@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'backtexpo.ultrawares.com',
+        hostname: 'dashboard.texpo-exhibition.com',
       },
     ],
     // dangerouslyAllowSVG: true,
