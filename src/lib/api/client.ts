@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://backtexpo.ultrawares.com',
+  baseURL: 'https://dashboard.texpo-exhibition.com',
   timeout: 15_000,
   headers: {
     'Content-Type': 'application/json',
@@ -10,6 +10,7 @@ const client = axios.create({
 });
 
 client.interceptors.request.use((config) => {
+  config.baseURL = 'https://dashboard.texpo-exhibition.com';
   if (typeof window !== 'undefined') {
     const lang = window.location.pathname.split('/')[1];
     if (lang === 'ar' || lang === 'en') {
@@ -19,7 +20,6 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
-console.log("this is base url ", process.env.NEXT_PUBLIC_API_URL);
 client.interceptors.response.use(
   (response: AxiosResponse) => response.data,
 
